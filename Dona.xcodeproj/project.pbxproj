@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84D233F12F865BC800C7DE80 /* LanguageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D233EE2F865BC800C7DE80 /* LanguageScreen.swift */; };
+		84CE15432F890F59000E9552 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15422F890F59000E9552 /* AppButton.swift */; };
+		84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */; };
+		84CE15492F891277000E9552 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15482F891277000E9552 /* CustomSheet.swift */; };
+		84CE15512F89148C000E9552 /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15502F89148C000E9552 /* LogInScreen.swift */; };
+		84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15532F8914A6000E9552 /* VerificationScreen.swift */; };
+		84D233F12F865BC800C7DE80 /* LanguageOnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D233EE2F865BC800C7DE80 /* LanguageOnboardingScreen.swift */; };
 		84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D233EF2F865BC800C7DE80 /* DonaApp.swift */; };
 		84D233F32F865BC800C7DE80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D233ED2F865BC800C7DE80 /* Assets.xcassets */; };
 		84D233F62F865CFF00C7DE80 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 84D233F52F865CFF00C7DE80 /* CombineMoya */; };
@@ -40,11 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84CE15422F890F59000E9552 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBackgroundModifier.swift; sourceTree = "<group>"; };
+		84CE15482F891277000E9552 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
+		84CE15502F89148C000E9552 /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
+		84CE15532F8914A6000E9552 /* VerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationScreen.swift; sourceTree = "<group>"; };
+		84CE15552F892226000E9552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		84D233C32F865B8300C7DE80 /* Dona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D233D02F865B8400C7DE80 /* DonaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D233DA2F865B8400C7DE80 /* DonaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DonaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D233ED2F865BC800C7DE80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84D233EE2F865BC800C7DE80 /* LanguageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageScreen.swift; sourceTree = "<group>"; };
+		84D233EE2F865BC800C7DE80 /* LanguageOnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOnboardingScreen.swift; sourceTree = "<group>"; };
 		84D233EF2F865BC800C7DE80 /* DonaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonaApp.swift; sourceTree = "<group>"; };
 		84D234072F865F8800C7DE80 /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		84D2340A2F86627900C7DE80 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -96,6 +107,89 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84CE15412F890F4E000E9552 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				84CE15422F890F59000E9552 /* AppButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		84CE15442F89117A000E9552 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				84CE15482F891277000E9552 /* CustomSheet.swift */,
+				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		84CE15472F8911C2000E9552 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				84CE154A2F8912F7000E9552 /* States */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		84CE154A2F8912F7000E9552 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				84CE154B2F8912FE000E9552 /* Unauthenticated */,
+				84CE154C2F89130B000E9552 /* Authenticated */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		84CE154B2F8912FE000E9552 /* Unauthenticated */ = {
+			isa = PBXGroup;
+			children = (
+				84CE154E2F8913A7000E9552 /* UnauthenticatedViews */,
+			);
+			path = Unauthenticated;
+			sourceTree = "<group>";
+		};
+		84CE154C2F89130B000E9552 /* Authenticated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authenticated;
+			sourceTree = "<group>";
+		};
+		84CE154D2F89138F000E9552 /* LanguageOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				84D233EE2F865BC800C7DE80 /* LanguageOnboardingScreen.swift */,
+			);
+			path = LanguageOnboarding;
+			sourceTree = "<group>";
+		};
+		84CE154E2F8913A7000E9552 /* UnauthenticatedViews */ = {
+			isa = PBXGroup;
+			children = (
+				84CE154D2F89138F000E9552 /* LanguageOnboarding */,
+				84CE154F2F8913DD000E9552 /* LogIn */,
+				84CE15522F891490000E9552 /* Verification */,
+			);
+			path = UnauthenticatedViews;
+			sourceTree = "<group>";
+		};
+		84CE154F2F8913DD000E9552 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				84CE15502F89148C000E9552 /* LogInScreen.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		84CE15522F891490000E9552 /* Verification */ = {
+			isa = PBXGroup;
+			children = (
+				84CE15532F8914A6000E9552 /* VerificationScreen.swift */,
+			);
+			path = Verification;
+			sourceTree = "<group>";
+		};
 		84D233BA2F865B8300C7DE80 = {
 			isa = PBXGroup;
 			children = (
@@ -119,9 +213,12 @@
 		84D233F02F865BC800C7DE80 /* Dona */ = {
 			isa = PBXGroup;
 			children = (
+				84CE15552F892226000E9552 /* Info.plist */,
 				84D233EF2F865BC800C7DE80 /* DonaApp.swift */,
-				84D233EE2F865BC800C7DE80 /* LanguageScreen.swift */,
+				84CE15472F8911C2000E9552 /* Coordinators */,
 				84D234062F865F7200C7DE80 /* Constants */,
+				84CE15412F890F4E000E9552 /* Components */,
+				84CE15442F89117A000E9552 /* Helpers */,
 				84D234092F86626500C7DE80 /* ColorTokens */,
 				84D233ED2F865BC800C7DE80 /* Assets.xcassets */,
 			);
@@ -300,10 +397,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D233F12F865BC800C7DE80 /* LanguageScreen.swift in Sources */,
+				84CE15432F890F59000E9552 /* AppButton.swift in Sources */,
+				84CE15512F89148C000E9552 /* LogInScreen.swift in Sources */,
+				84D233F12F865BC800C7DE80 /* LanguageOnboardingScreen.swift in Sources */,
+				84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */,
 				84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */,
 				84D234082F865F8800C7DE80 /* AppFont.swift in Sources */,
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
+				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
+				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				84D2340D2F8662A400C7DE80 /* AppTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,13 +566,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WA5ETF4855;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dona/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -495,13 +601,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WA5ETF4855;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dona/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

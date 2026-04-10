@@ -1,5 +1,5 @@
 //
-//  LanguageScreen.swift
+//  LanguageOnboardingScreen.swift
 //  Dona
 //
 //  Created by Damir Rizoev on 08/04/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LanguageScreen: View {
+struct LanguageOnboardingScreen: View {
     @Environment(\.theme) private var theme
     @State private var selectedLanguage: Language? = .tajik
 
@@ -53,32 +53,12 @@ struct LanguageScreen: View {
                 }
             }
             Spacer()
-            Button { } label: {
-                Text("Continue")
-                    .font(AppFont.largeMedium)
-                    .foregroundStyle(theme.text.foregroundStaticWhite)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 15)
-                    .background {
-                        LinearGradient(
-                            colors: [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
-                            startPoint: .trailing,
-                            endPoint: .leading
-                        )
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 40))
+            AppButton(title: "Continue", state: .default) {
+                
             }
-
         }
         .padding(.horizontal)
-        .background {
-            LinearGradient(
-                colors: [theme.background.surface, theme.background.inversePrimary],
-                startPoint: .bottom,
-                endPoint: .top
-            )
-            .ignoresSafeArea()
-        }
+        .appBackground()
     }
 
     @ViewBuilder
@@ -115,5 +95,5 @@ struct LanguageScreen: View {
 }
 
 #Preview {
-    LanguageScreen()
+    LanguageOnboardingScreen()
 }

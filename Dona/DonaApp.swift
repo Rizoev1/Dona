@@ -12,7 +12,7 @@ struct DonaApp: App {
     var body: some Scene {
         WindowGroup {
             ThemeProvider {
-                LanguageScreen()
+                LogInScreen()
             }
         }
     }
