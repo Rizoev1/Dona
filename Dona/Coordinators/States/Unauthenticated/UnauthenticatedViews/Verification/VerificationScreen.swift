@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct VerificationScreen: View {
+    @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
     @FocusState private var isFocused: Bool
     @State private var code: String = ""
@@ -76,7 +78,7 @@ struct VerificationScreen: View {
                     code = String(digits.prefix(6))
 
                     if code.count == 6 {
-                        // код введён полностью
+                        navigator.push(.pin(savedPin: []))
                     }
                 }
             ))

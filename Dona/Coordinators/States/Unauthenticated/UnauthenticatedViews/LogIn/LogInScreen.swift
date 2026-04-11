@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct LogInScreen: View {
+    @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
     @State private var phoneNumber: String = ""
 
@@ -63,7 +65,7 @@ struct LogInScreen: View {
             
             Spacer()
             AppButton(title: "Log In", state: .default) {
-                
+                navigator.push(.verification)
             }
         }
         .padding(.horizontal)

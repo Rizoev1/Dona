@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct LanguageOnboardingScreen: View {
+    @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
     @State private var selectedLanguage: Language? = .tajik
 
@@ -54,7 +56,7 @@ struct LanguageOnboardingScreen: View {
             }
             Spacer()
             AppButton(title: "Continue", state: .default) {
-                
+                navigator.push(.login)
             }
         }
         .padding(.horizontal)

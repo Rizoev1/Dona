@@ -12,15 +12,19 @@ struct AppBackgroundModifier: ViewModifier {
     @Environment(\.theme) private var theme
 
     func body(content: Content) -> some View {
-        content
-            .background {
-                LinearGradient(
-                    colors: [theme.background.inversePrimary, theme.background.background],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-            }
+        ZStack {
+            LinearGradient(
+                stops: [
+                    Gradient.Stop(color: theme.background.inversePrimary, location: 0.00),
+                    Gradient.Stop(color: theme.background.background, location: 0.32)
+                ],
+                startPoint: UnitPoint(x: 0.5, y: 0),
+                endPoint: UnitPoint(x: 0.5, y: 1)
+            )
+            .ignoresSafeArea()
+
+            content
+        }
     }
 }
 
