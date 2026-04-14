@@ -24,7 +24,7 @@ struct LogInScreen: View {
                     .font(AppFont.heading4)
                     .foregroundStyle(theme.text.onSurface)
             }
-            VStack(spacing: 6) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text("Login or Sign up")
                     .font(AppFont.heading2)
                     .foregroundStyle(theme.text.onSurface)
@@ -43,11 +43,12 @@ struct LogInScreen: View {
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onSurface)
                     .keyboardType(.numberPad)
-                    .padding(.vertical, 14)
+                    .padding(.vertical, 17)
                     .onChange(of: phoneNumber) { newValue in
                         phoneNumber = format(newValue)
                     }
             }
+            .frame(height: 56)
             .background(theme.background.secondaryContainer)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             

@@ -13,6 +13,7 @@ struct VerificationScreen: View {
     @Environment(\.theme) private var theme
     @FocusState private var isFocused: Bool
     @State private var code: String = ""
+    @State private var didNavigate = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -77,7 +78,8 @@ struct VerificationScreen: View {
                     let digits = newValue.filter { $0.isNumber }
                     code = String(digits.prefix(6))
 
-                    if code.count == 6 {
+                    if code.count == 6 && !didNavigate {
+                        didNavigate = true
                         navigator.push(.pin(savedPin: []))
                     }
                 }

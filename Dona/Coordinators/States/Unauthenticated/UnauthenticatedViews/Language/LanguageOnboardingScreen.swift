@@ -60,7 +60,18 @@ struct LanguageOnboardingScreen: View {
             }
         }
         .padding(.horizontal)
-        .appBackground()
+        .background(
+            LinearGradient(
+                colors: [
+                    theme.background.inversePrimary,
+                    theme.background.background
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
+        .cardShadow()
     }
 
     @ViewBuilder
