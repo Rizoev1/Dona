@@ -12,6 +12,10 @@ enum HomeRouter: Hashable {
     case home
     case notifications
     case activity
+    case services
+    case subServices(title: String)
+    case payment(PaymentScreenType)
+    case fundSelection(PaymentScreenType)
 }
 
 struct HomeCoordinator: View {
@@ -28,8 +32,17 @@ struct HomeCoordinator: View {
                         NotificationsScreen()
                     case .activity:
                         ActivityScreen()
+                    case .services:
+                        ServicesScreen()
+                    case .subServices(let title):
+                        SubServicesScreen(title: title)
+                    case .payment(let type):
+                        PaymentScreen(type: type)
+                    case .fundSelection(let type):
+                        FundSelectionScreen(type: type)
                     }
                 }
         }
     }
 }
+

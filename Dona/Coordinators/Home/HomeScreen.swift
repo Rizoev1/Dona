@@ -101,7 +101,9 @@ struct HomeScreen: View {
             
             HStack(spacing: 14) {
                 VStack(spacing: 6) {
-                    Button { } label: {
+                    Button {
+                        navigator.push(.payment(.topUp))
+                    } label: {
                         Image(.add)
                             .resizable()
                             .frame(width: 22, height: 22)
@@ -109,9 +111,9 @@ struct HomeScreen: View {
                             .padding(.vertical, 12)
                             .padding(.horizontal, 36)
                             .background(LinearGradient(colors:
-                                                        [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
-                                                       startPoint: .trailing,
-                                                       endPoint: .leading))
+                                [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
+                                    startPoint: .trailing,
+                                    endPoint: .leading))
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
                     Text("Top up")
@@ -119,7 +121,9 @@ struct HomeScreen: View {
                         .foregroundStyle(theme.text.onSurface)
                 }
                 VStack(spacing: 6) {
-                    Button { } label: {
+                    Button {
+                        navigator.push(.fundSelection(.request))
+                    } label: {
                         Image(.arrowDown)
                             .resizable()
                             .frame(width: 22, height: 22)
@@ -134,7 +138,9 @@ struct HomeScreen: View {
                         .foregroundStyle(theme.text.onSurface)
                 }
                 VStack(spacing: 6) {
-                    Button { } label: {
+                    Button {
+                        navigator.push(.fundSelection(.send))
+                    } label: {
                         Image(.arrowRight)
                             .resizable()
                             .frame(width: 22, height: 22)
@@ -196,21 +202,26 @@ struct HomeScreen: View {
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
-                HStack(spacing: 5) {
-                    Text("View All")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                    Image(.arrowRight)
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                Button {
+                    navigator.push(.services)
+                } label: {
+                    HStack(spacing: 5) {
+                        Text("View All")
+                            .font(AppFont.smallRegular)
+                            .foregroundStyle(theme.text.onTertiary)
+                        Image(.arrowRight)
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .foregroundStyle(theme.text.onTertiary)
+                    }
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 8)
+                    .background(theme.background.background)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-                .padding(.vertical, 3)
-                .padding(.horizontal, 8)
-                .background(theme.background.background)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             .padding(.horizontal, 12)
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
                     ForEach(0 ..< 5, id: \.self) { _ in

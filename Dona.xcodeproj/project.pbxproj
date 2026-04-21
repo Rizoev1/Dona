@@ -14,6 +14,8 @@
 		4B3F73DF2F8A8F1C00406292 /* AuthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73DE2F8A8F1C00406292 /* AuthenticatedCoordinator.swift */; };
 		4B3F73E22F8A909100406292 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73E12F8A909100406292 /* HomeScreen.swift */; };
 		4B3F73E52F8A91F500406292 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73E42F8A91F500406292 /* SplashScreen.swift */; };
+		84B57E9F2F97676A00988346 /* ServicesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B57E9E2F97676A00988346 /* ServicesScreen.swift */; };
+		84B57EA22F976A3300988346 /* SubServicesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B57EA12F976A3300988346 /* SubServicesScreen.swift */; };
 		84C00EAC2F92499A00E6771B /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EAB2F92499A00E6771B /* PaymentScreen.swift */; };
 		84C00EAF2F9252E100E6771B /* SuccessStatusSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EAE2F9252E100E6771B /* SuccessStatusSheet.swift */; };
 		84C00EB12F92564600E6771B /* RequestStatusSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EB02F92564600E6771B /* RequestStatusSheet.swift */; };
@@ -69,6 +71,8 @@
 		4B3F73DE2F8A8F1C00406292 /* AuthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedCoordinator.swift; sourceTree = "<group>"; };
 		4B3F73E12F8A909100406292 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		4B3F73E42F8A91F500406292 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		84B57E9E2F97676A00988346 /* ServicesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesScreen.swift; sourceTree = "<group>"; };
+		84B57EA12F976A3300988346 /* SubServicesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubServicesScreen.swift; sourceTree = "<group>"; };
 		84C00EAB2F92499A00E6771B /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		84C00EAE2F9252E100E6771B /* SuccessStatusSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStatusSheet.swift; sourceTree = "<group>"; };
 		84C00EB02F92564600E6771B /* RequestStatusSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusSheet.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				84F0EFDC2F8F914200DD98C5 /* Activity */,
 				84C00EAA2F92497E00E6771B /* Payment */,
 				84C00EB22F92574D00E6771B /* FundSelection */,
+				84B57E9D2F97675900988346 /* Services */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -184,6 +189,23 @@
 				4B3F73E42F8A91F500406292 /* SplashScreen.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		84B57E9D2F97675900988346 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				84B57E9E2F97676A00988346 /* ServicesScreen.swift */,
+				84B57EA02F976A2400988346 /* SubServices */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		84B57EA02F976A2400988346 /* SubServices */ = {
+			isa = PBXGroup;
+			children = (
+				84B57EA12F976A3300988346 /* SubServicesScreen.swift */,
+			);
+			path = SubServices;
 			sourceTree = "<group>";
 		};
 		84C00EAA2F92497E00E6771B /* Payment */ = {
@@ -521,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B3F73C52F8A834500406292 /* PinScreen.swift in Sources */,
+				84B57EA22F976A3300988346 /* SubServicesScreen.swift in Sources */,
 				84CE15432F890F59000E9552 /* AppButton.swift in Sources */,
 				4B3F73DC2F8A8DBA00406292 /* UnauthenticatedCoordinator.swift in Sources */,
 				4B3F73DA2F8A8D9200406292 /* AppCoordinator.swift in Sources */,
@@ -539,6 +562,7 @@
 				84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */,
 				84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */,
 				84D234082F865F8800C7DE80 /* AppFont.swift in Sources */,
+				84B57E9F2F97676A00988346 /* ServicesScreen.swift in Sources */,
 				84F0EFE02F8F93E200DD98C5 /* HomeCoordinator.swift in Sources */,
 				84C00EAF2F9252E100E6771B /* SuccessStatusSheet.swift in Sources */,
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,

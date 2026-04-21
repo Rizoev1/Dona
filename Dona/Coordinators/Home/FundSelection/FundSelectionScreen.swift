@@ -6,23 +6,40 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct FundSelectionScreen: View {
     @Environment(\.theme) private var theme
-    
+    @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
+
+    let type: PaymentScreenType
+
+    var navigationTitle: String {
+        switch type {
+        case .request: return "Select Fund to Request"
+        case .send: return "Select Fund to Send"
+        default: return "Select Fund"
+        }
+    }
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
-                ForEach(0 ..< 4) { _ in
-                    makeFund()
+                ForEach(0 ..< 4, id: \.self) { _ in
+                    Button {
+                        navigator.push(.payment(type))
+                    } label: {
+                        makeFund()
+                    }
                 }
             }
+            .padding(.vertical, 16)
         }
-        .navigationTitle("Select Fund to Send")
+        .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.large)
         .background(theme.background.surface)
     }
-    
+
     @ViewBuilder func makeFund() -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 16) {
@@ -70,5 +87,5 @@ struct FundSelectionScreen: View {
 }
 
 #Preview {
-    FundSelectionScreen()
+    FundSelectionScreen(type: .request)
 }
