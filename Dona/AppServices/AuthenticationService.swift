@@ -9,24 +9,28 @@ import Foundation
 import Combine
 
 class AuthenticationService: ObservableObject {
-    enum Status {
+    enum Status: String {
         case authenticated
         case unauthenticated
         case idle
     }
     
-    static var shared: AuthenticationService = AuthenticationService()
+    static var shared = AuthenticationService()
     
-    @Published var status: Status = .unauthenticated {
-        willSet(newValue) {
-            switch newValue {
-            case .authenticated:
-                print("authenticated")
-            case .unauthenticated:
-                print("unauthenticated")
-            default:
-                break
-            }
+    private let key = "auth_status"
+    
+    @Published var status: Status = .idle {
+        didSet {
+            UserDefaults.standard.set(status.rawValue, forKey: key)
+        }
+    }
+    
+    init() {
+        if let saved = UserDefaults.standard.string(forKey: key),
+           let status = Status(rawValue: saved) {
+            self.status = status
+        } else {
+            self.status = .unauthenticated
         }
     }
 }

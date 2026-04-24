@@ -45,19 +45,23 @@ struct HomeScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                HStack(spacing: 10) {
-                    Image(.profileMock)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 36, height: 36)
-                        .clipShape(Circle())
-                    Text("Дамир. Р")
-                        .font(AppFont.xLargeSemibold)
-                        .foregroundStyle(theme.text.onSurface)
-                        .fixedSize()
+                Button {
+                    navigator.push(.profile)
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(.profileMock)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 36, height: 36)
+                            .clipShape(Circle())
+                        Text("Дамир. Р")
+                            .font(AppFont.xLargeSemibold)
+                            .foregroundStyle(theme.text.onSurface)
+                            .fixedSize()
+                    }
+                    .fixedSize()
+                    .padding(2)
                 }
-                .fixedSize()
-                .padding(2)
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {

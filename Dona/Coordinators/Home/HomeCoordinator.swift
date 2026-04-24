@@ -16,6 +16,7 @@ enum HomeRouter: Hashable {
     case subServices(title: String)
     case payment(PaymentScreenType)
     case fundSelection(PaymentScreenType)
+    case profile
 }
 
 struct HomeCoordinator: View {
@@ -40,6 +41,8 @@ struct HomeCoordinator: View {
                         PaymentScreen(type: type)
                     case .fundSelection(let type):
                         FundSelectionScreen(type: type)
+                    case .profile:
+                        ProfileScreen()
                     }
                 }
         }
