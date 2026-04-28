@@ -33,7 +33,8 @@ struct FundSelectionScreen: View {
                     }
                 }
             }
-            .padding(.vertical, 16)
+            .padding(.horizontal)
+
         }
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.large)
@@ -74,7 +75,8 @@ struct FundSelectionScreen: View {
                 Image(.arrowRight)
                     .resizable()
                     .frame(width: 22, height: 22)
-                    .padding()
+                    .foregroundStyle(theme.text.onSurface)
+                    .padding(12)
                     .background(theme.background.secondaryContainer)
                     .clipShape(Circle())
             }
@@ -82,7 +84,6 @@ struct FundSelectionScreen: View {
         .padding()
         .background(theme.background.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .padding(.horizontal)
     }
 }
 
