@@ -22,6 +22,10 @@
 		84C00EAF2F9252E100E6771B /* SuccessStatusSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EAE2F9252E100E6771B /* SuccessStatusSheet.swift */; };
 		84C00EB12F92564600E6771B /* RequestStatusSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EB02F92564600E6771B /* RequestStatusSheet.swift */; };
 		84C00EB42F92576300E6771B /* FundSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EB32F92576300E6771B /* FundSelectionScreen.swift */; };
+		84C0EB002FA2173F00373558 /* FundNamingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EAFF2FA2173F00373558 /* FundNamingScreen.swift */; };
+		84C0EB022FA21B0E00373558 /* FundAmountSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EB012FA21B0E00373558 /* FundAmountSetting.swift */; };
+		84C0EB042FA2201F00373558 /* FundCommunityRulesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */; };
+		84C0EB062FA22B7300373558 /* FundMemberInvitationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */; };
 		84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */; };
 		84CE15432F890F59000E9552 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15422F890F59000E9552 /* AppButton.swift */; };
 		84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */; };
@@ -82,6 +86,10 @@
 		84C00EAE2F9252E100E6771B /* SuccessStatusSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessStatusSheet.swift; sourceTree = "<group>"; };
 		84C00EB02F92564600E6771B /* RequestStatusSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatusSheet.swift; sourceTree = "<group>"; };
 		84C00EB32F92576300E6771B /* FundSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundSelectionScreen.swift; sourceTree = "<group>"; };
+		84C0EAFF2FA2173F00373558 /* FundNamingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundNamingScreen.swift; sourceTree = "<group>"; };
+		84C0EB012FA21B0E00373558 /* FundAmountSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundAmountSetting.swift; sourceTree = "<group>"; };
+		84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundCommunityRulesScreen.swift; sourceTree = "<group>"; };
+		84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundMemberInvitationScreen.swift; sourceTree = "<group>"; };
 		84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		84CE15422F890F59000E9552 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBackgroundModifier.swift; sourceTree = "<group>"; };
@@ -202,6 +210,10 @@
 			isa = PBXGroup;
 			children = (
 				84007D112FA0BA7B0042708A /* FundsScreen.swift */,
+				84C0EAFF2FA2173F00373558 /* FundNamingScreen.swift */,
+				84C0EB012FA21B0E00373558 /* FundAmountSetting.swift */,
+				84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */,
+				84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */,
 			);
 			path = Funds;
 			sourceTree = "<group>";
@@ -574,6 +586,7 @@
 				4B3F73DA2F8A8D9200406292 /* AppCoordinator.swift in Sources */,
 				84C00EAC2F92499A00E6771B /* PaymentScreen.swift in Sources */,
 				84F0EFDE2F8F915800DD98C5 /* ActivityScreen.swift in Sources */,
+				84C0EB042FA2201F00373558 /* FundCommunityRulesScreen.swift in Sources */,
 				84C00EB42F92576300E6771B /* FundSelectionScreen.swift in Sources */,
 				4B3F73E22F8A909100406292 /* HomeScreen.swift in Sources */,
 				84CE15512F89148C000E9552 /* LogInScreen.swift in Sources */,
@@ -582,9 +595,11 @@
 				4B3F73D62F8A8B8F00406292 /* AuthenticationService.swift in Sources */,
 				84D233F12F865BC800C7DE80 /* LanguageOnboardingScreen.swift in Sources */,
 				84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */,
+				84C0EB022FA21B0E00373558 /* FundAmountSetting.swift in Sources */,
 				4B3F73E52F8A91F500406292 /* SplashScreen.swift in Sources */,
 				84007D122FA0BA7B0042708A /* FundsScreen.swift in Sources */,
 				84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */,
+				84C0EB002FA2173F00373558 /* FundNamingScreen.swift in Sources */,
 				84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */,
 				84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */,
 				84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */,
@@ -598,6 +613,7 @@
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */,
+				84C0EB062FA22B7300373558 /* FundMemberInvitationScreen.swift in Sources */,
 				84D2340D2F8662A400C7DE80 /* AppTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

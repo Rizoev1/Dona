@@ -32,6 +32,8 @@ struct FundsScreen: View {
         }
         .padding(.horizontal, 12)
         .appBackground()
+        .navigationTitle("Funds")
+        .navigationBarTitleDisplayMode(.large)
     }
     
     @ViewBuilder func makeOptionsBlock(text: String, icon: Image) -> some View {
