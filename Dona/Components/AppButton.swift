@@ -5,13 +5,13 @@
 //  Created by Damir Rizoev on 10/04/26.
 //
 
-
 import SwiftUI
 
 enum AppButtonState {
     case `default`
     case disabled
     case loading
+    case white
 }
 
 struct AppButton: View {
@@ -23,7 +23,7 @@ struct AppButton: View {
 
     var body: some View {
         Button {
-            guard state == .default else { return }
+            guard state == .default || state == .white else { return }
             action()
         } label: {
             ZStack {
@@ -33,19 +33,27 @@ struct AppButton: View {
                 } else {
                     Text(title)
                         .font(AppFont.largeMedium)
-                        .foregroundStyle(theme.text.foregroundStaticWhite)
+                        .foregroundStyle(
+                            state == .white
+                                ? theme.text.onSurface
+                                : theme.text.foregroundStaticWhite
+                        )
                 }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 15)
             .background {
-                LinearGradient(
-                    colors: state == .disabled
-                        ? [Color(hex: "#9E9EA7"), Color(hex: "#9E9EA7")]
-                        : [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
-                    startPoint: .trailing,
-                    endPoint: .leading
-                )
+                if state == .white {
+                    theme.background.background
+                } else {
+                    LinearGradient(
+                        colors: state == .disabled
+                            ? [Color(hex: "#9E9EA7"), Color(hex: "#9E9EA7")]
+                            : [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
+                        startPoint: .trailing,
+                        endPoint: .leading
+                    )
+                }
             }
             .clipShape(RoundedRectangle(cornerRadius: 40))
         }

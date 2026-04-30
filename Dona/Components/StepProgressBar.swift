@@ -15,24 +15,35 @@ struct StepProgressBar: View {
     var body: some View {
         HStack(spacing: 6) {
             ForEach(1...totalSteps, id: \.self) { step in
-                Capsule()
-                    .fill(
-                        step <= currentStep
-                        ? LinearGradient(
-                            colors: [Color(hex: "2A8AE4"), Color(hex: "3A49F9")],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                          )
-                        : LinearGradient(
-                            colors: [Color(.systemGray5), Color(.systemGray5)],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                          )
-                    )
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(Color(.systemGray5))
+                        .frame(height: 4)
+                    GeometryReader { geo in
+                        Capsule()
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(hex: "2A8AE4"), Color(hex: "3A49F9")],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .frame(
+                                width: step < currentStep
+                                    ? geo.size.width
+                                    : step == currentStep
+                                        ? geo.size.width
+                                        : 0,
+                                height: 4
+                            )
+                            .animation(
+                                .easeInOut(duration: 0.3).delay(step == currentStep ? 0.1 : 0),
+                                value: currentStep
+                            )
+                    }
                     .frame(height: 4)
-                    .animation(.easeInOut(duration: 0.3), value: currentStep)
+                }
             }
         }
-        .padding(.horizontal, 20)
     }
 }

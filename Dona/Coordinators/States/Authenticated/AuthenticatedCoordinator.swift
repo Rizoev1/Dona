@@ -10,20 +10,21 @@ import FlowStacks
 
 enum AuthenticatedRouter: Hashable {
     case home
+    case funds
+    case payments
 }
 
 struct AuthenticatedCoordinator: View {
-    @State private var routes: Routes<AuthenticatedRouter> = []
-
     var body: some View {
-        FlowStack($routes, withNavigation: false) {
+        TabView {
             HomeCoordinator()
-                .flowDestination(for: AuthenticatedRouter.self) { screen in
-                    switch screen {
-                    case .home:
-                        HomeCoordinator()
-                    }
-                }
+                .tabItem { Label("Home", systemImage: "house.fill") }
+
+            FundsCoordinator()
+                .tabItem { Label("Funds", systemImage: "chart.pie.fill") }
+
+            PaymentsCoordinator()
+                .tabItem { Label("Payments", systemImage: "creditcard.fill") }
         }
     }
 }

@@ -6,37 +6,55 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct FundCommunityRulesScreen: View {
     @Environment(\.theme) var theme
+    @Binding var routes: Routes<FundsRouter>
     @State private var contributions: String = ""
     @State private var withdrawals: String = ""
-    
+    @State private var animatedStep: Int = 2
+
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 32) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Community Rules")
-                        .font(AppFont.heading2)
-                        .foregroundStyle(theme.text.onSurface)
-                    Text("Define the terms for your savings circle. Members must accept these to participate.")
-                        .font(AppFont.largeRegular)
-                        .foregroundStyle(theme.text.onTertiary)
+        VStack(spacing: 0) {
+            StepProgressBar(totalSteps: 5, currentStep: animatedStep)
+                .padding(.vertical, 12)
+
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 32) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Community Rules")
+                            .font(AppFont.heading2)
+                            .foregroundStyle(theme.text.onSurface)
+                        Text("Define the terms for your savings circle. Members must accept these to participate.")
+                            .font(AppFont.largeRegular)
+                            .foregroundStyle(theme.text.onTertiary)
+                    }
+                    VStack(alignment: .leading, spacing: 8) {
+                        makeGeneralRules()
+                        makeContributions()
+                        makeWithdrawals()
+                        makeResolution()
+                    }
+
+                    AppButton(title: "Continue", state: .default) {
+                        routes.push(.fundInvitation)
+                    }
                 }
-                VStack(alignment: .leading, spacing: 8) {
-                    makeGeneralRules()
-                    makeContributions()
-                    makeWithdrawals()
-                    makeResolution()
-                }
-                
-                AppButton(title: "Continue", state: .default, action: {})
+                .padding(.bottom, 16)
             }
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
         .navigationTitle("Create fund")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    animatedStep = 3
+                }
+            }
+        }
     }
     
     @ViewBuilder func makeGeneralRules() -> some View {
@@ -227,6 +245,3 @@ struct FundCommunityRulesScreen: View {
     }
 }
 
-#Preview {
-    FundCommunityRulesScreen()
-}
