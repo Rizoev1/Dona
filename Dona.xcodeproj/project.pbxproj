@@ -19,6 +19,7 @@
 		84956C0E2FA3150200563555 /* FundsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84956C0D2FA3150200563555 /* FundsCoordinator.swift */; };
 		84956C122FA31B0900563555 /* PaymentsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84956C112FA31B0900563555 /* PaymentsCoordinator.swift */; };
 		84956C142FA31B2600563555 /* PaymentsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84956C132FA31B2600563555 /* PaymentsScreen.swift */; };
+		84956C452FA35CFE00563555 /* IndividualFundScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84956C442FA35CFE00563555 /* IndividualFundScreen.swift */; };
 		84B57E9F2F97676A00988346 /* ServicesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B57E9E2F97676A00988346 /* ServicesScreen.swift */; };
 		84B57EA22F976A3300988346 /* SubServicesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B57EA12F976A3300988346 /* SubServicesScreen.swift */; };
 		84C00EAC2F92499A00E6771B /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C00EAB2F92499A00E6771B /* PaymentScreen.swift */; };
@@ -86,6 +87,7 @@
 		84956C0D2FA3150200563555 /* FundsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsCoordinator.swift; sourceTree = "<group>"; };
 		84956C112FA31B0900563555 /* PaymentsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsCoordinator.swift; sourceTree = "<group>"; };
 		84956C132FA31B2600563555 /* PaymentsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsScreen.swift; sourceTree = "<group>"; };
+		84956C442FA35CFE00563555 /* IndividualFundScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualFundScreen.swift; sourceTree = "<group>"; };
 		84B57E9E2F97676A00988346 /* ServicesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesScreen.swift; sourceTree = "<group>"; };
 		84B57EA12F976A3300988346 /* SubServicesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubServicesScreen.swift; sourceTree = "<group>"; };
 		84C00EAB2F92499A00E6771B /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				84956C0D2FA3150200563555 /* FundsCoordinator.swift */,
 				84007D112FA0BA7B0042708A /* FundsScreen.swift */,
 				84956C0F2FA315FB00563555 /* FundSettingScreens */,
+				84956C432FA35CE600563555 /* IndividualFund */,
 			);
 			path = Funds;
 			sourceTree = "<group>";
@@ -247,6 +250,14 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84956C432FA35CE600563555 /* IndividualFund */ = {
+			isa = PBXGroup;
+			children = (
+				84956C442FA35CFE00563555 /* IndividualFundScreen.swift */,
+			);
+			path = IndividualFund;
 			sourceTree = "<group>";
 		};
 		84B57E9D2F97675900988346 /* Services */ = {
@@ -631,6 +642,7 @@
 				84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */,
 				84C0EB022FA21B0E00373558 /* FundAmountSetting.swift in Sources */,
 				84956C122FA31B0900563555 /* PaymentsCoordinator.swift in Sources */,
+				84956C452FA35CFE00563555 /* IndividualFundScreen.swift in Sources */,
 				4B3F73E52F8A91F500406292 /* SplashScreen.swift in Sources */,
 				84007D122FA0BA7B0042708A /* FundsScreen.swift in Sources */,
 				84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */,

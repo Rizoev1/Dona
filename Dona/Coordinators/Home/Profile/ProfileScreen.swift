@@ -52,6 +52,7 @@ struct ProfileScreen: View {
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .foregroundStyle(theme.text.onTertiary)
                 }
             }
             Divider()
@@ -71,6 +72,7 @@ struct ProfileScreen: View {
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .foregroundStyle(theme.text.onTertiary)
                 }
             }
             Divider()
@@ -90,6 +92,7 @@ struct ProfileScreen: View {
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .foregroundStyle(theme.text.onTertiary)
                 }
             }
             Divider()
@@ -109,6 +112,7 @@ struct ProfileScreen: View {
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
+                        .foregroundStyle(theme.text.onTertiary)
                 }
             }
         }
@@ -137,6 +141,7 @@ struct ProfileScreen: View {
                 Image(.right)
                     .resizable()
                     .frame(width: 16, height: 16)
+                    .foregroundStyle(theme.text.onTertiary)
             }
             .padding(.horizontal)
             .padding(.vertical, 20)

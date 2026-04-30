@@ -286,7 +286,7 @@ struct HomeScreen: View {
                                 .foregroundStyle(theme.text.onTertiary)
                         }
                     }
-                    if index < 1 {
+                    if index < 2 {
                         Divider()
                             .padding(.leading, 48)
                     }
