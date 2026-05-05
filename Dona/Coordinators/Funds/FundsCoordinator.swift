@@ -14,6 +14,10 @@ enum FundsRouter: Hashable {
     case fundAmount
     case fundRules
     case fundInvitation
+    case fundDetails
+    case approvals
+    case members
+    case payment(PaymentScreenType)
 }
 
 struct FundsCoordinator: View {
@@ -34,6 +38,14 @@ struct FundsCoordinator: View {
                         FundCommunityRulesScreen(routes: $routes)
                     case .fundInvitation:
                         FundMemberInvitationScreen(routes: $routes)
+                    case .fundDetails:
+                        IndividualFundScreen(routes: $routes)
+                    case .approvals:
+                        ApprovalsScreen()
+                    case .members:
+                        MembersScreen()
+                    case .payment(let type):
+                        PaymentScreen(type: type)
                     }
                 }
         }

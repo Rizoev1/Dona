@@ -27,10 +27,18 @@ struct FundsScreen: View {
                     makeOptionsBlock(text: "Migrate Existing Community", icon: Image(.refresh)) {}
                 }
                 VStack(spacing: 16) {
-                    makeSavings(status: .admin)
-                    makeSavings(status: .member)
-                    makeSavings(status: .admin)
-                    makeSavings(status: .member)
+                    makeSavings(status: .admin) {
+                        routes.push(.fundDetails)
+                    }
+                    makeSavings(status: .member) {
+                        routes.push(.fundDetails)
+                    }
+                    makeSavings(status: .admin) {
+                        routes.push(.fundDetails)
+                    }
+                    makeSavings(status: .member) {
+                        routes.push(.fundDetails)
+                    }
                 }
             }
         }
@@ -67,65 +75,77 @@ struct FundsScreen: View {
         }
     }
 
-    @ViewBuilder func makeSavings(status: UserStatus) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .top, spacing: 16) {
-                Image(.amazonMock)
-                    .resizable()
-                    .frame(width: 45, height: 45)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Family Savings")
-                        .font(AppFont.xLargeBold)
-                        .foregroundStyle(theme.text.onSurface)
-                    Text("4 Members")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                }
-                Spacer()
-                if status == .admin {
-                    Text("ADMIN")
-                        .font(AppFont.smallMedium)
-                        .foregroundStyle(theme.text.primaryContainer)
-                        .padding(.horizontal, 8).padding(.vertical, 4)
-                        .background(theme.background.inversePrimary)
-                        .clipShape(RoundedRectangle(cornerRadius: 60))
-                } else {
-                    Text("MEMBER")
-                        .font(AppFont.smallMedium)
-                        .foregroundStyle(theme.text.onTertiary)
-                        .padding(.horizontal, 8).padding(.vertical, 4)
-                        .background(theme.background.secondaryContainer)
-                        .clipShape(RoundedRectangle(cornerRadius: 60))
-                }
-            }
-            Divider()
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Fund balance")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                    HStack(spacing: 4) {
-                        Text("1 293.19")
-                            .font(AppFont.heading3)
+    @ViewBuilder func makeSavings(status: UserStatus, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(alignment: .top, spacing: 16) {
+                    Image(.amazonMock)
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Family Savings")
+                            .font(AppFont.xLargeBold)
                             .foregroundStyle(theme.text.onSurface)
-                        Text("TJS")
-                            .font(AppFont.largeMedium)
-                            .foregroundStyle(theme.text.onTertiaryContainer)
+                        Text("4 Members")
+                            .font(AppFont.smallRegular)
+                            .foregroundStyle(theme.text.onTertiary)
+                    }
+                    
+                    Spacer()
+                    
+                    if status == .admin {
+                        Text("ADMIN")
+                            .font(AppFont.smallMedium)
+                            .foregroundStyle(theme.text.primaryContainer)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(theme.background.inversePrimary)
+                            .clipShape(RoundedRectangle(cornerRadius: 60))
+                    } else {
+                        Text("MEMBER")
+                            .font(AppFont.smallMedium)
+                            .foregroundStyle(theme.text.onTertiary)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(theme.background.secondaryContainer)
+                            .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
                 }
-                Spacer()
-                Image(.arrowRight)
-                    .resizable()
-                    .frame(width: 22, height: 22)
-                    .foregroundStyle(theme.text.onSurface)
-                    .padding(12)
-                    .background(theme.background.secondaryContainer)
-                    .clipShape(Circle())
+                
+                Divider()
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Fund balance")
+                            .font(AppFont.smallRegular)
+                            .foregroundStyle(theme.text.onTertiary)
+                        
+                        HStack(spacing: 4) {
+                            Text("1 293.19")
+                                .font(AppFont.heading3)
+                                .foregroundStyle(theme.text.onSurface)
+                            Text("TJS")
+                                .font(AppFont.largeMedium)
+                                .foregroundStyle(theme.text.onTertiaryContainer)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Image(.arrowRight)
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(theme.text.onSurface)
+                        .padding(12)
+                        .background(theme.background.secondaryContainer)
+                        .clipShape(Circle())
+                }
             }
+            .padding()
+            .background(theme.background.background)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
         }
-        .padding()
-        .background(theme.background.background)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

@@ -55,7 +55,7 @@ struct FundMemberInvitationScreen: View {
             Text("MK")
                 .font(AppFont.largeMedium)
                 .foregroundStyle(theme.text.primaryContainer)
-                .padding(8)
+                .padding(10)
                 .background(theme.background.inversePrimary)
                 .clipShape(Circle())
             
@@ -64,8 +64,8 @@ struct FundMemberInvitationScreen: View {
                     .font(AppFont.largeMedium)
                     .foregroundStyle(theme.text.onSurface)
                 Text("+992 98 765 43 21")
-                    .font(AppFont.largeMedium)
-                    .foregroundStyle(theme.text.onSurface)
+                    .font(AppFont.mediumRegular)
+                    .foregroundStyle(theme.text.onTertiary)
             }
             Spacer()
             

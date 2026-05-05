@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct IndividualFundScreen: View {
+    @Binding var routes: Routes<FundsRouter>
     @Environment(\.theme) var theme
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
                 makeTopVIew()
                 makeMembers()
                 
+                Button {
+                    routes.push(.approvals)
+                } label: {
                 HStack(spacing: 12) {
                     Image(.signature)
                         .resizable()
@@ -22,7 +28,7 @@ struct IndividualFundScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-
+                    
                     VStack(alignment: .leading, spacing: 4) {
                         HStack(spacing: 4) {
                             Text("Approvals")
@@ -44,6 +50,7 @@ struct IndividualFundScreen: View {
                 .padding(16)
                 .background(theme.background.background)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
                 
                 makeOptions()
                 makeRecentActivity()
@@ -121,7 +128,7 @@ struct IndividualFundScreen: View {
             HStack(spacing: 16) {
                 VStack(spacing: 6) {
                     Button {
-                        
+                        routes.push(.payment(.topUp))
                     } label: {
                         Image(.add)
                             .resizable()
@@ -171,7 +178,7 @@ struct IndividualFundScreen: View {
                     .foregroundColor(theme.text.onTertiaryContainer)
                 Spacer()
                 Button {
-                   
+                    routes.push(.members)
                 } label: {
                     HStack(spacing: 5) {
                         Text("View All")
@@ -197,7 +204,7 @@ struct IndividualFundScreen: View {
                                     Text("MK")
                                         .font(AppFont.largeMedium)
                                         .foregroundStyle(theme.text.primaryContainer)
-                                        .padding(8)
+                                        .padding(10)
                                         .background(theme.background.inversePrimary)
                                         .clipShape(Circle())
                                     
@@ -378,6 +385,3 @@ struct PulsingDot: View {
     }
 }
 
-#Preview {
-    IndividualFundScreen()
-}
