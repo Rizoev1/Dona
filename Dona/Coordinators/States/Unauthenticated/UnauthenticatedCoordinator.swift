@@ -25,7 +25,7 @@ struct UnauthenticatedCoordinator: View {
                     case .login:
                         LogInScreen()
                     case .verification:
-                        VerificationScreen()
+                        VerificationScreen(phone: "")
                     case .pin(let savedPin):
                         PinScreen(savedPin: savedPin, onSuccess:  {
                             AuthenticationService.shared.status = .authenticated

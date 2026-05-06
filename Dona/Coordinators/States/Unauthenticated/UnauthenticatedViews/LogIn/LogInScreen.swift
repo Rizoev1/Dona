@@ -11,6 +11,7 @@ import FlowStacks
 struct LogInScreen: View {
     @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
+    @StateObject private var viewModel = LoginViewModel()
     @State private var phoneNumber: String = ""
 
     var body: some View {
@@ -51,28 +52,37 @@ struct LogInScreen: View {
             .frame(height: 56)
             .background(theme.background.secondaryContainer)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            
+
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .font(AppFont.mediumRegular)
+                    .foregroundStyle(.red)
+            }
+
             Group {
-                    Text("By continuing, you agree to the ")
+                Text("By continuing, you agree to the ")
                     .foregroundColor(theme.text.onSecondary)
-                    + Text("Terms of Use")
+                + Text("Terms of Use")
                     .foregroundColor(theme.text.primaryContainer)
-                }
+            }
             .font(AppFont.mediumRegular)
-                .multilineTextAlignment(.center)
-                .onTapGesture {
-                    // открыть Terms of Use
-                }
-            
+            .multilineTextAlignment(.center)
+            .onTapGesture {
+                // открыть Terms of Use
+            }
+
             Spacer()
-            AppButton(title: "Log In", state: .default) {
-                navigator.push(.verification)
+
+            AppButton(title: "Log In", state: viewModel.isLoading ? .loading : .default) {
+                viewModel.sendOtp(phone: phoneNumber) {
+                    navigator.push(.verification)
+                }
             }
         }
         .padding(.horizontal)
         .appBackground()
     }
-    
+
     func format(_ input: String) -> String {
         let digits = input.filter { $0.isNumber }.prefix(9)
         var result = ""

@@ -11,9 +11,14 @@ import FlowStacks
 struct VerificationScreen: View {
     @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
+    @StateObject private var viewModel: VerificationViewModel
     @FocusState private var isFocused: Bool
     @State private var code: String = ""
     @State private var didNavigate = false
+
+    init(phone: String) {
+        _viewModel = StateObject(wrappedValue: VerificationViewModel(phone: phone))
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -27,9 +32,24 @@ struct VerificationScreen: View {
                     .foregroundStyle(theme.text.onSecondary)
             }
             makeCodeField()
-            Text("Resend code")
-                .font(AppFont.mediumMedium)
-                .foregroundStyle(theme.text.primaryContainer)
+
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .font(AppFont.mediumRegular)
+                    .foregroundStyle(.red)
+            }
+
+            if viewModel.isResending {
+                ProgressView()
+            } else {
+                Text("Resend code")
+                    .font(AppFont.mediumMedium)
+                    .foregroundStyle(theme.text.primaryContainer)
+                    .onTapGesture {
+                        viewModel.resendOtp()
+                    }
+            }
+
             Spacer()
         }
         .padding(.horizontal)
@@ -65,9 +85,14 @@ struct VerificationScreen: View {
                                     .animation(.easeInOut(duration: 0.2), value: isActive)
                             }
 
-                        Text(character)
-                            .font(AppFont.heading4)
-                            .foregroundStyle(theme.text.onSurface)
+                        if viewModel.isLoading && digitsOnly.count == 6 {
+                            ProgressView()
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Text(character)
+                                .font(AppFont.heading4)
+                                .foregroundStyle(theme.text.onSurface)
+                        }
                     }
                 }
             }
@@ -75,12 +100,15 @@ struct VerificationScreen: View {
             TextField("", text: Binding(
                 get: { code },
                 set: { newValue in
+                    guard !viewModel.isLoading else { return }
                     let digits = newValue.filter { $0.isNumber }
                     code = String(digits.prefix(6))
 
                     if code.count == 6 && !didNavigate {
                         didNavigate = true
-                        navigator.push(.pin(savedPin: []))
+                        viewModel.verifyOtp(code: code) {
+                            navigator.push(.pin(savedPin: []))
+                        }
                     }
                 }
             ))
@@ -96,10 +124,12 @@ struct VerificationScreen: View {
         .onTapGesture {
             isFocused = true
         }
+        .onChange(of: viewModel.errorMessage) { error in
+            if error != nil { didNavigate = false }
+        }
     }
 }
 
-
 #Preview {
-    VerificationScreen()
+    VerificationScreen(phone: "992901234567")
 }
