@@ -10,13 +10,13 @@ import FlowStacks
 
 enum UnauthenticatedRouter: Hashable {
     case login
-    case verification
+    case verification(phone: String)
     case pin(savedPin: [Int])
 }
 
 struct UnauthenticatedCoordinator: View {
     @State private var routes: Routes<UnauthenticatedRouter> = []
-    
+
     var body: some View {
         FlowStack($routes, withNavigation: true) {
             LanguageOnboardingScreen()
@@ -24,10 +24,10 @@ struct UnauthenticatedCoordinator: View {
                     switch screen {
                     case .login:
                         LogInScreen()
-                    case .verification:
-                        VerificationScreen(phone: "")
+                    case .verification(let phone):
+                        VerificationScreen(phone: phone)
                     case .pin(let savedPin):
-                        PinScreen(savedPin: savedPin, onSuccess:  {
+                        PinScreen(savedPin: savedPin, onSuccess: {
                             AuthenticationService.shared.status = .authenticated
                         })
                     }

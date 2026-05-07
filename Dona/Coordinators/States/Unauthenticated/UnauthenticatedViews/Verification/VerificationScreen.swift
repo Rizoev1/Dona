@@ -22,7 +22,7 @@ struct VerificationScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Spacer().frame(height: 100)
+            Spacer().frame(height: 80)
             VStack(alignment: .leading, spacing: 6) {
                 Text("Enter the SMS code")
                     .font(AppFont.heading2)

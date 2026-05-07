@@ -16,7 +16,7 @@ struct LogInScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Spacer().frame(height: 100)
+            Spacer().frame(height: 80)
             HStack(spacing: 12) {
                 Image(.appLogo)
                     .resizable()
@@ -74,8 +74,10 @@ struct LogInScreen: View {
             Spacer()
 
             AppButton(title: "Log In", state: viewModel.isLoading ? .loading : .default) {
-                viewModel.sendOtp(phone: phoneNumber) {
-                    navigator.push(.verification)
+                let digits = phoneNumber.filter { $0.isNumber }
+                let fullPhone = "992" + digits
+                viewModel.sendOtp(phone: fullPhone) {
+                    navigator.push(.verification(phone: fullPhone))
                 }
             }
         }

@@ -40,7 +40,7 @@ enum API {
 }
 
 extension API: TargetType {
-    var baseURL: URL { URL(string: "https://api.donaapp.tj/api")! }
+    var baseURL: URL { URL(string: "https://api.dona.finance/api")! }
 
     var path: String {
         switch self {
