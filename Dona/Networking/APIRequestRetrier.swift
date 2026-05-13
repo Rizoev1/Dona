@@ -40,6 +40,12 @@ final class APIRequestRetrier: RequestInterceptor {
         dueTo error: Error,
         completion: @escaping (RetryResult) -> Void
     ) {
+        if let response = request.task?.response as? HTTPURLResponse,
+           response.statusCode == 401 {
+            refreshTokenIfNeeded(completion: completion)
+            return
+        }
+
         lock.lock()
         defer { lock.unlock() }
 
@@ -53,9 +59,24 @@ final class APIRequestRetrier: RequestInterceptor {
         }
 
         retryCount[requestID] = currentRetryCount + 1
-
         let delay = retryDelay * pow(2.0, Double(currentRetryCount))
         completion(.retryWithDelay(delay))
+    }
+    
+    private func refreshTokenIfNeeded(completion: @escaping (RetryResult) -> Void) {
+        guard let refreshToken = KeychainService.shared.refreshToken else {
+            // Refresh токена нет — разлогиниваем
+            DispatchQueue.main.async {
+                AuthenticationService.shared.status = .unauthenticated
+            }
+            completion(.doNotRetry)
+            return
+        }
+
+        // Здесь вызов endpoint обновления токена
+        // Когда появится — вставить реальный запрос
+        _ = refreshToken
+        completion(.doNotRetry)
     }
 
     private func shouldRetry(error: Error) -> Bool {

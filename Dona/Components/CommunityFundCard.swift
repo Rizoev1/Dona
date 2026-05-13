@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CommunityFundCard: View {
     @Environment(\.theme) private var theme
+    let fund: Fund
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -16,11 +17,11 @@ struct CommunityFundCard: View {
                 .resizable()
                 .frame(width: 32, height: 32)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Community name")
+                Text(fund.name)
                     .font(AppFont.mediumRegular)
                     .foregroundStyle(theme.text.onSurface)
                 HStack(spacing: 4) {
-                    Text("1 293.19")
+                    Text(fund.balanceFormatted)
                         .font(AppFont.xxLargeBold)
                         .foregroundStyle(theme.text.onSurface)
                     Text("TJS")
@@ -28,7 +29,7 @@ struct CommunityFundCard: View {
                         .foregroundStyle(theme.text.onTertiaryContainer)
                 }
             }
-            Text("Earns 4.2% APY")
+            Text(fund.apyFormatted)
                 .font(AppFont.smallRegular)
                 .foregroundStyle(theme.text.onTertiary)
         }

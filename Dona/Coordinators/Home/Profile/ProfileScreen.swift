@@ -9,20 +9,21 @@ import SwiftUI
 
 struct ProfileScreen: View {
     @Environment(\.theme) private var theme
+    @StateObject private var viewModel = ProfileViewModel()
     
     var body: some View {
         VStack(spacing: 10) {
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 10)
             VStack(spacing: 12) {
                 Image(.profileMock)
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
                 VStack(spacing: 4) {
-                    Text("Damir Rizoev")
+                    Text(viewModel.displayName)
                         .font(AppFont.xLargeSemibold)
                         .foregroundStyle(theme.text.onSurface)
-                    Text("example@example.com")
+                    Text(viewModel.displayEmail)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onTertiary)
                 }
@@ -33,11 +34,14 @@ struct ProfileScreen: View {
         }
         .padding(.horizontal)
         .background(theme.background.surface)
+        .onAppear { viewModel.onAppear() }
     }
     
     @ViewBuilder func makeOptions() -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Button {} label: {
+            Button {
+                viewModel.updateLanguage("en")
+            } label: {
                 HStack(spacing: 12) {
                     Image(.languageCircle)
                         .resizable()
@@ -49,6 +53,9 @@ struct ProfileScreen: View {
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
+                    Text(viewModel.currentLanguage)
+                        .font(AppFont.smallRegular)
+                        .foregroundStyle(theme.text.onTertiary)
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
@@ -85,7 +92,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Payment metod")
+                    Text("Payment method (\(viewModel.paymentMethods.count))")
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()

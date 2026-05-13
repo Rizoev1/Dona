@@ -180,12 +180,10 @@ struct FundListResponse: Decodable {
 struct Fund: Decodable {
     let id: Int
     let name: String
-    /// Баланс в дирамах
     let balance: Int
     let apy: Double
     let status: String
     let memberCount: Int
-    /// Роль текущего пользователя в фонде
     let role: FundRole
 
     enum CodingKeys: String, CodingKey {
@@ -297,7 +295,7 @@ struct NotificationListResponse: Decodable {
     let payload: [AppNotification]
 }
 
-struct AppNotification: Decodable {
+struct AppNotification: Decodable, Identifiable {
     let id: Int
     let userId: Int
     let title: String

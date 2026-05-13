@@ -11,6 +11,7 @@ import FlowStacks
 struct HomeScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
+    @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -42,7 +43,8 @@ struct HomeScreen: View {
                 .padding(.top, 8)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .onAppear { viewModel.onAppear() }
+        .refreshable { viewModel.refresh() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -54,7 +56,7 @@ struct HomeScreen: View {
                             .scaledToFill()
                             .frame(width: 36, height: 36)
                             .clipShape(Circle())
-                        Text("Дамир. Р")
+                        Text(viewModel.displayName)
                             .font(AppFont.xLargeSemibold)
                             .foregroundStyle(theme.text.onSurface)
                             .fixedSize()
@@ -84,7 +86,7 @@ struct HomeScreen: View {
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     HStack(spacing: 4) {
-                        Text("1 293.19")
+                        Text(viewModel.balanceFormatted)
                             .font(AppFont.heading2)
                             .foregroundStyle(theme.text.onSurface)
                         Text("TJS")
@@ -97,7 +99,7 @@ struct HomeScreen: View {
                     Text("Personal wallet")
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
-                    Text("•• 4092")
+                    Text(viewModel.cardSuffix)
                         .font(AppFont.mediumMedium)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -190,8 +192,8 @@ struct HomeScreen: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(0 ..< 5, id: \.self) { _ in
-                        CommunityFundCard()
+                    ForEach(viewModel.funds) { fund in
+                        CommunityFundCard(fund: fund)
                     }
                 }
                 .padding(.horizontal, 12)
@@ -263,7 +265,7 @@ struct HomeScreen: View {
                 }
             }
             VStack(alignment: .leading, spacing: 12) {
-                ForEach(0 ..< 3, id: \.self) { index in
+                ForEach(Array(viewModel.topRecentActivity.enumerated()), id: \.element.id) { index, activity in
                     HStack(spacing: 12) {
                         Image(.amazonMock)
                             .resizable()
@@ -272,21 +274,21 @@ struct HomeScreen: View {
                             Text("Community name")
                                 .font(AppFont.mediumMedium)
                                 .foregroundStyle(theme.text.onSurface)
-                            Text("Monthly Contribution")
+                            Text(activity.typeLabel)
                                 .font(AppFont.mediumRegular)
                                 .foregroundStyle(theme.text.onTertiary)
                         }
                         Spacer()
                         VStack(alignment: .trailing, spacing: 4) {
-                            Text("- 42.2 TJS")
+                            Text(activity.amountFormatted)
                                 .font(AppFont.mediumMedium)
                                 .foregroundStyle(theme.text.onSurface)
-                            Text("12.01")
+                            Text(activity.shortDate)
                                 .font(AppFont.mediumRegular)
                                 .foregroundStyle(theme.text.onTertiary)
                         }
                     }
-                    if index < 2 {
+                    if index < viewModel.topRecentActivity.count - 1 {
                         Divider()
                             .padding(.leading, 48)
                     }
