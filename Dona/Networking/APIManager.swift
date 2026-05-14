@@ -71,6 +71,22 @@ extension APIManager {
     func verifyOtp(phone: String, code: String) -> AnyPublisher<AuthTokensResponse, MoyaError> {
         return requestObject(.verifyOtp(phone: phone, code: code), type: AuthTokensResponse.self)
     }
+    
+    func setPin(sessionToken: String, pin: String) -> AnyPublisher<AuthTokensResponse, MoyaError> {
+        return requestObject(.setPin(sessionToken: sessionToken, pin: pin), type: AuthTokensResponse.self)
+    }
+
+    func verifyPin(sessionToken: String, pin: String) -> AnyPublisher<AuthTokensResponse, MoyaError> {
+        return requestObject(.verifyPin(sessionToken: sessionToken, pin: pin), type: AuthTokensResponse.self)
+    }
+
+    func refreshTokens(refreshToken: String) -> AnyPublisher<AuthTokensResponse, MoyaError> {
+        return requestObject(.refreshTokens(refreshToken: refreshToken), type: AuthTokensResponse.self)
+    }
+
+    func logout(sessionToken: String) -> AnyPublisher<MessageResponse, MoyaError> {
+        return requestObject(.logout(sessionToken: sessionToken), type: MessageResponse.self)
+    }
 }
 
 // MARK: - Profile

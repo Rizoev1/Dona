@@ -37,6 +37,10 @@ enum API {
     case listNotifications
     case markNotificationRead(id: Int)
     case ping
+    case setPin(sessionToken: String, pin: String)
+    case verifyPin(sessionToken: String, pin: String)
+    case refreshTokens(refreshToken: String)
+    case logout(sessionToken: String)
 }
 
 extension API: TargetType {
@@ -88,6 +92,14 @@ extension API: TargetType {
             return "/notifications/\(id)/read"
         case .ping:
             return "/ping"
+        case .setPin:
+            return "/auth/pin/set"
+        case .verifyPin:
+            return "/auth/pin/verify"
+        case .refreshTokens:
+            return "/auth/refresh"
+        case .logout:
+            return "/auth/logout"
         }
     }
 
@@ -99,7 +111,7 @@ extension API: TargetType {
             return .get
 
         case .sendOtp, .verifyOtp, .topUpWallet, .sendWallet, .addPaymentMethod,
-             .createFund, .inviteFundMember, .topUpFund, .createWithdrawal:
+             .createFund, .inviteFundMember, .topUpFund, .createWithdrawal, .setPin, .verifyPin, .refreshTokens, .logout:
             return .post
 
         case .updateProfile, .approveWithdrawal, .rejectWithdrawal, .markNotificationRead:
@@ -115,7 +127,6 @@ extension API: TargetType {
         let queryEncoding = URLEncoding.queryString
 
         switch self {
-        // Parameterless
         case .getProfile, .getWallet, .getWalletActivity, .listPaymentMethods,
              .listFunds, .getFund, .listFundMembers, .getFundActivity,
              .getFundReport, .listWithdrawals, .listNotifications,
@@ -180,6 +191,30 @@ extension API: TargetType {
             var params: [String: Any] = ["amount": amount]
             if let toPaymentId { params["to_payment_id"] = toPaymentId }
             return .requestParameters(parameters: params, encoding: jsonEncoding)
+            
+        case let .setPin(sessionToken, pin):
+            return .requestParameters(
+                parameters: ["session_token": sessionToken, "pin": pin],
+                encoding: jsonEncoding
+            )
+
+        case let .verifyPin(sessionToken, pin):
+            return .requestParameters(
+                parameters: ["session_token": sessionToken, "pin": pin],
+                encoding: jsonEncoding
+            )
+
+        case let .refreshTokens(refreshToken):
+            return .requestParameters(
+                parameters: ["refresh_token": refreshToken],
+                encoding: jsonEncoding
+            )
+
+        case let .logout(sessionToken):
+            return .requestParameters(
+                parameters: ["session_token": sessionToken],
+                encoding: jsonEncoding
+            )
         }
     }
 
