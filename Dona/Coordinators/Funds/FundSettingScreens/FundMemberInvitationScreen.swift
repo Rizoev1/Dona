@@ -7,10 +7,47 @@
 
 import SwiftUI
 import FlowStacks
+import Combine
+
+@MainActor
+final class FundInvitationViewModel: ObservableObject {
+    @Published var phone: String = ""
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+    @Published var isSuccess = false
+
+    private var cancellables = Set<AnyCancellable>()
+
+    func invite(fundId: Int) {
+        let digits = phone.filter { $0.isNumber }
+        guard digits.count == 9 else {
+            errorMessage = "Enter a valid 9-digit phone number"
+            return
+        }
+        isLoading = true
+        errorMessage = nil
+        APIManager.shared.inviteFundMember(fundId: fundId, phone: "992\(digits)")
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] _ in
+                self?.isSuccess = true
+                self?.phone = ""
+            }
+            .store(in: &cancellables)
+    }
+}
 
 struct FundMemberInvitationScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
+    @StateObject private var viewModel = FundInvitationViewModel()
+    @FocusState private var isFocused: Bool
+
+    let fundId: Int
+
     @State private var animatedStep: Int = 3
 
     var body: some View {
@@ -28,14 +65,42 @@ struct FundMemberInvitationScreen: View {
                             .font(AppFont.largeRegular)
                             .foregroundStyle(theme.text.onTertiary)
                     }
-                    makeContact()
+
+                    makePhoneInput()
+
+                    if let error = viewModel.errorMessage {
+                        Text(error)
+                            .font(AppFont.mediumRegular)
+                            .foregroundStyle(theme.text.onErrorContainer)
+                    }
+
+                    if viewModel.isSuccess {
+                        HStack(spacing: 8) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(theme.text.foregroundSuccess1)
+                            Text("Invitation sent!")
+                                .font(AppFont.mediumMedium)
+                                .foregroundStyle(theme.text.foregroundSuccess1)
+                        }
+                        .padding(12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(theme.background.backgroundSuccess)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                 }
                 .padding(.bottom, 16)
             }
 
             VStack(spacing: 6) {
-                AppButton(title: "Invite member", state: .default, action: { })
-                AppButton(title: "Skip now", state: .white, action: { })
+                AppButton(
+                    title: "Invite member",
+                    state: viewModel.isLoading ? .loading : .default
+                ) {
+                    viewModel.invite(fundId: fundId)
+                }
+                AppButton(title: "Skip now", state: .white) {
+                    routes = []
+                }
             }
             .padding(.top, 8)
         }
@@ -43,42 +108,34 @@ struct FundMemberInvitationScreen: View {
         .background(theme.background.surface)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    animatedStep = 4
-                }
+                withAnimation(.easeInOut(duration: 0.5)) { animatedStep = 4 }
             }
         }
     }
-    
-    @ViewBuilder func makeContact() -> some View {
-        HStack(spacing: 12) {
-            Text("MK")
-                .font(AppFont.largeMedium)
-                .foregroundStyle(theme.text.primaryContainer)
-                .padding(10)
-                .background(theme.background.inversePrimary)
-                .clipShape(Circle())
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Maftuna Kholova")
-                    .font(AppFont.largeMedium)
-                    .foregroundStyle(theme.text.onSurface)
-                Text("+992 98 765 43 21")
-                    .font(AppFont.mediumRegular)
-                    .foregroundStyle(theme.text.onTertiary)
-            }
-            Spacer()
-            
-            Text("ADMIN")
-                .font(AppFont.smallMedium)
-                .foregroundStyle(theme.text.primaryContainer)
-                .padding(.horizontal, 8).padding(.vertical, 4)
-                .background(theme.background.inversePrimary)
-                .clipShape(RoundedRectangle(cornerRadius: 60))
+
+    @ViewBuilder func makePhoneInput() -> some View {
+        HStack(spacing: 0) {
+            Text("+992 ")
+                .font(AppFont.mediumMedium)
+                .foregroundStyle(theme.text.onSurface)
+                .padding(.leading, 16)
+
+            TextField("00 000 00 00", text: $viewModel.phone)
+                .font(AppFont.mediumMedium)
+                .foregroundStyle(theme.text.onSurface)
+                .keyboardType(.phonePad)
+                .focused($isFocused)
+                .padding(.vertical, 17)
+                .onChange(of: viewModel.phone) { newValue in
+                    let digits = newValue.filter { $0.isNumber }
+                    viewModel.phone = String(digits.prefix(9))
+                }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 20)
-        .background(theme.background.background)
+        .frame(height: 56)
+        .background(theme.background.secondaryContainer)
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { isFocused = true }
+        }
     }
 }

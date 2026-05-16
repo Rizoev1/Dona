@@ -17,6 +17,7 @@
 		4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743B2FAF778A00406292 /* HomeViewModel.swift */; };
 		4B3F743E2FAF7B9800406292 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */; };
 		4B3F74402FAF7E5700406292 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743F2FAF7E5700406292 /* NotificationsViewModel.swift */; };
+		4B3F74422FB4B9FB00406292 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F74412FB4B9FA00406292 /* PaymentViewModel.swift */; };
 		84007D122FA0BA7B0042708A /* FundsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84007D112FA0BA7B0042708A /* FundsScreen.swift */; };
 		84007D222FA0CE2D0042708A /* StepProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84007D212FA0CE2D0042708A /* StepProgressBar.swift */; };
 		84956C0E2FA3150200563555 /* FundsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84956C0D2FA3150200563555 /* FundsCoordinator.swift */; };
@@ -53,6 +54,7 @@
 		84D2340B2F86627900C7DE80 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2340A2F86627900C7DE80 /* Token.swift */; };
 		84D2340D2F8662A400C7DE80 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2340C2F8662A400C7DE80 /* AppTheme.swift */; };
 		84D5FF122FA9F8270033A8BD /* ApprovalsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF112FA9F8270033A8BD /* ApprovalsScreen.swift */; };
+		84DBE0462F9B000000B44EA9 /* FundReportScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0452F9B000000B44EA9 /* FundReportScreen.swift */; };
 		84D5FF172FAA0EE00033A8BD /* MembersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF162FAA0EE00033A8BD /* MembersScreen.swift */; };
 		84D5FF2F2FAB65000033A8BD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF2E2FAB65000033A8BD /* API.swift */; };
 		84D5FF312FAB65220033A8BD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF302FAB65220033A8BD /* APIManager.swift */; };
@@ -64,6 +66,7 @@
 		84D5FF3F2FAB694D0033A8BD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF3E2FAB694D0033A8BD /* LoginViewModel.swift */; };
 		84D5FF412FAB695E0033A8BD /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF402FAB695E0033A8BD /* VerificationViewModel.swift */; };
 		84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03D2F8E543900B44EA9 /* CardShadow.swift */; };
+		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0432F9A000000B44EA9 /* Shimmer.swift */; };
 		84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */; };
 		84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */; };
 		84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */; };
@@ -99,6 +102,7 @@
 		4B3F743B2FAF778A00406292 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		4B3F743F2FAF7E5700406292 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		4B3F74412FB4B9FA00406292 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		84007D112FA0BA7B0042708A /* FundsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsScreen.swift; sourceTree = "<group>"; };
 		84007D212FA0CE2D0042708A /* StepProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepProgressBar.swift; sourceTree = "<group>"; };
 		84956C0D2FA3150200563555 /* FundsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsCoordinator.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		84D2340A2F86627900C7DE80 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		84D2340C2F8662A400C7DE80 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		84D5FF112FA9F8270033A8BD /* ApprovalsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalsScreen.swift; sourceTree = "<group>"; };
+		84DBE0452F9B000000B44EA9 /* FundReportScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundReportScreen.swift; sourceTree = "<group>"; };
 		84D5FF162FAA0EE00033A8BD /* MembersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersScreen.swift; sourceTree = "<group>"; };
 		84D5FF2E2FAB65000033A8BD /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		84D5FF302FAB65220033A8BD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		84D5FF3E2FAB694D0033A8BD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		84D5FF402FAB695E0033A8BD /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
 		84DBE03D2F8E543900B44EA9 /* CardShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShadow.swift; sourceTree = "<group>"; };
+		84DBE0432F9A000000B44EA9 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFundCard.swift; sourceTree = "<group>"; };
 		84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPayCard.swift; sourceTree = "<group>"; };
 		84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				84C00EAB2F92499A00E6771B /* PaymentScreen.swift */,
+				4B3F74412FB4B9FA00406292 /* PaymentViewModel.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -352,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				84DBE03D2F8E543900B44EA9 /* CardShadow.swift */,
+				84DBE0432F9A000000B44EA9 /* Shimmer.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
 			);
@@ -484,6 +492,7 @@
 			isa = PBXGroup;
 			children = (
 				84D5FF112FA9F8270033A8BD /* ApprovalsScreen.swift */,
+				84DBE0452F9B000000B44EA9 /* FundReportScreen.swift */,
 			);
 			path = Approvals;
 			sourceTree = "<group>";
@@ -704,6 +713,7 @@
 				84D5FF312FAB65220033A8BD /* APIManager.swift in Sources */,
 				4B3F74402FAF7E5700406292 /* NotificationsViewModel.swift in Sources */,
 				84D5FF122FA9F8270033A8BD /* ApprovalsScreen.swift in Sources */,
+				84DBE0462F9B000000B44EA9 /* FundReportScreen.swift in Sources */,
 				84D5FF382FAB65850033A8BD /* NetworkingType.swift in Sources */,
 				4B3F73DA2F8A8D9200406292 /* AppCoordinator.swift in Sources */,
 				84D5FF362FAB657B0033A8BD /* Networking.swift in Sources */,
@@ -718,6 +728,7 @@
 				84D5FF2F2FAB65000033A8BD /* API.swift in Sources */,
 				84CE15512F89148C000E9552 /* LogInScreen.swift in Sources */,
 				84D5FF332FAB655D0033A8BD /* APIRequestRetrier.swift in Sources */,
+				4B3F74422FB4B9FB00406292 /* PaymentViewModel.swift in Sources */,
 				4B3F73DF2F8A8F1C00406292 /* AuthenticatedCoordinator.swift in Sources */,
 				84C00EB12F92564600E6771B /* RequestStatusSheet.swift in Sources */,
 				84D5FF3D2FAB68910033A8BD /* ResponseModels.swift in Sources */,
@@ -745,6 +756,7 @@
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
 				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
+				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
 				84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */,

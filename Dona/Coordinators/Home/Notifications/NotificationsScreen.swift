@@ -14,11 +14,21 @@ struct NotificationsScreen: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 8) {
-                if !viewModel.thisMonthNotifications.isEmpty {
-                    makeMonthSection(title: "This Month", notifications: viewModel.thisMonthNotifications)
-                }
-                ForEach(viewModel.groupedByMonth, id: \.title) { group in
-                    makeMonthSection(title: group.title, notifications: group.notifications)
+                if viewModel.isLoading && viewModel.notifications.isEmpty {
+                    notificationSectionSkeleton()
+                } else if !viewModel.isLoading && viewModel.notifications.isEmpty {
+                    EmptyStateView(
+                        icon: "bell.slash",
+                        title: "No notifications",
+                        subtitle: "You're all caught up! New alerts will appear here"
+                    )
+                } else {
+                    if !viewModel.thisMonthNotifications.isEmpty {
+                        makeMonthSection(title: "This Month", notifications: viewModel.thisMonthNotifications)
+                    }
+                    ForEach(viewModel.groupedByMonth, id: \.title) { group in
+                        makeMonthSection(title: group.title, notifications: group.notifications)
+                    }
                 }
             }
             .padding(.horizontal, 12)
@@ -51,6 +61,28 @@ struct NotificationsScreen: View {
         }
     }
 
+    @ViewBuilder func notificationSectionSkeleton() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            ShimmerBox(width: 90, height: 16)
+            ForEach(0..<4, id: \.self) { _ in
+                HStack(spacing: 8) {
+                    ShimmerBox(width: 52, height: 52, cornerRadius: 12)
+                    VStack(alignment: .leading, spacing: 6) {
+                        ShimmerBox(width: 140, height: 13)
+                        ShimmerBox(width: 200, height: 11)
+                        ShimmerBox(width: 160, height: 11)
+                    }
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+
     @ViewBuilder func makeMonthSection(title: String, notifications: [AppNotification]) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(title)
@@ -74,6 +106,7 @@ struct NotificationsScreen: View {
                             Text(notification.body)
                                 .font(AppFont.smallRegular)
                                 .foregroundStyle(theme.text.onTertiary)
+                                .multilineTextAlignment(.leading)
                         }
                         Spacer()
                         if !notification.isRead {

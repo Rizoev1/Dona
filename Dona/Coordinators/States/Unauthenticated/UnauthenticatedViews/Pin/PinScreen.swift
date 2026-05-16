@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import Combine
+import LocalAuthentication
+
+enum PinMode {
+    case setup(sessionToken: String)
+    case enter
+}
 
 enum PinScreenState {
     case create
@@ -13,22 +20,102 @@ enum PinScreenState {
     case enter
 }
 
+@MainActor
+final class PinViewModel: ObservableObject {
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+    @Published var biometryType: LABiometryType = .none
+
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        let ctx = LAContext()
+        var error: NSError?
+        if ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            biometryType = ctx.biometryType
+        }
+    }
+
+    func authenticateWithBiometrics(onSuccess: @escaping () -> Void) {
+        let ctx = LAContext()
+        var error: NSError?
+        guard ctx.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return
+        }
+        ctx.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: "Log in to Dona"
+        ) { success, _ in
+            DispatchQueue.main.async {
+                if success { onSuccess() }
+            }
+        }
+    }
+
+    func setup(pin: String, sessionToken: String, onSuccess: @escaping () -> Void) {
+        isLoading = true
+        APIManager.shared.setPin(sessionToken: sessionToken, pin: pin)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] response in
+                self?.isLoading = false
+                KeychainService.shared.saveTokens(
+                    access: response.payload.accessToken,
+                    refresh: response.payload.refreshToken
+                )
+                onSuccess()
+            }
+            .store(in: &cancellables)
+    }
+
+    func verify(pin: String, onSuccess: @escaping () -> Void) {
+        guard let sessionToken = KeychainService.shared.sessionToken else {
+            errorMessage = "Session expired. Please log in again."
+            return
+        }
+        isLoading = true
+        APIManager.shared.verifyPin(sessionToken: sessionToken, pin: pin)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] response in
+                self?.isLoading = false
+                KeychainService.shared.saveTokens(
+                    access: response.payload.accessToken,
+                    refresh: response.payload.refreshToken
+                )
+                onSuccess()
+            }
+            .store(in: &cancellables)
+    }
+}
+
 struct PinScreen: View {
     @Environment(\.theme) private var theme
+    @StateObject private var viewModel = PinViewModel()
+
     @State private var pin: [Int] = []
     @State private var firstPin: [Int] = []
-    @State private var savedPin: [Int] = []
     @State private var screenState: PinScreenState
     @State private var isError: Bool = false
 
+    let mode: PinMode
     var onForgotPin: (() -> Void)?
     var onSuccess: (() -> Void)?
 
-    init(savedPin: [Int] = [], onForgotPin: (() -> Void)? = nil, onSuccess: (() -> Void)? = nil) {
-        _savedPin = State(initialValue: savedPin)
-        _screenState = State(initialValue: savedPin.isEmpty ? .create : .enter)
+    init(mode: PinMode, onForgotPin: (() -> Void)? = nil, onSuccess: (() -> Void)? = nil) {
+        self.mode = mode
         self.onForgotPin = onForgotPin
         self.onSuccess = onSuccess
+        switch mode {
+        case .setup: _screenState = State(initialValue: .create)
+        case .enter: _screenState = State(initialValue: .enter)
+        }
     }
 
     let keys: [[String]] = [
@@ -38,6 +125,14 @@ struct PinScreen: View {
         ["", "0", "delete"]
     ]
 
+    @ViewBuilder var biometricIcon: Image {
+        if viewModel.biometryType == .faceID {
+            Image(.faceId)
+        } else {
+            Image(systemName: "touchid")
+        }
+    }
+
     var title: String {
         switch screenState {
         case .create: return "Create a PIN"
@@ -46,17 +141,13 @@ struct PinScreen: View {
         }
     }
 
-    var showSubtitle: Bool {
-        screenState != .enter
-    }
-
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             VStack(alignment: .center, spacing: 8) {
                 Text(title)
                     .font(AppFont.heading2)
                     .foregroundStyle(theme.text.onSurface)
-                if showSubtitle {
+                if screenState != .enter {
                     Text("For secure access")
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onSecondary)
@@ -82,14 +173,24 @@ struct PinScreen: View {
                 }
                 .frame(height: 20)
 
-                if isError {
-                    Text("Incorrect PIN")
+                if viewModel.isLoading {
+                    ProgressView()
+                        .transition(.opacity)
+                } else if isError {
+                    Text(screenState == .confirm ? "PINs don't match" : "Incorrect PIN")
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onErrorContainer)
+                        .transition(.opacity)
+                } else if let error = viewModel.errorMessage {
+                    Text(error)
+                        .font(AppFont.largeRegular)
+                        .foregroundStyle(theme.text.onErrorContainer)
+                        .multilineTextAlignment(.center)
                         .transition(.opacity)
                 }
             }
             .animation(.easeInOut(duration: 0.2), value: isError)
+            .animation(.easeInOut(duration: 0.2), value: viewModel.isLoading)
 
             Spacer().frame(height: 100)
 
@@ -102,6 +203,7 @@ struct PinScreen: View {
                                     if !pin.isEmpty {
                                         pin.removeLast()
                                         isError = false
+                                        viewModel.errorMessage = nil
                                     }
                                 } label: {
                                     Image(.tagCross)
@@ -113,12 +215,13 @@ struct PinScreen: View {
                                 .frame(height: 80)
                             } else if key.isEmpty {
                                 Group {
-                                    if screenState == .enter {
+                                    if screenState == .enter && viewModel.biometryType != .none {
                                         Button {
-                                            // Face ID action
+                                            triggerBiometrics()
                                         } label: {
-                                            Image(.faceId)
+                                            biometricIcon
                                                 .resizable()
+                                                .scaledToFit()
                                                 .frame(width: 28, height: 28)
                                                 .foregroundStyle(theme.stroke.scrim)
                                         }
@@ -136,6 +239,7 @@ struct PinScreen: View {
                                         .font(AppFont.heading3)
                                         .foregroundStyle(theme.text.onSurface)
                                 }
+                                .disabled(viewModel.isLoading)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 80)
                             }
@@ -157,11 +261,23 @@ struct PinScreen: View {
         }
         .padding(.horizontal, 24)
         .appBackground()
+        .onAppear {
+            if case .enter = mode {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    triggerBiometrics()
+                }
+            }
+        }
+    }
+
+    private func triggerBiometrics() {
+        viewModel.authenticateWithBiometrics { onSuccess?() }
     }
 
     private func handleKeyPress(_ key: String) {
-        guard pin.count < 4, let digit = Int(key) else { return }
+        guard pin.count < 4, let digit = Int(key), !viewModel.isLoading else { return }
         isError = false
+        viewModel.errorMessage = nil
         pin.append(digit)
 
         guard pin.count == 4 else { return }
@@ -174,34 +290,33 @@ struct PinScreen: View {
 
         case .confirm:
             if pin == firstPin {
-                savedPin = pin
-                pin = []
-                screenState = .enter
-                onSuccess?()
+                let pinString = firstPin.map(String.init).joined()
+                if case .setup(let sessionToken) = mode {
+                    viewModel.setup(pin: pinString, sessionToken: sessionToken) {
+                        onSuccess?()
+                    }
+                }
             } else {
                 showError()
             }
 
         case .enter:
-            if pin == savedPin {
-                pin = []
+            let pinString = pin.map(String.init).joined()
+            viewModel.verify(pin: pinString) {
                 onSuccess?()
-            } else {
-                showError()
             }
         }
     }
 
     private func showError() {
-        withAnimation {
-            isError = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        withAnimation { isError = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             pin = []
+            withAnimation { isError = false }
         }
     }
 }
 
 #Preview {
-    PinScreen()
+    PinScreen(mode: .enter)
 }

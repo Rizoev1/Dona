@@ -20,6 +20,21 @@ struct MessageResponse: Decodable {
 // MARK: - Auth
 // ─────────────────────────────────────────────
 
+// Returned by verifyOtp — temporary token used for setPin / verifyPin
+struct OtpVerifyResponse: Decodable {
+    let message: String
+    let payload: Payload
+
+    struct Payload: Decodable {
+        let sessionToken: String
+
+        enum CodingKeys: String, CodingKey {
+            case sessionToken = "session_token"
+        }
+    }
+}
+
+// Returned by setPin / verifyPin / refreshTokens
 struct AuthTokensResponse: Decodable {
     let message: String
     let payload: AuthTokens
@@ -177,7 +192,7 @@ struct FundListResponse: Decodable {
     let payload: [Fund]
 }
 
-struct Fund: Decodable {
+struct Fund: Decodable, Hashable {
     let id: Int
     let name: String
     let balance: Int
@@ -283,6 +298,25 @@ struct WithdrawalRequest: Decodable {
         case pending  = "pending"
         case approved = "approved"
         case rejected = "rejected"
+    }
+}
+
+extension WithdrawalRequest {
+    var amountFormatted: String {
+        String(format: "%.2f", Double(amount) / 100.0)
+    }
+
+    var feeFormatted: String {
+        String(format: "%.2f TJS", Double(fee) / 100.0)
+    }
+
+    var shortDate: String {
+        let iso = ISO8601DateFormatter()
+        iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let date = iso.date(from: createdAt) else { return createdAt }
+        let fmt = DateFormatter()
+        fmt.dateFormat = "dd.MM"
+        return fmt.string(from: date)
     }
 }
 

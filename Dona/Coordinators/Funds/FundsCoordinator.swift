@@ -11,12 +11,14 @@ import SwiftUI
 enum FundsRouter: Hashable {
     case funds
     case fundNaming
-    case fundAmount
-    case fundRules
-    case fundInvitation
-    case fundDetails
-    case approvals
-    case members
+    case fundAmount(name: String)
+    case fundRules(name: String, apy: Double?)
+    case fundInvitation(fundId: Int)
+    case fundDetails(fund: Fund)
+    case fundActivity(fundId: Int)
+    case fundReport(fundId: Int)
+    case approvals(fundId: Int)
+    case members(fundId: Int)
     case payment(PaymentScreenType)
 }
 
@@ -32,18 +34,22 @@ struct FundsCoordinator: View {
                         FundsScreen(routes: $routes)
                     case .fundNaming:
                         FundNamingScreen(routes: $routes)
-                    case .fundAmount:
-                        FundAmountSetting(routes: $routes)
-                    case .fundRules:
-                        FundCommunityRulesScreen(routes: $routes)
-                    case .fundInvitation:
-                        FundMemberInvitationScreen(routes: $routes)
-                    case .fundDetails:
-                        IndividualFundScreen(routes: $routes)
-                    case .approvals:
-                        ApprovalsScreen()
-                    case .members:
-                        MembersScreen()
+                    case .fundAmount(let name):
+                        FundAmountSetting(routes: $routes, fundName: name)
+                    case .fundRules(let name, let apy):
+                        FundCommunityRulesScreen(routes: $routes, fundName: name, apy: apy)
+                    case .fundInvitation(let fundId):
+                        FundMemberInvitationScreen(routes: $routes, fundId: fundId)
+                    case .fundDetails(let fund):
+                        IndividualFundScreen(routes: $routes, fund: fund)
+                    case .fundActivity(let fundId):
+                        ActivityScreen(fundId: fundId)
+                    case .fundReport(let fundId):
+                        FundReportScreen(fundId: fundId)
+                    case .approvals(let fundId):
+                        ApprovalsScreen(fundId: fundId)
+                    case .members(let fundId):
+                        MembersScreen(fundId: fundId)
                     case .payment(let type):
                         PaymentScreen(type: type)
                     }

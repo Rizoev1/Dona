@@ -17,6 +17,17 @@ struct AppCoordinator: View {
             SplashScreen()
         case .unauthenticated:
             UnauthenticatedCoordinator()
+        case .pendingPin:
+            PinScreen(
+                mode: .enter,
+                onForgotPin: {
+                    KeychainService.shared.clear()
+                    AuthenticationService.shared.status = .unauthenticated
+                },
+                onSuccess: {
+                    AuthenticationService.shared.status = .authenticated
+                }
+            )
         case .authenticated:
             AuthenticatedCoordinator()
         }

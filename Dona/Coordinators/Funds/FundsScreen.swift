@@ -7,15 +7,35 @@
 
 import SwiftUI
 import FlowStacks
+import Combine
 
-enum UserStatus {
-    case member
-    case admin
+@MainActor
+final class FundsViewModel: ObservableObject {
+    @Published var funds: [Fund] = []
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    private var cancellables = Set<AnyCancellable>()
+
+    func onAppear() {
+        isLoading = true
+        APIManager.shared.listFunds()
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] response in
+                self?.funds = response.payload
+            }
+            .store(in: &cancellables)
+    }
 }
 
 struct FundsScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
+    @StateObject private var viewModel = FundsViewModel()
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -26,18 +46,24 @@ struct FundsScreen: View {
                     }
                     makeOptionsBlock(text: "Migrate Existing Community", icon: Image(.refresh)) {}
                 }
-                VStack(spacing: 16) {
-                    makeSavings(status: .admin) {
-                        routes.push(.fundDetails)
+
+                if viewModel.isLoading && viewModel.funds.isEmpty {
+                    VStack(spacing: 16) {
+                        ForEach(0..<3, id: \.self) { _ in makeFundSkeleton() }
                     }
-                    makeSavings(status: .member) {
-                        routes.push(.fundDetails)
-                    }
-                    makeSavings(status: .admin) {
-                        routes.push(.fundDetails)
-                    }
-                    makeSavings(status: .member) {
-                        routes.push(.fundDetails)
+                } else if !viewModel.isLoading && viewModel.funds.isEmpty {
+                    EmptyStateView(
+                        icon: "person.3",
+                        title: "No communities yet",
+                        subtitle: "Create your first savings community to get started"
+                    )
+                } else {
+                    VStack(spacing: 16) {
+                        ForEach(viewModel.funds) { fund in
+                            makeSavings(fund: fund) {
+                                routes.push(.fundDetails(fund: fund))
+                            }
+                        }
                     }
                 }
             }
@@ -45,7 +71,34 @@ struct FundsScreen: View {
         .padding(.horizontal, 12)
         .appBackground()
         .navigationTitle("Funds")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear { viewModel.onAppear() }
+    }
+
+    @ViewBuilder func makeFundSkeleton() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(alignment: .top, spacing: 16) {
+                ShimmerBox(width: 45, height: 45, cornerRadius: 12)
+                VStack(alignment: .leading, spacing: 6) {
+                    ShimmerBox(width: 130, height: 16)
+                    ShimmerBox(width: 75, height: 12)
+                }
+                Spacer()
+                ShimmerBox(width: 60, height: 22, cornerRadius: 60)
+            }
+            Divider()
+            HStack {
+                VStack(alignment: .leading, spacing: 6) {
+                    ShimmerBox(width: 80, height: 12)
+                    ShimmerBox(width: 110, height: 22)
+                }
+                Spacer()
+                ShimmerBox(width: 46, height: 46, cornerRadius: 23)
+            }
+        }
+        .padding()
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 
     @ViewBuilder func makeOptionsBlock(text: String, icon: Image, action: @escaping () -> Void) -> some View {
@@ -75,26 +128,26 @@ struct FundsScreen: View {
         }
     }
 
-    @ViewBuilder func makeSavings(status: UserStatus, action: @escaping () -> Void) -> some View {
+    @ViewBuilder func makeSavings(fund: Fund, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 16) {
                     Image(.amazonMock)
                         .resizable()
                         .frame(width: 45, height: 45)
-                    
+
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Family Savings")
+                        Text(fund.name)
                             .font(AppFont.xLargeBold)
                             .foregroundStyle(theme.text.onSurface)
-                        Text("4 Members")
+                        Text("\(fund.memberCount) Members")
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                     }
-                    
+
                     Spacer()
-                    
-                    if status == .admin {
+
+                    if fund.role == .admin {
                         Text("ADMIN")
                             .font(AppFont.smallMedium)
                             .foregroundStyle(theme.text.primaryContainer)
@@ -112,17 +165,17 @@ struct FundsScreen: View {
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
                 }
-                
+
                 Divider()
-                
+
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Fund balance")
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
-                        
+
                         HStack(spacing: 4) {
-                            Text("1 293.19")
+                            Text(fund.balanceFormatted)
                                 .font(AppFont.heading3)
                                 .foregroundStyle(theme.text.onSurface)
                             Text("TJS")
@@ -130,9 +183,9 @@ struct FundsScreen: View {
                                 .foregroundStyle(theme.text.onTertiaryContainer)
                         }
                     }
-                    
+
                     Spacer()
-                    
+
                     Image(.arrowRight)
                         .resizable()
                         .frame(width: 22, height: 22)
@@ -148,4 +201,3 @@ struct FundsScreen: View {
         }
     }
 }
-

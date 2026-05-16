@@ -7,10 +7,39 @@
 
 import SwiftUI
 import FlowStacks
+import Combine
+
+@MainActor
+final class FundCreationViewModel: ObservableObject {
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    private var cancellables = Set<AnyCancellable>()
+
+    func createFund(name: String, apy: Double?, onSuccess: @escaping (Int) -> Void) {
+        isLoading = true
+        APIManager.shared.createFund(name: name, apy: apy)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] response in
+                self?.isLoading = false
+                onSuccess(response.payload.id)
+            }
+            .store(in: &cancellables)
+    }
+}
 
 struct FundCommunityRulesScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
+    @StateObject private var viewModel = FundCreationViewModel()
+
+    let fundName: String
+    let apy: Double?
+
     @State private var contributions: String = ""
     @State private var withdrawals: String = ""
     @State private var animatedStep: Int = 2
@@ -37,8 +66,16 @@ struct FundCommunityRulesScreen: View {
                         makeResolution()
                     }
 
-                    AppButton(title: "Continue", state: .default) {
-                        routes.push(.fundInvitation)
+                    if let error = viewModel.errorMessage {
+                        Text(error)
+                            .font(AppFont.mediumRegular)
+                            .foregroundStyle(theme.text.onErrorContainer)
+                    }
+
+                    AppButton(title: "Continue", state: viewModel.isLoading ? .loading : .default) {
+                        viewModel.createFund(name: fundName, apy: apy) { fundId in
+                            routes.push(.fundInvitation(fundId: fundId))
+                        }
                     }
                 }
                 .padding(.bottom, 16)
@@ -50,13 +87,11 @@ struct FundCommunityRulesScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    animatedStep = 3
-                }
+                withAnimation(.easeInOut(duration: 0.5)) { animatedStep = 3 }
             }
         }
     }
-    
+
     @ViewBuilder func makeGeneralRules() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
@@ -87,7 +122,7 @@ struct FundCommunityRulesScreen: View {
         .background(theme.background.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
-    
+
     @ViewBuilder func makeContributions() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
@@ -106,7 +141,6 @@ struct FundCommunityRulesScreen: View {
                     Text("Min. Deposit")
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
-
                     HStack(spacing: 4) {
                         TextField("0", text: $contributions)
                             .font(AppFont.mediumMedium)
@@ -114,15 +148,12 @@ struct FundCommunityRulesScreen: View {
                             .tint(theme.text.onSurface)
                             .keyboardType(.numberPad)
                             .fixedSize()
-
                         Text("TJS")
                             .font(AppFont.largeMedium)
                             .foregroundStyle(theme.text.onTertiaryContainer)
                     }
                 }
-
                 Spacer()
-
                 Image(.moneys)
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -149,7 +180,7 @@ struct FundCommunityRulesScreen: View {
         .background(theme.background.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
-    
+
     @ViewBuilder func makeWithdrawals() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
@@ -175,29 +206,24 @@ struct FundCommunityRulesScreen: View {
             .frame(maxWidth: .infinity)
             .background(theme.background.secondaryContainer)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Min. Deposit")
+                    Text("Min. Withdrawal")
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
-
                     HStack(spacing: 4) {
-                        TextField("0", text: $contributions)
+                        TextField("0", text: $withdrawals)
                             .font(AppFont.mediumMedium)
                             .foregroundColor(theme.text.onSurface)
                             .tint(theme.text.onSurface)
                             .keyboardType(.numberPad)
                             .fixedSize()
-
                         Text("%")
                             .font(AppFont.largeMedium)
                             .foregroundStyle(theme.text.onTertiaryContainer)
                     }
                 }
-
                 Spacer()
-
                 Image(.moneys)
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -212,7 +238,7 @@ struct FundCommunityRulesScreen: View {
         .background(theme.background.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
-    
+
     @ViewBuilder func makeResolution() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
@@ -244,4 +270,3 @@ struct FundCommunityRulesScreen: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
-

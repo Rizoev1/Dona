@@ -27,30 +27,6 @@ struct Networking<API: TargetType>: NetworkingType {
             .eraseToAnyPublisher()
     }
 
-    func requestObject<T: Decodable>(
-        _ target: API,
-        type: T.Type,
-        using decoder: JSONDecoder = JSONDecoder()
-    ) -> AnyPublisher<T, MoyaError> {
-        return provider.requestPublisher(target)
-            .filterSuccessfulStatusCodes()
-            .map(T.self, using: decoder)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-
-    func requestArray<T: Decodable>(
-        _ target: API,
-        type: T.Type,
-        using decoder: JSONDecoder = JSONDecoder()
-    ) -> AnyPublisher<[T], MoyaError> {
-        return provider.requestPublisher(target)
-            .filterSuccessfulStatusCodes()
-            .map([T].self, using: decoder)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-
     static func defaultNetworking() -> Networking {
         return Networking(provider: MoyaProvider(
             endpointClosure: endpointsClosure(),

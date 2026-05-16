@@ -11,7 +11,7 @@ import FlowStacks
 enum UnauthenticatedRouter: Hashable {
     case login
     case verification(phone: String)
-    case pin(savedPin: [Int])
+    case pinSetup(sessionToken: String)
 }
 
 struct UnauthenticatedCoordinator: View {
@@ -26,10 +26,13 @@ struct UnauthenticatedCoordinator: View {
                         LogInScreen()
                     case .verification(let phone):
                         VerificationScreen(phone: phone)
-                    case .pin(let savedPin):
-                        PinScreen(savedPin: savedPin, onSuccess: {
-                            AuthenticationService.shared.status = .authenticated
-                        })
+                    case .pinSetup(let sessionToken):
+                        PinScreen(
+                            mode: .setup(sessionToken: sessionToken),
+                            onSuccess: {
+                                AuthenticationService.shared.status = .authenticated
+                            }
+                        )
                     }
                 }
         }

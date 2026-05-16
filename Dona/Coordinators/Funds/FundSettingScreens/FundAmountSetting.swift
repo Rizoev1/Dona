@@ -11,9 +11,17 @@ import FlowStacks
 struct FundAmountSetting: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
+
+    let fundName: String
+
     @State private var amount: String = ""
-    @State private var percent: String = ""
+    @State private var apyText: String = ""
     @State private var animatedStep: Int = 1
+
+    private var apy: Double? {
+        guard let v = Double(apyText.replacingOccurrences(of: ",", with: ".")), v > 0 else { return nil }
+        return v
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -64,21 +72,21 @@ struct FundAmountSetting: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Fund Allocation")
+                        Text("Fund APY")
                             .font(AppFont.largeSemibold)
                             .foregroundStyle(theme.text.onSurface)
 
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Current Account")
+                                Text("Annual Percentage Yield")
                                     .font(AppFont.smallRegular)
                                     .foregroundStyle(theme.text.onTertiary)
                                 HStack(spacing: 4) {
-                                    TextField("0", text: $percent)
+                                    TextField("0", text: $apyText)
                                         .font(AppFont.mediumMedium)
                                         .foregroundColor(theme.text.onSurface)
                                         .tint(theme.text.onSurface)
-                                        .keyboardType(.numberPad)
+                                        .keyboardType(.decimalPad)
                                         .fixedSize()
                                     Text("%")
                                         .font(AppFont.largeMedium)
@@ -96,14 +104,9 @@ struct FundAmountSetting: View {
                             Image(.infoCircle)
                                 .resizable()
                                 .frame(width: 18, height: 18)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Total Allocation: 100%")
-                                    .font(AppFont.mediumSemibold)
-                                    .foregroundStyle(theme.text.onSurface)
-                                Text("All funds go to Current Account. You can allocate to Depository after creating the community.")
-                                    .font(AppFont.smallRegular)
-                                    .foregroundStyle(theme.text.onTertiary)
-                            }
+                            Text("Optional. Leave empty if your community doesn't offer interest on deposits.")
+                                .font(AppFont.smallRegular)
+                                .foregroundStyle(theme.text.onTertiary)
                         }
                         .padding(16)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -118,7 +121,7 @@ struct FundAmountSetting: View {
             }
 
             AppButton(title: "Continue", state: .default) {
-                routes.push(.fundRules)
+                routes.push(.fundRules(name: fundName, apy: apy))
             }
             .padding(.top, 8)
         }
@@ -128,9 +131,7 @@ struct FundAmountSetting: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    animatedStep = 2
-                }
+                withAnimation(.easeInOut(duration: 0.5)) { animatedStep = 2 }
             }
         }
     }

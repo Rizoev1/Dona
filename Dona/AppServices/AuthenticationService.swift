@@ -9,28 +9,25 @@ import Foundation
 import Combine
 
 class AuthenticationService: ObservableObject {
-    enum Status: String {
-        case authenticated
+    enum Status {
+        case idle           // Splash: not yet determined
         case unauthenticated
-        case idle
+        case pendingPin     // Session token exists — PIN entry required
+        case authenticated
     }
-    
+
     static var shared = AuthenticationService()
-    
-    private let key = "auth_status"
-    
-    @Published var status: Status = .idle {
-        didSet {
-            UserDefaults.standard.set(status.rawValue, forKey: key)
-        }
-    }
-    
-    init() {
-        if let saved = UserDefaults.standard.string(forKey: key),
-           let status = Status(rawValue: saved) {
-            self.status = status
+
+    @Published var status: Status = .idle
+
+    init() {}
+
+    // Called by SplashScreen after brief animation
+    func resolveInitialStatus() {
+        if KeychainService.shared.sessionToken != nil {
+            status = .pendingPin
         } else {
-            self.status = .unauthenticated
+            status = .unauthenticated
         }
     }
 }

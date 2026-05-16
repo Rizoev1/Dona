@@ -114,8 +114,11 @@ extension API: TargetType {
              .createFund, .inviteFundMember, .topUpFund, .createWithdrawal, .setPin, .verifyPin, .refreshTokens, .logout:
             return .post
 
-        case .updateProfile, .approveWithdrawal, .rejectWithdrawal, .markNotificationRead:
+        case .updateProfile, .approveWithdrawal, .rejectWithdrawal:
             return .put
+
+        case .markNotificationRead:
+            return .post
 
         case .deletePaymentMethod:
             return .delete
@@ -223,6 +226,6 @@ extension API: TargetType {
     }
 
     var validationType: ValidationType {
-        .successCodes
+        return .none
     }
 }

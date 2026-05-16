@@ -9,8 +9,9 @@ import KeychainSwift
 
 final class KeychainService {
     struct Key {
-        static let accessToken = "access_token"
+        static let accessToken  = "access_token"
         static let refreshToken = "refresh_token"
+        static let sessionToken = "session_token"
     }
 
     static let shared = KeychainService()
@@ -37,6 +38,17 @@ final class KeychainService {
                 keychain.set(newValue, forKey: Key.refreshToken)
             } else {
                 keychain.delete(Key.refreshToken)
+            }
+        }
+    }
+
+    var sessionToken: String? {
+        get { keychain.get(Key.sessionToken) }
+        set {
+            if let newValue {
+                keychain.set(newValue, forKey: Key.sessionToken)
+            } else {
+                keychain.delete(Key.sessionToken)
             }
         }
     }

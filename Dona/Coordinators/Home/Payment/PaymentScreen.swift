@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 enum PaymentScreenType: Hashable {
     case topUp
-    case request
-    case send
+    case request(fund: Fund)
+    case send(fund: Fund)
     case services(title: String)
 
     var navigationTitle: String {
         switch self {
         case .topUp: return "Top Up"
-        case .request: return "Request"
-        case .send: return "Send"
+        case .request(_): return "Request"
+        case .send(_): return "Send"
         case .services(let title): return title
         }
     }
@@ -25,18 +26,33 @@ enum PaymentScreenType: Hashable {
     var buttonTitle: String {
         switch self {
         case .topUp: return "Top Up"
-        case .request: return "Continue"
-        case .send: return "Send"
-        case .services: return "Top-up"
+        case .request(_): return "Continue"
+        case .send(_): return "Send"
+        case .services(_): return "Top-up"
+        }
+    }
+
+    var preselectedFund: Fund? {
+        switch self {
+        case .request(let fund): return fund
+        case .send(let fund): return fund
+        default: return nil
         }
     }
 }
 
 struct PaymentScreen: View {
     @Environment(\.theme) private var theme
+    @Environment(\.dismiss) private var dismiss
     @State private var amount: String = ""
     @State private var phoneNumber: String = ""
     @FocusState private var focusedField: PaymentField?
+    @StateObject private var viewModel: PaymentViewModel
+    
+    init(type: PaymentScreenType) {
+        self.type = type
+        _viewModel = StateObject(wrappedValue: PaymentViewModel(type: type))
+    }
 
     enum PaymentField {
         case phone
@@ -50,11 +66,11 @@ struct PaymentScreen: View {
             switch type {
             case .topUp:
                 makeTopUpLayout()
-            case .request:
+            case .request(_):
                 makeRequestLayout()
-            case .send:
+            case .send(_):
                 makeSendLayout()
-            case .services:
+            case .services(_):
                 makeServicesLayout()
             }
         }
@@ -65,47 +81,82 @@ struct PaymentScreen: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 switch type {
-                case .services:
+                case .services(_):
                     focusedField = .phone
                 default:
                     focusedField = .amount
                 }
             }
         }
+        .onAppear { viewModel.onAppear() }
+        .onChange(of: viewModel.isSuccess) { success in
+            if success { dismiss() }
+        }
+        .alert("Ошибка", isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button("OK") { viewModel.errorMessage = nil }
+        } message: {
+            Text(viewModel.errorMessage ?? "")
+        }
     }
 
     @ViewBuilder func makeTopUpLayout() -> some View {
-        makeWalletCard(label: "Send to", name: "Personal Wallet", number: "•• 4092", balance: "2 145.00 TJS", showChange: false)
+        makeWalletCard(label: "From", name: "Personal Wallet",
+            number: viewModel.walletCardSuffix,
+            balance: viewModel.walletBalanceFormatted, showChange: false)
         makeAmountField()
         Spacer()
         makeTopUpCard()
-        AppButton(title: type.buttonTitle, state: .default, action: {})
+        AppButton(title: type.buttonTitle, state: .default) {
+            viewModel.topUp(amount: amount)
+        }
     }
 
     @ViewBuilder func makeRequestLayout() -> some View {
-        makeWalletCard(label: "From fund", name: "Family Savings", number: "2 145.00 TJS", balance: "", showChange: true)
+        makeWalletCard(label: "From fund",
+            name: viewModel.selectedFund?.name ?? "—",
+            number: viewModel.selectedFundBalanceFormatted,
+            balance: "", showChange: true)
         makeAmountField()
         Spacer()
-        makeWalletCard(label: "To", name: "Personal Wallet", number: "•• 4092", balance: "2 145.00 TJS", showChange: false)
-        AppButton(title: type.buttonTitle, state: .default, action: {})
+        makeWalletCard(
+            label: "To",
+            name: "Personal Wallet",
+            number: viewModel.walletCardSuffix,       // вместо "•• 4092"
+            balance: viewModel.walletBalanceFormatted, // вместо "2 145.00 TJS"
+            showChange: false
+        )
+        AppButton(title: type.buttonTitle, state: .default) {
+            viewModel.requestWithdrawal(amount: amount)
+        }
     }
 
     @ViewBuilder func makeSendLayout() -> some View {
-        makeWalletCard(label: "From", name: "Personal Wallet", number: "•• 4092", balance: "2 145.00 TJS", showChange: false)
+        makeWalletCard(label: "From", name: "Personal Wallet",
+            number: viewModel.walletCardSuffix,
+            balance: viewModel.walletBalanceFormatted, showChange: false)
         makeAmountField()
         Spacer()
-        makeWalletCard(label: "To", name: "Family Savings", number: "2 145.00 TJS", balance: "", showChange: true)
-        AppButton(title: type.buttonTitle, state: .default, action: {})
+        makeWalletCard(label: "To",
+            name: viewModel.selectedFund?.name ?? "—",
+            number: viewModel.selectedFundBalanceFormatted,
+            balance: "", showChange: true)
+        AppButton(title: type.buttonTitle, state: .default) {
+            viewModel.sendToFund(amount: amount)
+        }
     }
 
     @ViewBuilder func makeServicesLayout() -> some View {
         VStack(spacing: 4) {
             makePhoneField()
-            makeWalletCard(label: "From", name: "Personal Wallet", number: "•• 4092", balance: "2 145.00 TJS", showChange: false)
+            makeWalletCard(label: "From", name: "Personal Wallet",
+                number: viewModel.walletCardSuffix,
+                balance: viewModel.walletBalanceFormatted, showChange: false)
         }
         makeAmountField()
         Spacer()
-        AppButton(title: type.buttonTitle, state: .default, action: {})
+        AppButton(title: type.buttonTitle, state: viewModel.isLoading ? .loading : .default) {
+            viewModel.send(phone: phoneNumber, amount: amount)
+        }
     }
     
     @ViewBuilder func makeTopUpCard() -> some View {
@@ -165,7 +216,7 @@ struct PaymentScreen: View {
                 }
                 Spacer()
                 if showChange {
-                    Button(action: { }) {
+                    Button { dismiss() } label: {
                         Text("Change")
                             .font(AppFont.smallSemibold)
                             .foregroundStyle(theme.text.onSecondary)

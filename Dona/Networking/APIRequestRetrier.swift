@@ -26,26 +26,20 @@ final class APIRequestRetrier: RequestInterceptor {
         completion: @escaping (Result<URLRequest, Error>) -> Void
     ) {
         var request = urlRequest
-
         if let token = KeychainService.shared.accessToken {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-
         completion(.success(request))
     }
 
+    // Handles only network-level errors (connection lost, timeout, etc.)
+    // 401 token refresh is handled in APIManager via Combine operators.
     func retry(
         _ request: Request,
         for session: Session,
         dueTo error: Error,
         completion: @escaping (RetryResult) -> Void
     ) {
-        if let response = request.task?.response as? HTTPURLResponse,
-           response.statusCode == 401 {
-            refreshTokenIfNeeded(completion: completion)
-            return
-        }
-
         lock.lock()
         defer { lock.unlock() }
 
@@ -62,32 +56,12 @@ final class APIRequestRetrier: RequestInterceptor {
         let delay = retryDelay * pow(2.0, Double(currentRetryCount))
         completion(.retryWithDelay(delay))
     }
-    
-    private func refreshTokenIfNeeded(completion: @escaping (RetryResult) -> Void) {
-        guard let refreshToken = KeychainService.shared.refreshToken else {
-            // Refresh токена нет — разлогиниваем
-            DispatchQueue.main.async {
-                AuthenticationService.shared.status = .unauthenticated
-            }
-            completion(.doNotRetry)
-            return
-        }
-
-        // Здесь вызов endpoint обновления токена
-        // Когда появится — вставить реальный запрос
-        _ = refreshToken
-        completion(.doNotRetry)
-    }
 
     private func shouldRetry(error: Error) -> Bool {
         guard let urlError = error as? URLError else { return false }
-
         switch urlError.code {
-        case .timedOut,
-             .networkConnectionLost,
-             .notConnectedToInternet,
-             .cannotConnectToHost,
-             .cannotFindHost:
+        case .timedOut, .networkConnectionLost,
+             .notConnectedToInternet, .cannotConnectToHost, .cannotFindHost:
             return true
         default:
             return false

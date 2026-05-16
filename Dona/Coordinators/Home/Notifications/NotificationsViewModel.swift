@@ -90,7 +90,6 @@ final class NotificationsViewModel: ObservableObject {
             } receiveValue: { [weak self] _ in
                 guard let self else { return }
                 if let index = self.notifications.firstIndex(where: { $0.id == notification.id }) {
-                    // Пересобираем объект с isRead = true (struct — immutable)
                     let old = self.notifications[index]
                     self.notifications[index] = AppNotification(
                         id: old.id,

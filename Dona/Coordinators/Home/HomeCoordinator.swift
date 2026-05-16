@@ -8,6 +8,11 @@
 import FlowStacks
 import SwiftUI
 
+enum FundSelectionType: Hashable {
+    case request
+    case send
+}
+
 enum HomeRouter: Hashable {
     case home
     case notifications
@@ -15,7 +20,7 @@ enum HomeRouter: Hashable {
     case services
     case subServices(title: String)
     case payment(PaymentScreenType)
-    case fundSelection(PaymentScreenType)
+    case fundSelection(FundSelectionType)
     case profile
 }
 

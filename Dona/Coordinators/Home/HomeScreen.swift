@@ -33,12 +33,31 @@ struct HomeScreen: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
-                    balanceCardView()
-                        .padding(.horizontal, 12)
-                    makeCommunityFund()
+                    Group {
+                        if viewModel.isLoadingWallet && viewModel.wallet == nil {
+                            balanceCardSkeleton()
+                        } else {
+                            balanceCardView()
+                        }
+                    }
+                    .padding(.horizontal, 12)
+
+                    if viewModel.isLoadingFunds && viewModel.funds.isEmpty {
+                        communityFundSkeleton()
+                    } else {
+                        makeCommunityFund()
+                    }
+
                     makeQuickPay()
-                    makeRecentActivity()
-                        .padding(.horizontal, 12)
+
+                    Group {
+                        if viewModel.isLoadingActivity && viewModel.recentActivity.isEmpty {
+                            activitySkeleton()
+                        } else {
+                            makeRecentActivity()
+                        }
+                    }
+                    .padding(.horizontal, 12)
                 }
                 .padding(.top, 8)
             }
@@ -77,7 +96,7 @@ struct HomeScreen: View {
             }
         }
     }
-    
+
     @ViewBuilder func balanceCardView() -> some View {
         VStack(spacing: 24) {
             HStack {
@@ -291,6 +310,101 @@ struct HomeScreen: View {
                     if index < viewModel.topRecentActivity.count - 1 {
                         Divider()
                             .padding(.leading, 48)
+                    }
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 26)
+            .background(theme.background.background)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .cardShadow()
+        }
+    }
+
+    // MARK: - Skeletons
+
+    @ViewBuilder func balanceCardSkeleton() -> some View {
+        VStack(spacing: 24) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerBox(width: 110, height: 13)
+                    ShimmerBox(width: 160, height: 30)
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 8) {
+                    ShimmerBox(width: 90, height: 13)
+                    ShimmerBox(width: 65, height: 16)
+                }
+            }
+            HStack(spacing: 14) {
+                ForEach(0..<3, id: \.self) { _ in
+                    VStack(spacing: 6) {
+                        ShimmerBox(height: 46, cornerRadius: 60)
+                        ShimmerBox(width: 42, height: 13)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+        }
+        .padding()
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 28))
+        .cardShadow()
+    }
+
+    @ViewBuilder func communityFundSkeleton() -> some View {
+        VStack(spacing: 12) {
+            HStack {
+                ShimmerBox(width: 130, height: 20)
+                Spacer()
+                ShimmerBox(width: 60, height: 20, cornerRadius: 12)
+            }
+            .padding(.horizontal, 12)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(0..<3, id: \.self) { _ in
+                        VStack(alignment: .leading, spacing: 16) {
+                            ShimmerBox(width: 32, height: 32, cornerRadius: 8)
+                            VStack(alignment: .leading, spacing: 6) {
+                                ShimmerBox(width: 80, height: 12)
+                                ShimmerBox(width: 100, height: 22)
+                            }
+                            ShimmerBox(width: 95, height: 12)
+                        }
+                        .padding()
+                        .frame(width: 165, height: 165, alignment: .leading)
+                        .background(theme.background.background)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                }
+                .padding(.horizontal, 12)
+            }
+        }
+    }
+
+    @ViewBuilder func activitySkeleton() -> some View {
+        VStack(spacing: 12) {
+            HStack {
+                ShimmerBox(width: 130, height: 20)
+                Spacer()
+                ShimmerBox(width: 60, height: 20, cornerRadius: 12)
+            }
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(0..<3, id: \.self) { index in
+                    HStack(spacing: 12) {
+                        ShimmerBox(width: 36, height: 36, cornerRadius: 18)
+                        VStack(alignment: .leading, spacing: 6) {
+                            ShimmerBox(width: 110, height: 13)
+                            ShimmerBox(width: 75, height: 11)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 6) {
+                            ShimmerBox(width: 65, height: 13)
+                            ShimmerBox(width: 35, height: 11)
+                        }
+                    }
+                    if index < 2 {
+                        Divider().padding(.leading, 48)
                     }
                 }
             }

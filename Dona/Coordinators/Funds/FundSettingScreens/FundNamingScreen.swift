@@ -41,7 +41,7 @@ struct FundNamingScreen: View {
             Spacer()
 
             AppButton(title: "Continue", state: fundName.isEmpty ? .disabled : .default) {
-                routes.push(.fundAmount)
+                routes.push(.fundAmount(name: fundName))
             }
         }
         .padding(.horizontal)
