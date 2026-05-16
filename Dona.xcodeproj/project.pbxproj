@@ -72,6 +72,16 @@
 		84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */; };
 		84F0EFDE2F8F915800DD98C5 /* ActivityScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EFDD2F8F915800DD98C5 /* ActivityScreen.swift */; };
 		84F0EFE02F8F93E200DD98C5 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EFDF2F8F93E200DD98C5 /* HomeCoordinator.swift */; };
+		84BBCC0200000000AABB0001 /* FundSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0001 /* FundSelectionViewModel.swift */; };
+		84BBCC0200000000AABB0002 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0002 /* ActivityViewModel.swift */; };
+		84BBCC0200000000AABB0003 /* PinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0003 /* PinViewModel.swift */; };
+		84BBCC0200000000AABB0004 /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0004 /* MembersViewModel.swift */; };
+		84BBCC0200000000AABB0005 /* ApprovalsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0005 /* ApprovalsViewModel.swift */; };
+		84BBCC0200000000AABB0006 /* FundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0006 /* FundsViewModel.swift */; };
+		84BBCC0200000000AABB0007 /* IndividualFundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0007 /* IndividualFundViewModel.swift */; };
+		84BBCC0200000000AABB0008 /* FundReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0008 /* FundReportViewModel.swift */; };
+		84BBCC0200000000AABB0009 /* FundCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB0009 /* FundCreationViewModel.swift */; };
+		84BBCC0200000000AABB000A /* FundInvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBCC0100000000AABB000A /* FundInvitationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +164,16 @@
 		84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		84F0EFDD2F8F915800DD98C5 /* ActivityScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityScreen.swift; sourceTree = "<group>"; };
 		84F0EFDF2F8F93E200DD98C5 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0001 /* FundSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundSelectionViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0002 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0003 /* PinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0004 /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0005 /* ApprovalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovalsViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0006 /* FundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0007 /* IndividualFundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualFundViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0008 /* FundReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundReportViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB0009 /* FundCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundCreationViewModel.swift; sourceTree = "<group>"; };
+		84BBCC0100000000AABB000A /* FundInvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundInvitationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -205,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				4B3F73C42F8A834500406292 /* PinScreen.swift */,
+				84BBCC0100000000AABB0003 /* PinViewModel.swift */,
 			);
 			path = Pin;
 			sourceTree = "<group>";
@@ -255,6 +276,7 @@
 			children = (
 				84956C0D2FA3150200563555 /* FundsCoordinator.swift */,
 				84007D112FA0BA7B0042708A /* FundsScreen.swift */,
+				84BBCC0100000000AABB0006 /* FundsViewModel.swift */,
 				84956C0F2FA315FB00563555 /* FundSettingScreens */,
 				84956C432FA35CE600563555 /* IndividualFund */,
 			);
@@ -267,7 +289,9 @@
 				84C0EAFF2FA2173F00373558 /* FundNamingScreen.swift */,
 				84C0EB012FA21B0E00373558 /* FundAmountSetting.swift */,
 				84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */,
+				84BBCC0100000000AABB0009 /* FundCreationViewModel.swift */,
 				84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */,
+				84BBCC0100000000AABB000A /* FundInvitationViewModel.swift */,
 			);
 			path = FundSettingScreens;
 			sourceTree = "<group>";
@@ -285,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				84956C442FA35CFE00563555 /* IndividualFundScreen.swift */,
+				84BBCC0100000000AABB0007 /* IndividualFundViewModel.swift */,
 				84D5FF152FAA0E380033A8BD /* Approvals */,
 				84D5FF182FAA0EE30033A8BD /* Members */,
 			);
@@ -330,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				84C00EB32F92576300E6771B /* FundSelectionScreen.swift */,
+				84BBCC0100000000AABB0001 /* FundSelectionViewModel.swift */,
 			);
 			path = FundSelection;
 			sourceTree = "<group>";
@@ -492,7 +518,9 @@
 			isa = PBXGroup;
 			children = (
 				84D5FF112FA9F8270033A8BD /* ApprovalsScreen.swift */,
+				84BBCC0100000000AABB0005 /* ApprovalsViewModel.swift */,
 				84DBE0452F9B000000B44EA9 /* FundReportScreen.swift */,
+				84BBCC0100000000AABB0008 /* FundReportViewModel.swift */,
 			);
 			path = Approvals;
 			sourceTree = "<group>";
@@ -501,6 +529,7 @@
 			isa = PBXGroup;
 			children = (
 				84D5FF162FAA0EE00033A8BD /* MembersScreen.swift */,
+				84BBCC0100000000AABB0004 /* MembersViewModel.swift */,
 			);
 			path = Members;
 			sourceTree = "<group>";
@@ -547,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				84F0EFDD2F8F915800DD98C5 /* ActivityScreen.swift */,
+				84BBCC0100000000AABB0002 /* ActivityViewModel.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -763,6 +793,16 @@
 				84C0EB062FA22B7300373558 /* FundMemberInvitationScreen.swift in Sources */,
 				84956C0E2FA3150200563555 /* FundsCoordinator.swift in Sources */,
 				84D2340D2F8662A400C7DE80 /* AppTheme.swift in Sources */,
+				84BBCC0200000000AABB0001 /* FundSelectionViewModel.swift in Sources */,
+				84BBCC0200000000AABB0002 /* ActivityViewModel.swift in Sources */,
+				84BBCC0200000000AABB0003 /* PinViewModel.swift in Sources */,
+				84BBCC0200000000AABB0004 /* MembersViewModel.swift in Sources */,
+				84BBCC0200000000AABB0005 /* ApprovalsViewModel.swift in Sources */,
+				84BBCC0200000000AABB0006 /* FundsViewModel.swift in Sources */,
+				84BBCC0200000000AABB0007 /* IndividualFundViewModel.swift in Sources */,
+				84BBCC0200000000AABB0008 /* FundReportViewModel.swift in Sources */,
+				84BBCC0200000000AABB0009 /* FundCreationViewModel.swift in Sources */,
+				84BBCC0200000000AABB000A /* FundInvitationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
