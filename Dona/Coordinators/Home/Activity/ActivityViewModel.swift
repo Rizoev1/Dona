@@ -21,6 +21,15 @@ final class ActivityViewModel: ObservableObject {
     }
 
     func onAppear() {
+        guard !isLoading && transactions.isEmpty else { return }
+        load()
+    }
+
+    func reload() {
+        load()
+    }
+
+    private func load() {
         isLoading = true
         let publisher: AnyPublisher<TransactionListResponse, MoyaError> = fundId.map {
             APIManager.shared.getFundActivity(fundId: $0)
@@ -38,18 +47,17 @@ final class ActivityViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    var groupedByDate: [(title: String, transactions: [TransactionListResponse.Transaction])] {
-        let iso = ISO8601DateFormatter()
-        iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    var groupedByDate: [(title: String, date: Date?, transactions: [TransactionListResponse.Transaction])] {
         let fmt = DateFormatter()
         fmt.dateFormat = "dd.MM.yyyy"
 
-        var groups: [(title: String, transactions: [TransactionListResponse.Transaction])] = []
+        var groups: [(title: String, date: Date?, transactions: [TransactionListResponse.Transaction])] = []
         var seen: [String: Int] = [:]
 
         for tx in transactions {
+            let parsed = Self.parseDate(tx.createdAt)
             let title: String
-            if let date = iso.date(from: tx.createdAt) {
+            if let date = parsed {
                 title = Calendar.current.isDateInToday(date) ? "Today" : fmt.string(from: date)
             } else {
                 title = tx.createdAt
@@ -59,10 +67,24 @@ final class ActivityViewModel: ObservableObject {
                 groups[index].transactions.append(tx)
             } else {
                 seen[title] = groups.count
-                groups.append((title: title, transactions: [tx]))
+                groups.append((title: title, date: parsed, transactions: [tx]))
             }
         }
 
-        return groups
+        return groups.sorted { lhs, rhs in
+            switch (lhs.date, rhs.date) {
+            case let (l?, r?): return l > r
+            default: return lhs.date != nil
+            }
+        }
+    }
+
+    private static func parseDate(_ string: String) -> Date? {
+        let withFractional = ISO8601DateFormatter()
+        withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = withFractional.date(from: string) { return date }
+        let standard = ISO8601DateFormatter()
+        standard.formatOptions = [.withInternetDateTime]
+        return standard.date(from: string)
     }
 }

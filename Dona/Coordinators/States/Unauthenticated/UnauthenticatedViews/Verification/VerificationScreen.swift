@@ -106,8 +106,13 @@ struct VerificationScreen: View {
 
                     if code.count == 6 && !didNavigate {
                         didNavigate = true
-                        viewModel.verifyOtp(code: code) { sessionToken in
-                            navigator.push(.pinSetup(sessionToken: sessionToken))
+                        viewModel.verifyOtp(code: code) { sessionToken, command in
+                            switch command {
+                            case .setPin:
+                                navigator.push(.pinSetup(sessionToken: sessionToken))
+                            case .checkPin:
+                                navigator.push(.pinVerify)
+                            }
                         }
                     }
                 }

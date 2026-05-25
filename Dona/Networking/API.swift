@@ -118,7 +118,7 @@ extension API: TargetType {
             return .put
 
         case .markNotificationRead:
-            return .post
+            return .put
 
         case .deletePaymentMethod:
             return .delete

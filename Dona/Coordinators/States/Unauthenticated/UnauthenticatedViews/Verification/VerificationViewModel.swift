@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Moya
 
 final class VerificationViewModel: ObservableObject {
     @Published var isLoading: Bool = false
@@ -21,7 +22,7 @@ final class VerificationViewModel: ObservableObject {
         self.phone = phone
     }
 
-    func verifyOtp(code: String, onSuccess: @escaping (String) -> Void) {
+    func verifyOtp(code: String, onSuccess: @escaping (String, PinCommand) -> Void) {
         isLoading = true
         errorMessage = nil
 
@@ -30,14 +31,27 @@ final class VerificationViewModel: ObservableObject {
                 guard let self else { return }
                 self.isLoading = false
                 if case .failure(let error) = completion {
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = Self.extractMessage(from: error)
                 }
             } receiveValue: { response in
                 let sessionToken = response.payload.sessionToken
-                KeychainService.shared.sessionToken = sessionToken
-                onSuccess(sessionToken)
+                // For CHECK_PIN the PIN already exists — save now so PinViewModel.verify() can read it.
+                // For SET_PIN we save only after setPin succeeds, to avoid showing the PIN screen
+                // on relaunch before the user has actually set their PIN.
+                if response.payload.command == .checkPin {
+                    KeychainService.shared.sessionToken = sessionToken
+                }
+                onSuccess(sessionToken, response.payload.command)
             }
             .store(in: &cancellables)
+    }
+
+    private static func extractMessage(from error: MoyaError) -> String {
+        if case .statusCode(let response) = error,
+           let decoded = try? JSONDecoder().decode(MessageResponse.self, from: response.data) {
+            return decoded.message
+        }
+        return error.localizedDescription
     }
 
     func resendOtp(onSuccess: (() -> Void)? = nil) {
@@ -49,7 +63,7 @@ final class VerificationViewModel: ObservableObject {
                 guard let self else { return }
                 self.isResending = false
                 if case .failure(let error) = completion {
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = Self.extractMessage(from: error)
                 }
             } receiveValue: { _ in
                 onSuccess?()

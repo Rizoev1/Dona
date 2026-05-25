@@ -43,6 +43,7 @@ struct FundsScreen: View {
                     }
                 }
             }
+            .padding(.bottom, 8)
         }
         .padding(.horizontal, 12)
         .appBackground()

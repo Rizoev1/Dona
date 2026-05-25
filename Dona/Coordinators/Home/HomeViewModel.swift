@@ -136,12 +136,20 @@ extension TransactionListResponse.Transaction: Identifiable {
     }
 
     var shortDate: String {
-        let iso = ISO8601DateFormatter()
-        iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let date = iso.date(from: createdAt) else { return createdAt }
+        let date = parseISO(createdAt)
+        guard let date else { return createdAt }
         let fmt = DateFormatter()
         fmt.dateFormat = "dd.MM"
         return fmt.string(from: date)
+    }
+
+    private func parseISO(_ string: String) -> Date? {
+        let withFractional = ISO8601DateFormatter()
+        withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = withFractional.date(from: string) { return date }
+        let standard = ISO8601DateFormatter()
+        standard.formatOptions = [.withInternetDateTime]
+        return standard.date(from: string)
     }
 }
 

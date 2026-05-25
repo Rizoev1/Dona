@@ -16,6 +16,14 @@ struct PinScreen: View {
     @State private var firstPin: [Int] = []
     @State private var screenState: PinScreenState
     @State private var isError: Bool = false
+    @State private var isPulsing: Bool = false
+    @State private var shakeOffset: CGFloat = 0
+    @State private var backendError: String?
+
+    var errorText: String {
+        if let msg = backendError { return msg }
+        return screenState == .confirm ? "PINs don't match" : "Incorrect PIN"
+    }
 
     let mode: PinMode
     var onForgotPin: (() -> Void)?
@@ -69,32 +77,28 @@ struct PinScreen: View {
                         Circle()
                             .fill(isError
                                 ? theme.text.onErrorContainer
-                                : (index < pin.count
+                                : (index < pin.count || viewModel.isLoading
                                     ? theme.text.primaryContainer
                                     : theme.text.onTertiaryContainer))
-                            .frame(
-                                width: isError ? 8 : (index < pin.count ? 12 : 8),
-                                height: isError ? 8 : (index < pin.count ? 12 : 8)
+                            .frame(width: isError ? 12 : 12, height: isError ? 12 : 12)
+                            .scaleEffect(viewModel.isLoading ? (isPulsing ? 1.3 : 0.7) : 1.0)
+                            .animation(
+                                viewModel.isLoading
+                                    ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true).delay(Double(index) * 0.1)
+                                    : .spring(response: 0.3, dampingFraction: 0.6),
+                                value: isPulsing
                             )
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: pin.count)
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isError)
                     }
                 }
+                .offset(x: shakeOffset)
                 .frame(height: 20)
 
-                if viewModel.isLoading {
-                    ProgressView()
-                        .transition(.opacity)
-                } else if isError {
-                    Text(screenState == .confirm ? "PINs don't match" : "Incorrect PIN")
+                if isError {
+                    Text(errorText)
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onErrorContainer)
-                        .transition(.opacity)
-                } else if let error = viewModel.errorMessage {
-                    Text(error)
-                        .font(AppFont.largeRegular)
-                        .foregroundStyle(theme.text.onErrorContainer)
-                        .multilineTextAlignment(.center)
                         .transition(.opacity)
                 }
             }
@@ -170,6 +174,15 @@ struct PinScreen: View {
         }
         .padding(.horizontal, 24)
         .appBackground()
+        .onChange(of: viewModel.isLoading) { isLoading in
+            isPulsing = isLoading
+        }
+        .onChange(of: viewModel.errorMessage) { error in
+            guard let msg = error else { return }
+            backendError = msg
+            viewModel.errorMessage = nil
+            showError()
+        }
         .onAppear {
             if case .enter = mode {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -186,6 +199,7 @@ struct PinScreen: View {
     private func handleKeyPress(_ key: String) {
         guard pin.count < 4, let digit = Int(key), !viewModel.isLoading else { return }
         isError = false
+        backendError = nil
         viewModel.errorMessage = nil
         pin.append(digit)
 
@@ -218,10 +232,20 @@ struct PinScreen: View {
     }
 
     private func showError() {
-        withAnimation { isError = true }
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { isError = true }
+
+        let shakes: [(CGFloat, Double)] = [
+            (-5, 0.0), (5, 0.1), (-3, 0.2), (3, 0.3), (0, 0.4)
+        ]
+        for (offset, delay) in shakes {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                withAnimation(.easeInOut(duration: 0.09)) { shakeOffset = offset }
+            }
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             pin = []
-            withAnimation { isError = false }
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { isError = false }
         }
     }
 }

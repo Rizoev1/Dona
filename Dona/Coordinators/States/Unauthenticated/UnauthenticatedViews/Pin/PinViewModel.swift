@@ -6,6 +6,7 @@
 import Foundation
 import Combine
 import LocalAuthentication
+import Moya
 
 enum PinMode {
     case setup(sessionToken: String)
@@ -54,10 +55,11 @@ final class PinViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = Self.extractMessage(from: error)
                 }
             } receiveValue: { [weak self] response in
                 self?.isLoading = false
+                KeychainService.shared.sessionToken = sessionToken
                 KeychainService.shared.saveTokens(
                     access: response.payload.accessToken,
                     refresh: response.payload.refreshToken
@@ -65,6 +67,14 @@ final class PinViewModel: ObservableObject {
                 onSuccess()
             }
             .store(in: &cancellables)
+    }
+
+    private static func extractMessage(from error: MoyaError) -> String {
+        if case .statusCode(let response) = error,
+           let decoded = try? JSONDecoder().decode(MessageResponse.self, from: response.data) {
+            return decoded.message
+        }
+        return error.localizedDescription
     }
 
     func verify(pin: String, onSuccess: @escaping () -> Void) {
@@ -77,7 +87,7 @@ final class PinViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = Self.extractMessage(from: error)
                 }
             } receiveValue: { [weak self] response in
                 self?.isLoading = false

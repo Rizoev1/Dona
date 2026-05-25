@@ -41,7 +41,15 @@ struct FundsCoordinator: View {
                     case .fundInvitation(let fundId):
                         FundMemberInvitationScreen(routes: $routes, fundId: fundId)
                     case .fundDetails(let fund):
-                        IndividualFundScreen(routes: $routes, fund: fund)
+                        IndividualFundScreen(
+                            fund: fund,
+                            onTopUp:    { routes.push(.payment(.topUp)) },
+                            onRequest:  { f in routes.push(.payment(.request(fund: f))) },
+                            onMembers:  { id in routes.push(.members(fundId: id)) },
+                            onApprovals:{ id in routes.push(.approvals(fundId: id)) },
+                            onActivity: { id in routes.push(.fundActivity(fundId: id)) },
+                            onReport:   { id in routes.push(.fundReport(fundId: id)) }
+                        )
                     case .fundActivity(let fundId):
                         ActivityScreen(fundId: fundId)
                     case .fundReport(let fundId):

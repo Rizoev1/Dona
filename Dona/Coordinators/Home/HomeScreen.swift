@@ -60,6 +60,7 @@ struct HomeScreen: View {
                     .padding(.horizontal, 12)
                 }
                 .padding(.top, 8)
+                .padding(.bottom, 8)
             }
         }
         .onAppear { viewModel.onAppear() }
@@ -212,7 +213,12 @@ struct HomeScreen: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(viewModel.funds) { fund in
-                        CommunityFundCard(fund: fund)
+                        Button {
+                            navigator.push(.fundDetails(fund: fund))
+                        } label: {
+                            CommunityFundCard(fund: fund)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 12)
@@ -301,7 +307,7 @@ struct HomeScreen: View {
                         VStack(alignment: .trailing, spacing: 4) {
                             Text(activity.amountFormatted)
                                 .font(AppFont.mediumMedium)
-                                .foregroundStyle(theme.text.onSurface)
+                                .foregroundStyle(activity.isIncoming ? theme.text.foregroundSuccess1 : theme.text.onErrorContainer)
                             Text(activity.shortDate)
                                 .font(AppFont.mediumRegular)
                                 .foregroundStyle(theme.text.onTertiary)

@@ -57,6 +57,7 @@ struct NotificationsScreen: View {
                 }
                 .padding(.horizontal, 12)
                 .padding(.top, 24)
+                .padding(.bottom, 8)
             }
         }
     }

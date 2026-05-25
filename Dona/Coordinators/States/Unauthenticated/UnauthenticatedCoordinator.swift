@@ -12,6 +12,7 @@ enum UnauthenticatedRouter: Hashable {
     case login
     case verification(phone: String)
     case pinSetup(sessionToken: String)
+    case pinVerify
 }
 
 struct UnauthenticatedCoordinator: View {
@@ -29,6 +30,13 @@ struct UnauthenticatedCoordinator: View {
                     case .pinSetup(let sessionToken):
                         PinScreen(
                             mode: .setup(sessionToken: sessionToken),
+                            onSuccess: {
+                                AuthenticationService.shared.status = .authenticated
+                            }
+                        )
+                    case .pinVerify:
+                        PinScreen(
+                            mode: .enter,
                             onSuccess: {
                                 AuthenticationService.shared.status = .authenticated
                             }

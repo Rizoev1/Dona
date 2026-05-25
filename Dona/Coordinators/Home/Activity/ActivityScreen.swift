@@ -51,7 +51,7 @@ struct ActivityScreen: View {
                                         VStack(alignment: .trailing, spacing: 4) {
                                             Text(tx.amountFormatted)
                                                 .font(AppFont.mediumMedium)
-                                                .foregroundStyle(theme.text.onSurface)
+                                                .foregroundStyle(tx.isIncoming ? theme.text.foregroundSuccess1 : theme.text.onErrorContainer)
                                             Text(tx.shortDate)
                                                 .font(AppFont.mediumRegular)
                                                 .foregroundStyle(theme.text.onTertiary)
@@ -71,6 +71,7 @@ struct ActivityScreen: View {
                 }
             }
             .padding(.horizontal, 12)
+            .padding(.bottom, 8)
         }
         .background(theme.background.surface)
         .navigationTitle("Activity")

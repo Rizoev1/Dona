@@ -9,11 +9,16 @@ import SwiftUI
 import FlowStacks
 
 struct IndividualFundScreen: View {
-    @Binding var routes: Routes<FundsRouter>
     @Environment(\.theme) var theme
     @StateObject private var viewModel = IndividualFundViewModel()
 
     let fund: Fund
+    var onTopUp: () -> Void = {}
+    var onRequest: (Fund) -> Void = { _ in }
+    var onMembers: (Int) -> Void = { _ in }
+    var onApprovals: (Int) -> Void = { _ in }
+    var onActivity: (Int) -> Void = { _ in }
+    var onReport: (Int) -> Void = { _ in }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -23,7 +28,7 @@ struct IndividualFundScreen: View {
 
                 if fund.role == .admin {
                     Button {
-                        routes.push(.approvals(fundId: fund.id))
+                        onApprovals(fund.id)
                     } label: {
                         HStack(spacing: 12) {
                             Image(.signature)
@@ -67,8 +72,9 @@ struct IndividualFundScreen: View {
                 makeOptions()
                 makeRecentActivity()
             }
+            .padding(.horizontal, 12)
+            .padding(.bottom, 8)
         }
-        .padding(.horizontal, 12)
         .background(theme.background.surface)
         .navigationTitle(fund.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -151,7 +157,7 @@ struct IndividualFundScreen: View {
             HStack(spacing: 16) {
                 VStack(spacing: 6) {
                     Button {
-                        routes.push(.payment(.topUp))
+                        onTopUp()
                     } label: {
                         Image(.add)
                             .resizable()
@@ -170,7 +176,7 @@ struct IndividualFundScreen: View {
                 }
                 VStack(spacing: 6) {
                     Button {
-                        routes.push(.payment(.request(fund: fund)))
+                        onRequest(fund)
                     } label: {
                         Image(.arrowDown)
                             .resizable()
@@ -200,7 +206,7 @@ struct IndividualFundScreen: View {
                     .foregroundColor(theme.text.onTertiaryContainer)
                 Spacer()
                 Button {
-                    routes.push(.members(fundId: fund.id))
+                    onMembers(fund.id)
                 } label: {
                     HStack(spacing: 5) {
                         Text("View All")
@@ -253,7 +259,7 @@ struct IndividualFundScreen: View {
     @ViewBuilder func makeOptions() -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
-                routes.push(.fundActivity(fundId: fund.id))
+                onActivity(fund.id)
             } label: {
                 HStack(spacing: 12) {
                     Image(.clockBlue)
@@ -274,7 +280,7 @@ struct IndividualFundScreen: View {
             }
             Divider().padding(.leading, 48)
             Button {
-                routes.push(.fundReport(fundId: fund.id))
+                onReport(fund.id)
             } label: {
                 HStack(spacing: 12) {
                     Image(.chart)
@@ -351,7 +357,6 @@ struct IndividualFundScreen: View {
                 .padding(.vertical, 26)
                 .background(theme.background.background)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .cardShadow()
             } else if viewModel.activity.isEmpty {
                 EmptyStateView(
                     icon: "clock.arrow.circlepath",
@@ -377,7 +382,7 @@ struct IndividualFundScreen: View {
                             VStack(alignment: .trailing, spacing: 4) {
                                 Text(tx.amountFormatted)
                                     .font(AppFont.mediumMedium)
-                                    .foregroundStyle(theme.text.onSurface)
+                                    .foregroundStyle(tx.isIncoming ? theme.text.foregroundSuccess1 : theme.text.onErrorContainer)
                                 Text(tx.shortDate)
                                     .font(AppFont.mediumRegular)
                                     .foregroundStyle(theme.text.onTertiary)
@@ -392,7 +397,6 @@ struct IndividualFundScreen: View {
                 .padding(.vertical, 26)
                 .background(theme.background.background)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .cardShadow()
             }
         }
     }

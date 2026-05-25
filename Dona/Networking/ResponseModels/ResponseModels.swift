@@ -20,15 +20,22 @@ struct MessageResponse: Decodable {
 // MARK: - Auth
 // ─────────────────────────────────────────────
 
+enum PinCommand: String, Decodable {
+    case setPin   = "SET_PIN"
+    case checkPin = "CHECK_PIN"
+}
+
 // Returned by verifyOtp — temporary token used for setPin / verifyPin
 struct OtpVerifyResponse: Decodable {
     let message: String
     let payload: Payload
 
     struct Payload: Decodable {
+        let command: PinCommand
         let sessionToken: String
 
         enum CodingKeys: String, CodingKey {
+            case command
             case sessionToken = "session_token"
         }
     }
@@ -311,9 +318,12 @@ extension WithdrawalRequest {
     }
 
     var shortDate: String {
-        let iso = ISO8601DateFormatter()
-        iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let date = iso.date(from: createdAt) else { return createdAt }
+        let withFractional = ISO8601DateFormatter()
+        withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let standard = ISO8601DateFormatter()
+        standard.formatOptions = [.withInternetDateTime]
+        let date = withFractional.date(from: createdAt) ?? standard.date(from: createdAt)
+        guard let date else { return createdAt }
         let fmt = DateFormatter()
         fmt.dateFormat = "dd.MM"
         return fmt.string(from: date)
