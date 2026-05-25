@@ -38,12 +38,8 @@ struct PinScreen: View {
         ["", "0", "delete"]
     ]
 
-    @ViewBuilder var biometricIcon: Image {
-        if viewModel.biometryType == .faceID {
-            Image(.faceId)
-        } else {
-            Image(systemName: "touchid")
-        }
+    var biometricIcon: Image {
+        viewModel.biometryType == .faceID ? Image(.faceId) : Image(systemName: "touchid")
     }
 
     var title: String {
