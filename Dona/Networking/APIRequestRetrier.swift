@@ -26,7 +26,8 @@ final class APIRequestRetrier: RequestInterceptor {
         completion: @escaping (Result<URLRequest, Error>) -> Void
     ) {
         var request = urlRequest
-        if let token = KeychainService.shared.accessToken {
+        let isAuthEndpoint = request.url?.path.contains("/auth/") == true
+        if !isAuthEndpoint, let token = KeychainService.shared.accessToken {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         completion(.success(request))

@@ -19,6 +19,8 @@ struct FundCommunityRulesScreen: View {
     @State private var contributions: String = ""
     @State private var withdrawals: String = ""
     @State private var animatedStep: Int = 2
+    @FocusState private var contributionsFocused: Bool
+    @FocusState private var withdrawalsFocused: Bool
 
     var body: some View {
         VStack(spacing: 0) {
@@ -123,6 +125,7 @@ struct FundCommunityRulesScreen: View {
                             .foregroundColor(theme.text.onSurface)
                             .tint(theme.text.onSurface)
                             .keyboardType(.numberPad)
+                            .focused($contributionsFocused)
                             .fixedSize()
                         Text("TJS")
                             .font(AppFont.largeMedium)
@@ -139,6 +142,8 @@ struct FundCommunityRulesScreen: View {
             .padding(.vertical, 12)
             .background(theme.background.secondaryContainer)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .contentShape(RoundedRectangle(cornerRadius: 20))
+            .onTapGesture { contributionsFocused = true }
             VStack(alignment: .leading, spacing: 4) {
                 Text("Late Policy")
                     .font(AppFont.smallRegular)
@@ -193,6 +198,7 @@ struct FundCommunityRulesScreen: View {
                             .foregroundColor(theme.text.onSurface)
                             .tint(theme.text.onSurface)
                             .keyboardType(.numberPad)
+                            .focused($withdrawalsFocused)
                             .fixedSize()
                         Text("%")
                             .font(AppFont.largeMedium)
@@ -209,6 +215,8 @@ struct FundCommunityRulesScreen: View {
             .padding(.vertical, 12)
             .background(theme.background.secondaryContainer)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .contentShape(RoundedRectangle(cornerRadius: 20))
+            .onTapGesture { withdrawalsFocused = true }
         }
         .padding(12)
         .background(theme.background.background)

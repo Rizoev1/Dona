@@ -4,5 +4,7 @@
 <dict>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to log in to Dona quickly and securely</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Dona uses your contacts to invite members to your savings fund</string>
 </dict>
 </plist>

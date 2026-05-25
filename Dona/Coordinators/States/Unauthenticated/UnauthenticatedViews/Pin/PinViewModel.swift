@@ -42,11 +42,35 @@ final class PinViewModel: ObservableObject {
         ctx.evaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics,
             localizedReason: "Log in to Dona"
-        ) { success, _ in
+        ) { [weak self] success, _ in
+            guard success else { return }
             DispatchQueue.main.async {
-                if success { onSuccess() }
+                self?.refreshAfterBiometrics(onSuccess: onSuccess)
             }
         }
+    }
+
+    private func refreshAfterBiometrics(onSuccess: @escaping () -> Void) {
+        guard let refreshToken = KeychainService.shared.refreshToken else {
+            errorMessage = "Session expired. Please enter your PIN."
+            return
+        }
+        isLoading = true
+        APIManager.shared.refreshTokens(refreshToken: refreshToken)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure = completion {
+                    self?.errorMessage = "Biometric login failed. Please enter your PIN."
+                }
+            } receiveValue: { [weak self] response in
+                self?.isLoading = false
+                KeychainService.shared.saveTokens(
+                    access: response.payload.accessToken,
+                    refresh: response.payload.refreshToken
+                )
+                onSuccess()
+            }
+            .store(in: &cancellables)
     }
 
     func setup(pin: String, sessionToken: String, onSuccess: @escaping () -> Void) {

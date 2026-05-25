@@ -17,6 +17,8 @@ struct FundAmountSetting: View {
     @State private var amount: String = ""
     @State private var apyText: String = ""
     @State private var animatedStep: Int = 1
+    @FocusState private var amountFocused: Bool
+    @FocusState private var apyFocused: Bool
 
     private var apy: Double? {
         guard let v = Double(apyText.replacingOccurrences(of: ",", with: ".")), v > 0 else { return nil }
@@ -46,6 +48,7 @@ struct FundAmountSetting: View {
                                         .foregroundColor(theme.text.onSurface)
                                         .tint(theme.text.onSurface)
                                         .keyboardType(.numberPad)
+                                        .focused($amountFocused)
                                         .fixedSize()
                                     Text("TJS")
                                         .font(AppFont.largeMedium)
@@ -62,6 +65,8 @@ struct FundAmountSetting: View {
                         .padding(.vertical, 12)
                         .background(theme.background.secondaryContainer)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .contentShape(RoundedRectangle(cornerRadius: 20))
+                        .onTapGesture { amountFocused = true }
 
                         Text("The fixed amount each member contributes to the savings pool every month.")
                             .font(AppFont.smallRegular)
@@ -87,6 +92,7 @@ struct FundAmountSetting: View {
                                         .foregroundColor(theme.text.onSurface)
                                         .tint(theme.text.onSurface)
                                         .keyboardType(.decimalPad)
+                                        .focused($apyFocused)
                                         .fixedSize()
                                     Text("%")
                                         .font(AppFont.largeMedium)
@@ -99,6 +105,8 @@ struct FundAmountSetting: View {
                         .padding(.vertical, 12)
                         .background(theme.background.secondaryContainer)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .contentShape(RoundedRectangle(cornerRadius: 20))
+                        .onTapGesture { apyFocused = true }
 
                         HStack(alignment: .top, spacing: 8) {
                             Image(.infoCircle)

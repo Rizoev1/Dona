@@ -67,6 +67,12 @@ final class APIManager {
                 return decoded
             }
             .mapError { $0 as? MoyaError ?? MoyaError.underlying($0, nil) }
+            .catch { [weak self] _ -> AnyPublisher<AuthTokensResponse, MoyaError> in
+                // Refresh itself failed (expired/invalid refresh token) → force logout
+                self?.handleAuthFailure()
+                return Fail(error: MoyaError.underlying(URLError(.userAuthenticationRequired), nil))
+                    .eraseToAnyPublisher()
+            }
             .flatMap { [weak self] tokens -> AnyPublisher<Response, MoyaError> in
                 guard let self else {
                     return Fail(error: MoyaError.underlying(URLError(.unknown), nil)).eraseToAnyPublisher()
@@ -76,9 +82,6 @@ final class APIManager {
                     refresh: tokens.payload.refreshToken
                 )
                 return self.executeRequest(target)
-            }
-            .catch { [weak self] _ -> AnyPublisher<Response, MoyaError> in
-                self?.handleAuthFailure() ?? Fail(error: MoyaError.underlying(URLError(.unknown), nil)).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }
