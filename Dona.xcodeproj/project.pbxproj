@@ -410,6 +410,7 @@
 			children = (
 				84DBE03D2F8E543900B44EA9 /* CardShadow.swift */,
 				84DBE0432F9A000000B44EA9 /* Shimmer.swift */,
+				09A2040A789A4090AA6A20FE /* String+Localized.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
 			);
@@ -514,17 +515,7 @@
 				84D234062F865F7200C7DE80 /* Constants */,
 				84CE15412F890F4E000E9552 /* Components */,
 				84CE15442F89117A000E9552 /* Helpers */,
-				371954CA21794416A172E64F /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				1613F2D445B64DB28DB26039 /* en.strings */,
-				B15FE5455C9C4B968BF227A3 /* ru.strings */,
-				ED050E2664B145EBB4E5B86B /* tg.strings */,
-			);
-			path = Localization;
-			sourceTree = "<group>";
-		};
-		4B3F73D42F8A8B7600406292 /* AppServices */,
+				4B3F73D42F8A8B7600406292 /* AppServices */,
 				371954CA21794416A172E64F /* Localization */,
 				84D234092F86626500C7DE80 /* ColorTokens */,
 				84D233ED2F865BC800C7DE80 /* Assets.xcassets */,
@@ -826,11 +817,7 @@
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
 				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
-				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2040A789A4090AA6A20FE /* String+Localized.swift */; };
-		A0DB32B91B9A4572A74560B3 /* en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1613F2D445B64DB28DB26039 /* en.strings */; };
-		EC12D075C0D947E98A68741F /* ru.strings in Resources */ = {isa = PBXBuildFile; fileRef = B15FE5455C9C4B968BF227A3 /* ru.strings */; };
-		373B58127BA245DAA47DAC98 /* tg.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED050E2664B145EBB4E5B86B /* tg.strings */; };
-		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
+				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
 				84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */,
