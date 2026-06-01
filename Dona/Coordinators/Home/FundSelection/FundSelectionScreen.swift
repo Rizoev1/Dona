@@ -11,6 +11,7 @@ struct FundSelectionScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
     @StateObject private var viewModel = FundSelectionViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let type: FundSelectionType
 

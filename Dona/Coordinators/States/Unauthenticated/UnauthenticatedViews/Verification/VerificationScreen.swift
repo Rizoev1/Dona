@@ -12,6 +12,7 @@ struct VerificationScreen: View {
     @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
     @StateObject private var viewModel: VerificationViewModel
+    @AppStorage("appLanguage") private var _language: String = "en"
     @FocusState private var isFocused: Bool
     @State private var code: String = ""
     @State private var didNavigate = false

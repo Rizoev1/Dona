@@ -15,6 +15,7 @@ struct ProfileScreen: View {
     @State private var isEditSheetPresented = false
     @State private var editName: String = ""
     @State private var editEmail: String = ""
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         VStack(spacing: 10) {
@@ -123,7 +124,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Payment method (\(viewModel.paymentMethods.count))")
+                    Text("\("Payment method".localized) (\(viewModel.paymentMethods.count))")
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()

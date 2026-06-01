@@ -16,6 +16,7 @@ enum AuthenticatedRouter: Hashable {
 
 struct AuthenticatedCoordinator: View {
     @StateObject private var tabRouter = TabRouter.shared
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         TabView(selection: $tabRouter.selectedTab) {

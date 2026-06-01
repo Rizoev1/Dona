@@ -11,6 +11,7 @@ struct MembersScreen: View {
     @Environment(\.theme) var theme
     @StateObject private var viewModel = MembersViewModel()
     @State private var isInviteSheetPresented = false
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fundId: Int
 

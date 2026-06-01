@@ -8,6 +8,7 @@ import SwiftUI
 struct FundReportScreen: View {
     @Environment(\.theme) private var theme
     @StateObject private var viewModel = FundReportViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fundId: Int
 

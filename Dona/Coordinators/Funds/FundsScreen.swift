@@ -12,6 +12,7 @@ struct FundsScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
     @StateObject private var viewModel = FundsViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         ScrollView(showsIndicators: false) {

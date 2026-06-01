@@ -12,6 +12,7 @@ struct FundMemberInvitationScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
     @StateObject private var viewModel = FundInvitationViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fundId: Int
 

@@ -11,6 +11,7 @@ import FlowStacks
 struct PaymentsScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject private var navigator: FlowNavigator<PaymentsRouter>
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     private let services: [(title: String, icon: ImageResource)] = [
         ("Mobile Top-up",  .mobile),

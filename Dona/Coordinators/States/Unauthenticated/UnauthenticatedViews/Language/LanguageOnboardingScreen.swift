@@ -12,6 +12,7 @@ struct LanguageOnboardingScreen: View {
     @EnvironmentObject var navigator: FlowNavigator<UnauthenticatedRouter>
     @Environment(\.theme) private var theme
     @State private var selectedLanguage: Language? = .tajik
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     enum Language: CaseIterable {
         case tajik, russian, english

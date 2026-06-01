@@ -12,6 +12,7 @@ struct FundCommunityRulesScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
     @StateObject private var viewModel = FundCreationViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fundName: String
     let apy: Double?

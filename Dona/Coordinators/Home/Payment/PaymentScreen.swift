@@ -46,6 +46,7 @@ struct PaymentScreen: View {
     @Environment(\.dismiss) private var dismiss
     @State private var amount: String = ""
     @State private var phoneNumber: String = ""
+    @AppStorage("appLanguage") private var _language: String = "en"
     @FocusState private var focusedField: PaymentField?
     @StateObject private var viewModel: PaymentViewModel
     

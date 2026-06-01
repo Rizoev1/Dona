@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CommunityFundCard: View {
     @Environment(\.theme) private var theme
+    @AppStorage("appLanguage") private var _language: String = "en"
     let fund: Fund
 
     var body: some View {

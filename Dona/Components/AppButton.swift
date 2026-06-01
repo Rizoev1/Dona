@@ -16,6 +16,7 @@ enum AppButtonState {
 
 struct AppButton: View {
     @Environment(\.theme) private var theme
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let title: String
     let state: AppButtonState

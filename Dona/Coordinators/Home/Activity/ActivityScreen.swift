@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityScreen: View {
     @Environment(\.theme) private var theme
     @StateObject private var viewModel: ActivityViewModel
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     init(fundId: Int? = nil) {
         _viewModel = StateObject(wrappedValue: ActivityViewModel(fundId: fundId))

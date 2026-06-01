@@ -8,6 +8,7 @@ import SwiftUI
 struct ThemeScreen: View {
     @Environment(\.theme) private var theme
     @AppStorage("themeMode") private var themeMode: String = ThemeMode.system.rawValue
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     private func themeImage(for mode: ThemeMode) -> Image {
         switch mode {

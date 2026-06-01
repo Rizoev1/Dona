@@ -12,6 +12,7 @@ struct FundNamingScreen: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
     @State private var fundName: String = ""
+    @AppStorage("appLanguage") private var _language: String = "en"
     @FocusState private var isFocused: Bool
     @State private var animatedStep: Int = 0
 

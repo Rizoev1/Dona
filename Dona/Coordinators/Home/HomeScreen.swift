@@ -13,6 +13,7 @@ struct HomeScreen: View {
     @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
     @EnvironmentObject private var tabRouter: TabRouter
     @StateObject private var viewModel = HomeViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         ZStack(alignment: .topTrailing) {

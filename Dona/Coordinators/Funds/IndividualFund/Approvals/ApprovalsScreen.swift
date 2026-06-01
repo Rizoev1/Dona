@@ -10,6 +10,7 @@ import SwiftUI
 struct ApprovalsScreen: View {
     @Environment(\.theme) var theme
     @StateObject private var viewModel: ApprovalsViewModel
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     init(fundId: Int) {
         _viewModel = StateObject(wrappedValue: ApprovalsViewModel(fundId: fundId))

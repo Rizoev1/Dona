@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuickPayCard: View {
     @Environment(\.theme) private var theme
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {

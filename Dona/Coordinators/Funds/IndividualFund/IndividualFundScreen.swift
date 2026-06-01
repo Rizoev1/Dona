@@ -11,6 +11,7 @@ import FlowStacks
 struct IndividualFundScreen: View {
     @Environment(\.theme) var theme
     @StateObject private var viewModel = IndividualFundViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fund: Fund
     var onTopUp: () -> Void = {}

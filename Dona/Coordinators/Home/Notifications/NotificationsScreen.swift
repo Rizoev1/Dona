@@ -10,6 +10,7 @@ import SwiftUI
 struct NotificationsScreen: View {
     @Environment(\.theme) private var theme
     @StateObject private var viewModel = NotificationsViewModel()
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         ScrollView(showsIndicators: false) {

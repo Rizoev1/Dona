@@ -11,6 +11,7 @@ import FlowStacks
 struct FundAmountSetting: View {
     @Environment(\.theme) var theme
     @Binding var routes: Routes<FundsRouter>
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     let fundName: String
 

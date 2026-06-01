@@ -13,6 +13,7 @@ struct LogInScreen: View {
     @Environment(\.theme) private var theme
     @StateObject private var viewModel = LoginViewModel()
     @State private var phoneNumber: String = ""
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

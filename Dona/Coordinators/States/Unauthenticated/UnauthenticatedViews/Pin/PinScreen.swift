@@ -19,6 +19,7 @@ struct PinScreen: View {
     @State private var isPulsing: Bool = false
     @State private var shakeOffset: CGFloat = 0
     @State private var backendError: String?
+    @AppStorage("appLanguage") private var _language: String = "en"
 
     var errorText: String {
         if let msg = backendError { return msg }
