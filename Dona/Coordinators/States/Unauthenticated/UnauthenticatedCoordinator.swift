@@ -16,7 +16,12 @@ enum UnauthenticatedRouter: Hashable {
 }
 
 struct UnauthenticatedCoordinator: View {
-    @State private var routes: Routes<UnauthenticatedRouter> = []
+    @State private var routes: Routes<UnauthenticatedRouter>
+
+    init() {
+        let skipped = UserDefaults.standard.bool(forKey: "languageSelected")
+        _routes = State(initialValue: skipped ? [.login] : [])
+    }
 
     var body: some View {
         FlowStack($routes, withNavigation: true) {

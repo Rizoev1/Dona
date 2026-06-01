@@ -188,6 +188,8 @@ extension EnvironmentValues {
 
 struct ThemeProvider<Content: View>: View {
     @Environment(\.colorScheme) private var colorScheme
+    // Observing appLanguage ensures the full view tree re-renders on language change
+    @AppStorage("appLanguage") private var appLanguage: String = "en"
     let content: Content
 
     init(@ViewBuilder content: () -> Content) {

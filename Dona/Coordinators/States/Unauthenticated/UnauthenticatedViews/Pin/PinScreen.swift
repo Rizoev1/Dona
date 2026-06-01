@@ -67,7 +67,7 @@ struct PinScreen: View {
                     .font(AppFont.heading2)
                     .foregroundStyle(theme.text.onSurface)
                 if screenState != .enter {
-                    Text("For secure access")
+                    Text("For secure access".localized)
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onSecondary)
                 }
@@ -167,7 +167,7 @@ struct PinScreen: View {
                 Button {
                     onForgotPin?()
                 } label: {
-                    Text("Forgot PIN?")
+                    Text("Forgot PIN?".localized)
                         .font(AppFont.largeSemibold)
                         .foregroundStyle(theme.text.primaryContainer)
                 }

@@ -23,8 +23,8 @@ struct MembersScreen: View {
                     } else if !viewModel.isLoading && viewModel.members.isEmpty {
                         EmptyStateView(
                             icon: Image(.people),
-                            title: "No members yet",
-                            subtitle: "Invite people to join this community"
+                            title: "No members yet".localized,
+                            subtitle: "Invite people to join this community".localized
                         )
                     } else {
                         ForEach(Array(viewModel.members.enumerated()), id: \.element.userId) { index, member in
@@ -41,7 +41,7 @@ struct MembersScreen: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             Spacer()
-            AppButton(title: "Add Member", state: .default) {
+            AppButton(title: "Add Member".localized, state: .default) {
                 viewModel.invitePhone = ""
                 viewModel.inviteSuccess = false
                 viewModel.errorMessage = nil
@@ -50,7 +50,7 @@ struct MembersScreen: View {
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
-        .navigationTitle("Members")
+        .navigationTitle("Members".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear(fundId: fundId) }
         .sheet(isPresented: $isInviteSheetPresented) {
@@ -61,10 +61,10 @@ struct MembersScreen: View {
     @ViewBuilder func inviteSheet() -> some View {
         VStack(spacing: 24) {
             VStack(spacing: 6) {
-                Text("Invite Member")
+                Text("Invite Member".localized)
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
-                Text("Enter their Dona phone number")
+                Text("Enter their Dona phone number".localized)
                     .font(AppFont.mediumRegular)
                     .foregroundStyle(theme.text.onTertiary)
             }
@@ -100,7 +100,7 @@ struct MembersScreen: View {
                 HStack(spacing: 8) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(theme.text.foregroundSuccess1)
-                    Text("Invitation sent!")
+                    Text("Invitation sent!".localized)
                         .font(AppFont.mediumMedium)
                         .foregroundStyle(theme.text.foregroundSuccess1)
                 }
@@ -111,13 +111,13 @@ struct MembersScreen: View {
             }
 
             AppButton(
-                title: "Send Invitation",
+                title: "Send Invitation".localized,
                 state: viewModel.isInviting ? .loading : .default
             ) {
                 viewModel.inviteMember()
             }
 
-            AppButton(title: "Cancel", state: .white) {
+            AppButton(title: "Cancel".localized, state: .white) {
                 isInviteSheetPresented = false
             }
         }

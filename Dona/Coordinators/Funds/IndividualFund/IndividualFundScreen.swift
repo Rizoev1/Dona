@@ -40,7 +40,7 @@ struct IndividualFundScreen: View {
 
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack(spacing: 4) {
-                                    Text("Approvals")
+                                    Text("Approvals".localized)
                                         .font(AppFont.largeMedium)
                                         .foregroundStyle(theme.text.onSurface)
                                     if viewModel.pendingWithdrawals > 0 {
@@ -52,7 +52,7 @@ struct IndividualFundScreen: View {
                                         .font(AppFont.mediumMedium)
                                         .foregroundStyle(theme.text.onErrorContainer)
                                 } else {
-                                    Text("No pending requests")
+                                    Text("No pending requests".localized)
                                         .font(AppFont.mediumMedium)
                                         .foregroundStyle(theme.text.onTertiary)
                                 }
@@ -130,7 +130,7 @@ struct IndividualFundScreen: View {
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Fund balance")
+                        Text("Fund balance".localized)
                             .font(AppFont.mediumRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         HStack(spacing: 4) {
@@ -170,7 +170,7 @@ struct IndividualFundScreen: View {
                                 startPoint: .trailing, endPoint: .leading))
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
-                    Text("Top up")
+                    Text("Top up".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -187,7 +187,7 @@ struct IndividualFundScreen: View {
                             .background(theme.background.secondaryContainer)
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
-                    Text("Request")
+                    Text("Request".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -198,7 +198,7 @@ struct IndividualFundScreen: View {
     @ViewBuilder func makeMembers() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 12) {
-                Text("Members")
+                Text("Members".localized)
                     .font(AppFont.heading3)
                     .foregroundColor(theme.text.onSurface)
                 Text("\(fund.memberCount)")
@@ -209,7 +209,7 @@ struct IndividualFundScreen: View {
                     onMembers(fund.id)
                 } label: {
                     HStack(spacing: 5) {
-                        Text("View All")
+                        Text("View All".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         Image(.arrowRight)
@@ -268,7 +268,7 @@ struct IndividualFundScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("View my history")
+                    Text("View my history".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -289,7 +289,7 @@ struct IndividualFundScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Fund report")
+                    Text("Fund report".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -309,10 +309,10 @@ struct IndividualFundScreen: View {
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Community Guidelines")
+                        Text("Community Guidelines".localized)
                             .font(AppFont.largeMedium)
                             .foregroundStyle(theme.text.onSurface)
-                        Text("Read rules and policies")
+                        Text("Read rules and policies".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiaryContainer)
                     }
@@ -333,7 +333,7 @@ struct IndividualFundScreen: View {
     @ViewBuilder func makeRecentActivity() -> some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Recent Activity")
+                Text("Recent Activity".localized)
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
@@ -360,8 +360,8 @@ struct IndividualFundScreen: View {
             } else if viewModel.activity.isEmpty {
                 EmptyStateView(
                     icon: Image(systemName: "clock.arrow.circlepath"),
-                    title: "No activity yet",
-                    subtitle: "Fund transactions will appear here"
+                    title: "No activity yet".localized,
+                    subtitle: "Fund transactions will appear here".localized
                 )
             } else {
                 VStack(alignment: .leading, spacing: 12) {

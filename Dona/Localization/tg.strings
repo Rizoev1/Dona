@@ -1,0 +1,155 @@
+// MARK: - Auth
+"Login or Sign up" = "Воридшавӣ ё бақайдгирӣ";
+"Enter your phone number" = "Рақами телефони худро ворид кунед";
+"By continuing, you agree to the Terms of Use" = "Бо идома додан, шумо бо Шартҳои истифода розӣ мешавед";
+"Terms of Use" = "Шартҳои истифода";
+"Log in" = "Воридшавӣ";
+"Continue" = "Идома додан";
+"Enter the SMS code" = "Рамзи SMS-ро ворид кунед";
+"We sent it to your phone number" = "Мо онро ба рақами телефони шумо фиристодем";
+"Resend code" = "Рамзро дубора фиристед";
+"Create a PIN" = "PIN-код созед";
+"For secure access" = "Барои воридшавии бехатар";
+"Confirm PIN" = "PIN-кодро тасдиқ кунед";
+"Enter your PIN to log in" = "Барои воридшавӣ PIN-кодро ворид кунед";
+"Forgot PIN?" = "PIN-кодро фаромӯш кардед?";
+"Incorrect PIN" = "PIN-код нодуруст аст";
+"Choose a language" = "Забонро интихоб кунед";
+"You can change it later in settings if you want to" = "Баъдтар онро дар танзимот тағйир додан мумкин аст";
+
+// MARK: - Tabs
+"Home" = "Асосӣ";
+"Groups" = "Гурӯҳҳо";
+"Payments" = "Пардохтҳо";
+"Profile" = "Профил";
+
+// MARK: - Home
+"Available balance" = "Баланси дастрас";
+"Personal Wallet" = "Ҳамёни шахсӣ";
+"Dona Card" = "Корти Dona";
+"Add money" = "Пур кардан";
+"Top up" = "Пур кардан";
+"Request" = "Дархост кардан";
+"Send" = "Фиристодан";
+"Community fund" = "Фонди гурӯҳ";
+"Group fund" = "Фонди гурӯҳ";
+"View All" = "Ҳама";
+"Group name" = "Номи гурӯҳ";
+"Earns 4.2% per year" = "Даромади 4.2% дар сол";
+"Quick Pay" = "Пардохти зуд";
+"Recent Activity" = "Амалиётҳои охирин";
+"Received" = "Пардохтро гирифт";
+"Monthly Contribution" = "Саҳми моҳона";
+"No communities yet" = "Ҷамоат нест";
+"Join or create a fund to see it here" = "Ба фонд дохил шавед ё созед";
+"No transactions yet" = "Амалиёт нест";
+"Your recent activity will appear here" = "Амалиётҳои охирини шумо дар ин ҷо намоиш дода мешаванд";
+"This Month" = "Дар ин моҳ";
+"Today" = "Имрӯз";
+"Activity" = "Амалиётҳо";
+"New" = "Нав";
+"Close" = "Пӯшидан";
+"Search" = "Ҷустуҷӯ";
+
+// MARK: - Notifications
+"Notifications" = "Огоҳиномаҳо";
+"No notifications" = "Огоҳинома нест";
+"You're all caught up! New alerts will appear here" = "Ҳама хонда шуд! Огоҳиномаҳои нав дар ин ҷо намоиш дода мешаванд";
+
+// MARK: - Funds
+"Funds" = "Гурӯҳҳо";
+"Create Community" = "Гурӯҳ сохтан";
+"Create Group" = "Гурӯҳ сохтан";
+"Migrate Existing Community" = "Гурӯҳи мавҷударо интиқол додан";
+"Migrate Existing Group" = "Гурӯҳи мавҷударо интиқол додан";
+"ADMIN" = "МАЪМУР";
+"MEMBER" = "АЪЗО";
+"ACTIVE" = "ФАЪОЛ";
+"Fund balance" = "Баланси фонд";
+"Members" = "Аъзоён";
+"No communities yet" = "Ҷамоат нест";
+"Create your first savings community to get started" = "Аввалин ҷамоати пасандозии худро созед";
+"Approvals" = "Тасдиқҳо";
+"View my history" = "Таърихи ман";
+"Fund report" = "Гузориши фонд";
+"Group Rules" = "Қоидаҳои гурӯҳ";
+"Read rules and policies" = "Бо қоидаҳо шинос шавед";
+"JOIN REQUEST" = "ДАРХОСТИ ҲАМРОҲШАВӢ";
+"Reject" = "Рад кардан";
+"Approve" = "Тасдиқ кардан";
+"DISBURSEMENT" = "ПАРДОХТ";
+"Amount" = "Маблағ";
+"Invite member" = "Иштирокчиро даъват кунед";
+"Invite Group Members" = "Аъзоёнро даъват кунед";
+"Search and invite Dona users to join your group. They will receive a notification." = "Истифодабарандагони Dona-ро пайдо кунед ва онҳоро ба гурӯҳи худ даъват кунед. Онҳо огоҳинома мегиранд.";
+"Skip now" = "Гузаштан";
+"Select Group" = "Гурӯҳро интихоб кунед";
+"Total balance" = "Баланси умумӣ";
+"No members yet" = "Аъзо нест";
+"Invite members to get started" = "Аъзоёнро барои оғоз даъват кунед";
+"No activity yet" = "Амалиёт нест";
+"Transactions will appear here" = "Амалиётҳо дар ин ҷо намоиш дода мешаванд";
+
+// MARK: - Fund Creation
+"Create fund" = "Фонд сохтан";
+"Contribution" = "Саҳм";
+"The fixed amount each member contributes to the savings pool every month. You can change it later in settings if you want to." = "Маблағи муайяне, ки ҳар аъзо ҳар моҳ ба фонд мепардозад. Шумо метавонед онро баъдтар дар танзимот тағйир диҳед.";
+"Fund Allocation" = "Тақсимоти маблағ";
+"Current Account" = "Ҳисоби ҷорӣ";
+"Total Allocation: 100%" = "Ҷамъ: 100%";
+"All funds go to Current Account. You can allocate to Deposit after creating the group." = "Ҳама маблағҳо ба ҳисоби ҷорӣ мераванд. Шумо метавонед баъд аз сохтани гурӯҳ ба амонат тақсим кунед.";
+"General Rules" = "Қоидаҳои умумӣ";
+"Charter & Purpose" = "Оиннома ва мақсадҳо";
+"This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies." = "Ин гурӯҳ барои пасандозҳои муштарак ва рушди молиявӣ таъсис ёфтааст. Мо ӯҳдадор мешавем, ки барои сохтани фонди боэтимод барои мақсадҳои оянда ва ҳолатҳои фавқулода пайваста маблағ мегузорем.";
+"Late Policy" = "Сиёсати дер пардохт";
+"Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the group balance." = "Саҳмҳои аз даст рафта давраи пасандозро вайрон мекунанд. Барои пардохтҳои дер ҷарима 10 сомонӣ ба баланси фонд илова карда мешавад.";
+"Withdrawals" = "Гирифтани маблағ";
+"Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval." = "Гирифтани маблағ барои ҳолатҳои фавқулода ё мақсадҳои эълоншуда иҷозат дода мешавад. Дархостҳо бояд 3 рӯз пеш барои тасдиқи маъмур пешниҳод карда шаванд.";
+"Dispute Resolution" = "Ҳалли баҳсҳо";
+"Resolution Process" = "Раванди ҳалл";
+"Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote." = "Баҳсҳо оид ба баланси фонд ё рад кардани бозпасгирӣ аз тарафи маъмур ҳал карда мешаванд. Масъалаҳои ҳалнашуда тавассути овоздиҳии аъзоён ҳал карда мешаванд.";
+"Define the terms for your group. Users must accept these to become a member of this group." = "Шартҳои гурӯҳро муайян кунед. Аъзоён бояд онҳоро қабул кунанд, то ба гурӯҳ дохил шаванд.";
+
+// MARK: - Withdrawal / Request
+"From" = "Аз";
+"To" = "Ба";
+"Change" = "Тағйир додан";
+"Comment" = "Шарҳ";
+"Send request" = "Дархост фиристодан";
+"Are you sure you want to request funds?" = "Оё шумо мехоҳед маблағ дархост кунед?";
+"Funds requested" = "Дархост фиристода шуд";
+"We will notify you as soon as your request for funds is approved" = "Мо шуморо огоҳ мекунем, вақте ки дархости шумо тасдиқ шуд";
+
+// MARK: - Top Up
+"Bank Transfer" = "Интиқоли бонкӣ";
+"Transfer from your bank account" = "Интиқол аз ҳисоби бонкии шумо";
+"Instant" = "Фаврӣ";
+"No fees" = "Бе комиссия";
+"1% fee" = "Комиссия 1%";
+"Pay at any terminal near you" = "Дар ҳар терминали наздикатон пардохт кунед";
+"Payment Terminal" = "Терминали пардохт";
+"ATM Deposit" = "Пур кардан тавассути банкомат";
+"Deposit cash at supported ATMs" = "Пул ба банкоматҳои дастгирӣшаванда гузоред";
+"Up to 30 min" = "То 30 дақиқа";
+"Send to" = "Фиристодан ба";
+"Fee" = "Комиссия";
+"Bank" = "Бонк";
+"Account Name" = "Номи соҳиби ҳисоб";
+"Account Number" = "Рақами ҳисоб";
+"Reference" = "Мақсади пардохт";
+"Transfer Initiated" = "Интиқол оғоз шуд";
+"Your Dona Card will be topped up once the transfer is confirmed. This usually takes a few minutes." = "Корти Dona-и шумо пас аз тасдиқи интиқол пур мешавад. Ин одатан чанд дақиқа тӯл мекашад.";
+"Main page" = "Саҳифаи асосӣ";
+"Dona Wallet Top-Up" = "Пур кардани ҳамёни Dona";
+
+// MARK: - Profile
+"Language" = "Забон";
+"Theme" = "Ороиш";
+"Payment method" = "Тариқи пардохт";
+"Notification" = "Огоҳӣ";
+"FAQ" = "FAQ";
+"Log out" = "Баромадан";
+"Edit Profile" = "Таҳрири профил";
+"System" = "Системавӣ";
+"Light" = "Равшан";
+"Dark" = "Торик";

@@ -64,9 +64,9 @@ struct AppButton: View {
 #Preview {
     ThemeProvider {
         VStack(spacing: 16) {
-            AppButton(title: "Continue", state: .default) {}
-            AppButton(title: "Continue", state: .disabled) {}
-            AppButton(title: "Continue", state: .loading) {}
+            AppButton(title: "Continue".localized, state: .default) {}
+            AppButton(title: "Continue".localized, state: .disabled) {}
+            AppButton(title: "Continue".localized, state: .loading) {}
         }
         .padding()
     }

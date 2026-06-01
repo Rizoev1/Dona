@@ -60,7 +60,7 @@ struct PaymentsScreen: View {
         }
         .padding(.horizontal, 16)
         .background(theme.background.surface)
-        .navigationTitle("Payments")
+        .navigationTitle("Payments".localized)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

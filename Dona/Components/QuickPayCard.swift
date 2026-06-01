@@ -18,7 +18,7 @@ struct QuickPayCard: View {
                 .padding(8)
                 .background(theme.background.secondaryContainer)
                 .clipShape(Circle())
-            Text("Top up")
+            Text("Top up".localized)
                 .font(AppFont.mediumMedium)
                 .foregroundStyle(theme.text.onSurface)
         }

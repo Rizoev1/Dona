@@ -1,0 +1,155 @@
+// MARK: - Auth
+"Login or Sign up" = "Войти или зарегистрироваться";
+"Enter your phone number" = "Введите номер телефона";
+"By continuing, you agree to the Terms of Use" = "Продолжая, вы соглашаетесь с Условиями использования";
+"Terms of Use" = "Условия использования";
+"Log in" = "Войти";
+"Continue" = "Продолжить";
+"Enter the SMS code" = "Введите SMS-код";
+"We sent it to your phone number" = "Мы отправили его на ваш номер телефона";
+"Resend code" = "Отправить повторно";
+"Create a PIN" = "Создайте PIN-код";
+"For secure access" = "Для безопасного входа";
+"Confirm PIN" = "Подтвердите PIN-код";
+"Enter your PIN to log in" = "Введите PIN-код для входа";
+"Forgot PIN?" = "Забыли PIN-код?";
+"Incorrect PIN" = "Неверный PIN-код";
+"Choose a language" = "Выберите язык";
+"You can change it later in settings if you want to" = "Вы можете изменить его позже в настройках";
+
+// MARK: - Tabs
+"Home" = "Главная";
+"Groups" = "Группы";
+"Payments" = "Платежи";
+"Profile" = "Профиль";
+
+// MARK: - Home
+"Available balance" = "Доступный баланс";
+"Personal Wallet" = "Личный кошелёк";
+"Dona Card" = "Карта Dona";
+"Add money" = "Пополнить";
+"Top up" = "Пополнить";
+"Request" = "Запросить";
+"Send" = "Отправить";
+"Community fund" = "Фонд группы";
+"Group fund" = "Фонд группы";
+"View All" = "Все";
+"Group name" = "Название группы";
+"Earns 4.2% per year" = "Доходность 4.2% годовых";
+"Quick Pay" = "Быстрая оплата";
+"Recent Activity" = "Последние операции";
+"Received" = "Получено";
+"Monthly Contribution" = "Ежемесячный взнос";
+"No communities yet" = "Нет сообществ";
+"Join or create a fund to see it here" = "Вступите или создайте фонд";
+"No transactions yet" = "Нет транзакций";
+"Your recent activity will appear here" = "Здесь появятся ваши операции";
+"This Month" = "В этом месяце";
+"Today" = "Сегодня";
+"Activity" = "Операции";
+"New" = "Новый";
+"Close" = "Закрыть";
+"Search" = "Поиск";
+
+// MARK: - Notifications
+"Notifications" = "Уведомления";
+"No notifications" = "Нет уведомлений";
+"You're all caught up! New alerts will appear here" = "Всё просмотрено! Новые уведомления появятся здесь";
+
+// MARK: - Funds
+"Funds" = "Группы";
+"Create Community" = "Создать группу";
+"Create Group" = "Создать группу";
+"Migrate Existing Community" = "Перенести существующую группу";
+"Migrate Existing Group" = "Перенести существующую группу";
+"ADMIN" = "АДМИНИСТРАТОР";
+"MEMBER" = "УЧАСТНИК";
+"ACTIVE" = "АКТИВНЫЙ";
+"Fund balance" = "Баланс фонда";
+"Members" = "Участники";
+"No communities yet" = "Нет сообществ";
+"Create your first savings community to get started" = "Создайте первое сберегательное сообщество";
+"Approvals" = "Подтверждения";
+"View my history" = "Моя история";
+"Fund report" = "Отчёт по фонду";
+"Group Rules" = "Правила группы";
+"Read rules and policies" = "Ознакомиться с правилами";
+"JOIN REQUEST" = "ЗАПРОС НА ВСТУПЛЕНИЕ";
+"Reject" = "Отклонить";
+"Approve" = "Одобрить";
+"DISBURSEMENT" = "ВЫПЛАТА";
+"Amount" = "Сумма";
+"Invite member" = "Пригласить участника";
+"Invite Group Members" = "Пригласить участников";
+"Search and invite Dona users to join your group. They will receive a notification." = "Найдите и пригласите пользователей Dona в вашу группу. Они получат уведомление.";
+"Skip now" = "Пропустить";
+"Select Group" = "Выберите группу";
+"Total balance" = "Общий баланс";
+"No members yet" = "Нет участников";
+"Invite members to get started" = "Пригласите участников для начала";
+"No activity yet" = "Нет активности";
+"Transactions will appear here" = "Транзакции появятся здесь";
+
+// MARK: - Fund Creation
+"Create fund" = "Создать фонд";
+"Contribution" = "Взнос";
+"The fixed amount each member contributes to the savings pool every month. You can change it later in settings if you want to." = "Фиксированная сумма, которую каждый участник вносит в фонд каждый месяц. Вы можете изменить её позже в настройках.";
+"Fund Allocation" = "Распределение средств";
+"Current Account" = "Текущий счёт";
+"Total Allocation: 100%" = "Итого: 100%";
+"All funds go to Current Account. You can allocate to Deposit after creating the group." = "Все средства поступают на текущий счёт. Вы можете распределить средства на депозит после создания группы.";
+"General Rules" = "Общие правила";
+"Charter & Purpose" = "Устав и цели";
+"This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies." = "Эта группа создана для совместных сбережений и финансового роста. Мы обязуемся регулярно вносить средства для формирования надёжного фонда для будущих целей и непредвиденных ситуаций.";
+"Late Policy" = "Политика за просрочку";
+"Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the group balance." = "Пропущенные взносы нарушают сберегательный цикл. За просроченные платежи начисляется фиксированный штраф 10 сомони, добавляемый к балансу фонда.";
+"Withdrawals" = "Вывод средств";
+"Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval." = "Вывод средств разрешён в экстренных случаях или для заявленных целей. Запросы должны быть поданы за 3 дня для одобрения администратором.";
+"Dispute Resolution" = "Разрешение споров";
+"Resolution Process" = "Процесс разрешения";
+"Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote." = "Споры по поводу баланса фонда или отказов в выводе средств урегулируются администратором. Неразрешённые вопросы решаются путём голосования участников.";
+"Define the terms for your group. Users must accept these to become a member of this group." = "Определите условия для вашей группы. Участники должны принять их, чтобы вступить в группу.";
+
+// MARK: - Withdrawal / Request
+"From" = "От кого";
+"To" = "Кому";
+"Change" = "Изменить";
+"Comment" = "Комментарий";
+"Send request" = "Отправить запрос";
+"Are you sure you want to request funds?" = "Вы уверены, что хотите запросить средства?";
+"Funds requested" = "Запрос отправлен";
+"We will notify you as soon as your request for funds is approved" = "Мы уведомим вас, как только ваш запрос будет одобрён";
+
+// MARK: - Top Up
+"Bank Transfer" = "Банковский перевод";
+"Transfer from your bank account" = "Перевод с вашего банковского счёта";
+"Instant" = "Мгновенно";
+"No fees" = "Без комиссии";
+"1% fee" = "Комиссия 1%";
+"Pay at any terminal near you" = "Оплатите в любом терминале рядом";
+"Payment Terminal" = "Платёжный терминал";
+"ATM Deposit" = "Пополнение через банкомат";
+"Deposit cash at supported ATMs" = "Внесите наличные в поддерживаемых банкоматах";
+"Up to 30 min" = "До 30 минут";
+"Send to" = "Отправить на";
+"Fee" = "Комиссия";
+"Bank" = "Банк";
+"Account Name" = "Имя получателя";
+"Account Number" = "Номер счёта";
+"Reference" = "Назначение платежа";
+"Transfer Initiated" = "Перевод отправлен";
+"Your Dona Card will be topped up once the transfer is confirmed. This usually takes a few minutes." = "Карта Dona будет пополнена после подтверждения перевода. Обычно это занимает несколько минут.";
+"Main page" = "Главная";
+"Dona Wallet Top-Up" = "Пополнение кошелька Dona";
+
+// MARK: - Profile
+"Language" = "Язык";
+"Theme" = "Фон";
+"Payment method" = "Способ оплаты";
+"Notification" = "Уведомление";
+"FAQ" = "FAQ";
+"Log out" = "Выйти";
+"Edit Profile" = "Редактировать профиль";
+"System" = "Системная";
+"Light" = "Светлая";
+"Dark" = "Тёмная";

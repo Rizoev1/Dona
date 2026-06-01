@@ -29,8 +29,8 @@ struct FundSelectionScreen: View {
                 } else if !viewModel.isLoading && viewModel.funds.isEmpty {
                     EmptyStateView(
                         icon: Image(.people),
-                        title: "No communities",
-                        subtitle: "You don't belong to any savings community yet"
+                        title: "No communities".localized,
+                        subtitle: "You don't belong to any savings community yet".localized
                     )
                 } else {
                     ForEach(viewModel.funds) { fund in
@@ -97,7 +97,7 @@ struct FundSelectionScreen: View {
             Divider()
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Fund balance")
+                    Text("Fund balance".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     HStack(spacing: 4) {

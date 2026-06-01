@@ -30,10 +30,10 @@ struct FundCommunityRulesScreen: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 32) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Community Rules")
+                        Text("Community Rules".localized)
                             .font(AppFont.heading2)
                             .foregroundStyle(theme.text.onSurface)
-                        Text("Define the terms for your savings circle. Members must accept these to participate.")
+                        Text("Define the terms for your savings circle. Members must accept these to participate.".localized)
                             .font(AppFont.largeRegular)
                             .foregroundStyle(theme.text.onTertiary)
                     }
@@ -50,7 +50,7 @@ struct FundCommunityRulesScreen: View {
                             .foregroundStyle(theme.text.onErrorContainer)
                     }
 
-                    AppButton(title: "Continue", state: viewModel.isLoading ? .loading : .default) {
+                    AppButton(title: "Continue".localized, state: viewModel.isLoading ? .loading : .default) {
                         viewModel.createFund(name: fundName, apy: apy) { fundId in
                             routes.push(.fundInvitation(fundId: fundId))
                         }
@@ -61,7 +61,7 @@ struct FundCommunityRulesScreen: View {
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
-        .navigationTitle("Create fund")
+        .navigationTitle("Create fund".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -79,15 +79,15 @@ struct FundCommunityRulesScreen: View {
                     .padding(8)
                     .background(theme.background.inversePrimary)
                     .clipShape(Circle())
-                Text("General Rules")
+                Text("General Rules".localized)
                     .font(AppFont.largeSemibold)
                     .foregroundStyle(theme.text.onSurface)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Charter & Purpose")
+                Text("Charter & Purpose".localized)
                     .font(AppFont.smallRegular)
                     .foregroundStyle(theme.text.onTertiary)
-                Text("This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies.")
+                Text("This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies.".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onSurface)
             }
@@ -110,13 +110,13 @@ struct FundCommunityRulesScreen: View {
                     .padding(8)
                     .background(theme.background.inversePrimary)
                     .clipShape(Circle())
-                Text("Contributions")
+                Text("Contributions".localized)
                     .font(AppFont.largeSemibold)
                     .foregroundStyle(theme.text.onSurface)
             }
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Min. Deposit")
+                    Text("Min. Deposit".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     HStack(spacing: 4) {
@@ -145,10 +145,10 @@ struct FundCommunityRulesScreen: View {
             .contentShape(RoundedRectangle(cornerRadius: 20))
             .onTapGesture { contributionsFocused = true }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Late Policy")
+                Text("Late Policy".localized)
                     .font(AppFont.smallRegular)
                     .foregroundStyle(theme.text.onTertiary)
-                Text("Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the community reserve.")
+                Text("Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the community reserve.".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onSurface)
             }
@@ -171,15 +171,15 @@ struct FundCommunityRulesScreen: View {
                     .padding(8)
                     .background(theme.background.inversePrimary)
                     .clipShape(Circle())
-                Text("Withdrawals")
+                Text("Withdrawals".localized)
                     .font(AppFont.largeSemibold)
                     .foregroundStyle(theme.text.onSurface)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Withdrawals")
+                Text("Withdrawals".localized)
                     .font(AppFont.smallRegular)
                     .foregroundStyle(theme.text.onTertiary)
-                Text("Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval.")
+                Text("Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval.".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onSurface)
             }
@@ -189,7 +189,7 @@ struct FundCommunityRulesScreen: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Min. Withdrawal")
+                    Text("Min. Withdrawal".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     HStack(spacing: 4) {
@@ -232,15 +232,15 @@ struct FundCommunityRulesScreen: View {
                     .padding(8)
                     .background(theme.background.inversePrimary)
                     .clipShape(Circle())
-                Text("Dispute Resolution")
+                Text("Dispute Resolution".localized)
                     .font(AppFont.largeSemibold)
                     .foregroundStyle(theme.text.onSurface)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text("Resolution Process")
+                Text("Resolution Process".localized)
                     .font(AppFont.smallRegular)
                     .foregroundStyle(theme.text.onTertiary)
-                Text("Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote.")
+                Text("Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote.".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onSurface)
             }

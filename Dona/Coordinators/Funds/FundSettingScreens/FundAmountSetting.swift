@@ -33,13 +33,13 @@ struct FundAmountSetting: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 8) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Contribution")
+                        Text("Contribution".localized)
                             .font(AppFont.largeSemibold)
                             .foregroundStyle(theme.text.onSurface)
 
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Monthly Amount")
+                                Text("Monthly Amount".localized)
                                     .font(AppFont.smallRegular)
                                     .foregroundStyle(theme.text.onTertiary)
                                 HStack(spacing: 4) {
@@ -68,7 +68,7 @@ struct FundAmountSetting: View {
                         .contentShape(RoundedRectangle(cornerRadius: 20))
                         .onTapGesture { amountFocused = true }
 
-                        Text("The fixed amount each member contributes to the savings pool every month.")
+                        Text("The fixed amount each member contributes to the savings pool every month.".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                     }
@@ -77,13 +77,13 @@ struct FundAmountSetting: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Fund APY")
+                        Text("Fund APY".localized)
                             .font(AppFont.largeSemibold)
                             .foregroundStyle(theme.text.onSurface)
 
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Annual Percentage Yield")
+                                Text("Annual Percentage Yield".localized)
                                     .font(AppFont.smallRegular)
                                     .foregroundStyle(theme.text.onTertiary)
                                 HStack(spacing: 4) {
@@ -112,7 +112,7 @@ struct FundAmountSetting: View {
                             Image(.infoCircle)
                                 .resizable()
                                 .frame(width: 18, height: 18)
-                            Text("Optional. Leave empty if your community doesn't offer interest on deposits.")
+                            Text("Optional. Leave empty if your community doesn't offer interest on deposits.".localized)
                                 .font(AppFont.smallRegular)
                                 .foregroundStyle(theme.text.onTertiary)
                         }
@@ -128,14 +128,14 @@ struct FundAmountSetting: View {
                 .padding(.bottom, 16)
             }
 
-            AppButton(title: "Continue", state: .default) {
+            AppButton(title: "Continue".localized, state: .default) {
                 routes.push(.fundRules(name: fundName, apy: apy))
             }
             .padding(.top, 8)
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
-        .navigationTitle("Create fund")
+        .navigationTitle("Create fund".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

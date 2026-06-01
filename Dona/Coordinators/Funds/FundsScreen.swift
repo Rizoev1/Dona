@@ -17,10 +17,10 @@ struct FundsScreen: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
                 HStack(spacing: 16) {
-                    makeOptionsBlock(text: "Create Community", icon: Image(.add)) {
+                    makeOptionsBlock(text: "Create Community".localized, icon: Image(.add)) {
                         routes.push(.fundNaming)
                     }
-                    makeOptionsBlock(text: "Migrate Existing Community", icon: Image(.refresh)) {}
+                    makeOptionsBlock(text: "Migrate Existing Community".localized, icon: Image(.refresh)) {}
                 }
 
                 if viewModel.isLoading && viewModel.funds.isEmpty {
@@ -30,8 +30,8 @@ struct FundsScreen: View {
                 } else if !viewModel.isLoading && viewModel.funds.isEmpty {
                     EmptyStateView(
                         icon: Image(.people),
-                        title: "No communities yet",
-                        subtitle: "Create your first savings community to get started"
+                        title: "No communities yet".localized,
+                        subtitle: "Create your first savings community to get started".localized
                     )
                 } else {
                     VStack(spacing: 16) {
@@ -47,7 +47,7 @@ struct FundsScreen: View {
         }
         .padding(.horizontal, 12)
         .appBackground()
-        .navigationTitle("Funds")
+        .navigationTitle("Funds".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear() }
     }
@@ -147,7 +147,7 @@ struct FundsScreen: View {
 
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Fund balance")
+                        Text("Fund balance".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
 

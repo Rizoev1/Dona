@@ -19,12 +19,12 @@ struct NotificationsScreen: View {
                 } else if !viewModel.isLoading && viewModel.notifications.isEmpty {
                     EmptyStateView(
                         icon: Image(systemName: "bell.slash"),
-                        title: "No notifications",
-                        subtitle: "You're all caught up! New alerts will appear here"
+                        title: "No notifications".localized,
+                        subtitle: "You're all caught up! New alerts will appear here".localized
                     )
                 } else {
                     if !viewModel.thisMonthNotifications.isEmpty {
-                        makeMonthSection(title: "This Month", notifications: viewModel.thisMonthNotifications)
+                        makeMonthSection(title: "This Month".localized, notifications: viewModel.thisMonthNotifications)
                     }
                     ForEach(viewModel.groupedByMonth, id: \.title) { group in
                         makeMonthSection(title: group.title, notifications: group.notifications)
@@ -34,7 +34,7 @@ struct NotificationsScreen: View {
             .padding(.horizontal, 12)
         }
         .background(theme.background.surface)
-        .navigationTitle("Notifications")
+        .navigationTitle("Notifications".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear() }
         .sheet(isPresented: $viewModel.isSheetPresented) {
@@ -51,7 +51,7 @@ struct NotificationsScreen: View {
                             .font(AppFont.largeRegular)
                             .foregroundStyle(theme.text.onTertiary)
                     }
-                    AppButton(title: "Close", state: .default) {
+                    AppButton(title: "Close".localized, state: .default) {
                         viewModel.isSheetPresented = false
                     }
                 }
@@ -111,7 +111,7 @@ struct NotificationsScreen: View {
                         }
                         Spacer()
                         if !notification.isRead {
-                            Text("New")
+                            Text("New".localized)
                                 .font(AppFont.smallRegular)
                                 .foregroundStyle(theme.text.onErrorContainer)
                                 .padding(.vertical, 4)

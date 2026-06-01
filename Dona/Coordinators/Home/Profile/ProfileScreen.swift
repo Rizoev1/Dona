@@ -62,7 +62,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Edit Profile")
+                    Text("Edit Profile".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -83,7 +83,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Language")
+                    Text("Language".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -104,7 +104,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Theme")
+                    Text("Theme".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -142,7 +142,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("Notifications")
+                    Text("Notifications".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -171,7 +171,7 @@ struct ProfileScreen: View {
                     .padding(8)
                     .background(theme.background.inversePrimary)
                     .clipShape(Circle())
-                Text("Log out")
+                Text("Log out".localized)
                     .font(AppFont.largeMedium)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
@@ -189,7 +189,7 @@ struct ProfileScreen: View {
 
     @ViewBuilder func editSheet() -> some View {
         VStack(spacing: 20) {
-            Text("Edit Profile")
+            Text("Edit Profile".localized)
                 .font(AppFont.heading3)
                 .foregroundStyle(theme.text.onSurface)
                 .padding(.top, 8)
@@ -235,7 +235,7 @@ struct ProfileScreen: View {
                 HStack(spacing: 8) {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundStyle(theme.text.foregroundSuccess1)
-                    Text("Profile updated!")
+                    Text("Profile updated!".localized)
                         .font(AppFont.mediumMedium)
                         .foregroundStyle(theme.text.foregroundSuccess1)
                 }
@@ -246,13 +246,13 @@ struct ProfileScreen: View {
             }
 
             AppButton(
-                title: "Save",
+                title: "Save".localized,
                 state: viewModel.isSaving ? .loading : .default
             ) {
                 viewModel.updateProfileInfo(fullName: editName, email: editEmail)
             }
 
-            AppButton(title: "Cancel", state: .white) {
+            AppButton(title: "Cancel".localized, state: .white) {
                 isEditSheetPresented = false
             }
         }

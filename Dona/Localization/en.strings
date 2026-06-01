@@ -1,0 +1,155 @@
+// MARK: - Auth
+"Login or Sign up" = "Login or Sign up";
+"Enter your phone number" = "Enter your phone number";
+"By continuing, you agree to the Terms of Use" = "By continuing, you agree to the Terms of Use";
+"Terms of Use" = "Terms of Use";
+"Log in" = "Log in";
+"Continue" = "Continue";
+"Enter the SMS code" = "Enter the SMS code";
+"We sent it to your phone number" = "We sent it to your phone number";
+"Resend code" = "Resend code";
+"Create a PIN" = "Create a PIN";
+"For secure access" = "For secure access";
+"Confirm PIN" = "Confirm PIN";
+"Enter your PIN to log in" = "Enter your PIN to log in";
+"Forgot PIN?" = "Forgot PIN?";
+"Incorrect PIN" = "Incorrect PIN";
+"Choose a language" = "Choose a language";
+"You can change it later in settings if you want to" = "You can change it later in settings if you want to";
+
+// MARK: - Tabs
+"Home" = "Home";
+"Groups" = "Groups";
+"Payments" = "Payments";
+"Profile" = "Profile";
+
+// MARK: - Home
+"Available balance" = "Available balance";
+"Personal Wallet" = "Personal Wallet";
+"Dona Card" = "Dona Card";
+"Add money" = "Add money";
+"Top up" = "Top up";
+"Request" = "Request";
+"Send" = "Send";
+"Community fund" = "Community fund";
+"Group fund" = "Group fund";
+"View All" = "View All";
+"Group name" = "Group name";
+"Earns 4.2% per year" = "Earns 4.2% per year";
+"Quick Pay" = "Quick Pay";
+"Recent Activity" = "Recent Activity";
+"Received" = "Received";
+"Monthly Contribution" = "Monthly Contribution";
+"No communities yet" = "No communities yet";
+"Join or create a fund to see it here" = "Join or create a fund to see it here";
+"No transactions yet" = "No transactions yet";
+"Your recent activity will appear here" = "Your recent activity will appear here";
+"This Month" = "This Month";
+"Today" = "Today";
+"Activity" = "Activity";
+"New" = "New";
+"Close" = "Close";
+"Search" = "Search";
+
+// MARK: - Notifications
+"Notifications" = "Notifications";
+"No notifications" = "No notifications";
+"You're all caught up! New alerts will appear here" = "You're all caught up! New alerts will appear here";
+
+// MARK: - Funds
+"Funds" = "Funds";
+"Create Community" = "Create Community";
+"Create Group" = "Create Group";
+"Migrate Existing Community" = "Migrate Existing Community";
+"Migrate Existing Group" = "Migrate Existing Group";
+"ADMIN" = "ADMIN";
+"MEMBER" = "MEMBER";
+"ACTIVE" = "ACTIVE";
+"Fund balance" = "Fund balance";
+"Members" = "Members";
+"No communities yet" = "No communities yet";
+"Create your first savings community to get started" = "Create your first savings community to get started";
+"Approvals" = "Approvals";
+"View my history" = "View my history";
+"Fund report" = "Fund report";
+"Group Rules" = "Group Rules";
+"Read rules and policies" = "Read rules and policies";
+"JOIN REQUEST" = "JOIN REQUEST";
+"Reject" = "Reject";
+"Approve" = "Approve";
+"DISBURSEMENT" = "DISBURSEMENT";
+"Amount" = "Amount";
+"Invite member" = "Invite member";
+"Invite Group Members" = "Invite Group Members";
+"Search and invite Dona users to join your group. They will receive a notification." = "Search and invite Dona users to join your group. They will receive a notification.";
+"Skip now" = "Skip now";
+"Select Group" = "Select Group";
+"Total balance" = "Total balance";
+"No members yet" = "No members yet";
+"Invite members to get started" = "Invite members to get started";
+"No activity yet" = "No activity yet";
+"Transactions will appear here" = "Transactions will appear here";
+
+// MARK: - Fund Creation
+"Create fund" = "Create fund";
+"Contribution" = "Contribution";
+"The fixed amount each member contributes to the savings pool every month. You can change it later in settings if you want to." = "The fixed amount each member contributes to the savings pool every month. You can change it later in settings if you want to.";
+"Fund Allocation" = "Fund Allocation";
+"Current Account" = "Current Account";
+"Total Allocation: 100%" = "Total Allocation: 100%";
+"All funds go to Current Account. You can allocate to Deposit after creating the group." = "All funds go to Current Account. You can allocate to Deposit after creating the group.";
+"General Rules" = "General Rules";
+"Charter & Purpose" = "Charter & Purpose";
+"This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies." = "This group is dedicated to collective saving and financial growth. We commit to consistent deposits to build a secure fund for future goals and emergencies.";
+"Late Policy" = "Late Policy";
+"Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the group balance." = "Missed deposits disrupt the saving cycle. Late payments incur a fixed 10 TJS fee added to the group balance.";
+"Withdrawals" = "Withdrawals";
+"Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval." = "Withdrawals are permitted for emergencies or stated goals. Requests must be submitted 3 days in advance for Director approval.";
+"Dispute Resolution" = "Dispute Resolution";
+"Resolution Process" = "Resolution Process";
+"Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote." = "Disputes regarding account balances or withdrawal denials are mediated by the Director. Unresolved issues are settled by a binding member vote.";
+"Define the terms for your group. Users must accept these to become a member of this group." = "Define the terms for your group. Users must accept these to become a member of this group.";
+
+// MARK: - Withdrawal / Request
+"From" = "From";
+"To" = "To";
+"Change" = "Change";
+"Comment" = "Comment";
+"Send request" = "Send request";
+"Are you sure you want to request funds?" = "Are you sure you want to request funds?";
+"Funds requested" = "Funds requested";
+"We will notify you as soon as your request for funds is approved" = "We will notify you as soon as your request for funds is approved";
+
+// MARK: - Top Up
+"Bank Transfer" = "Bank Transfer";
+"Transfer from your bank account" = "Transfer from your bank account";
+"Instant" = "Instant";
+"No fees" = "No fees";
+"1% fee" = "1% fee";
+"Pay at any terminal near you" = "Pay at any terminal near you";
+"Payment Terminal" = "Payment Terminal";
+"ATM Deposit" = "ATM Deposit";
+"Deposit cash at supported ATMs" = "Deposit cash at supported ATMs";
+"Up to 30 min" = "Up to 30 min";
+"Send to" = "Send to";
+"Fee" = "Fee";
+"Bank" = "Bank";
+"Account Name" = "Account Name";
+"Account Number" = "Account Number";
+"Reference" = "Reference";
+"Transfer Initiated" = "Transfer Initiated";
+"Your Dona Card will be topped up once the transfer is confirmed. This usually takes a few minutes." = "Your Dona Card will be topped up once the transfer is confirmed. This usually takes a few minutes.";
+"Main page" = "Main page";
+"Dona Wallet Top-Up" = "Dona Wallet Top-Up";
+
+// MARK: - Profile
+"Language" = "Language";
+"Theme" = "Theme";
+"Payment method" = "Payment method";
+"Notification" = "Notification";
+"FAQ" = "FAQ";
+"Log out" = "Log out";
+"Edit Profile" = "Edit Profile";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";

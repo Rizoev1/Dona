@@ -21,7 +21,7 @@ struct RequestStatusSheet: View {
             makeInfo()
                 .padding(.horizontal, 12)
             Spacer()
-            AppButton(title: "Main page", state: .default, action: { })
+            AppButton(title: "Main page".localized, state: .default, action: { })
                 .padding(.horizontal, 12)
         }
         .background(LinearGradient(
@@ -36,14 +36,14 @@ struct RequestStatusSheet: View {
     
     @ViewBuilder func makeDescription() -> some View {
         VStack(spacing: 8) {
-            Text("Transfer Initiated")
+            Text("Transfer Initiated".localized)
                 .font(AppFont.heading1)
                 .foregroundStyle(theme.text.onSurface)
-            Text("Send $200 to the account details provided")
+            Text("Send $200 to the account details provided".localized)
                 .font(AppFont.mediumMedium)
                 .foregroundStyle(theme.text.onSecondary)
                 .multilineTextAlignment(.center)
-            Text("We will notify you as soon as your request for funds is approved")
+            Text("We will notify you as soon as your request for funds is approved".localized)
                 .font(AppFont.mediumRegular)
                 .foregroundStyle(theme.text.onTertiary)
                 .multilineTextAlignment(.center)
@@ -53,29 +53,29 @@ struct RequestStatusSheet: View {
     @ViewBuilder func makeInfo() -> some View {
         VStack(spacing: 20) {
             HStack {
-                Text("Send to")
+                Text("Send to".localized)
                     .font(AppFont.largeRegular)
                     .foregroundStyle(theme.text.onTertiary)
                 Spacer()
-                Text("Family Savings")
+                Text("Family Savings".localized)
                     .font(AppFont.largeMedium)
                     .foregroundStyle(theme.text.onSurface)
             }
             HStack {
-                Text("Wallet")
+                Text("Wallet".localized)
                     .font(AppFont.largeRegular)
                     .foregroundStyle(theme.text.onTertiary)
                 Spacer()
-                Text("Personal Wallet  •• 4092")
+                Text("Personal Wallet  •• 4092".localized)
                     .font(AppFont.largeMedium)
                     .foregroundStyle(theme.text.onSurface)
             }
             HStack {
-                Text("Funds requested")
+                Text("Funds requested".localized)
                     .font(AppFont.largeRegular)
                     .foregroundStyle(theme.text.onTertiary)
                 Spacer()
-                Text("10290 TJS")
+                Text("10290 TJS".localized)
                     .font(AppFont.largeMedium)
                     .foregroundStyle(theme.text.onSurface)
             }

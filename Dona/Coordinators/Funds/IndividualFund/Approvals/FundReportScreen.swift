@@ -21,7 +21,7 @@ struct FundReportScreen: View {
                 } else if let error = viewModel.errorMessage {
                     EmptyStateView(
                         icon: Image(systemName: "exclamationmark.triangle"),
-                        title: "Failed to load report",
+                        title: "Failed to load report".localized,
                         subtitle: error
                     )
                 }
@@ -29,7 +29,7 @@ struct FundReportScreen: View {
             .padding(.horizontal, 12)
         }
         .background(theme.background.surface)
-        .navigationTitle("Fund Report")
+        .navigationTitle("Fund Report".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear(fundId: fundId) }
     }
@@ -39,21 +39,21 @@ struct FundReportScreen: View {
             makeRow(
                 icon: Image(systemName: "arrow.down.circle.fill"),
                 iconColor: theme.text.foregroundSuccess1,
-                title: "Total Contributions",
+                title: "Total Contributions".localized,
                 value: formatAmount(report.contributions),
                 valueColor: theme.text.foregroundSuccess1
             )
             makeRow(
                 icon: Image(systemName: "arrow.up.circle.fill"),
                 iconColor: theme.text.onErrorContainer,
-                title: "Total Disbursements",
+                title: "Total Disbursements".localized,
                 value: formatAmount(report.disbursements),
                 valueColor: theme.text.onErrorContainer
             )
             makeRow(
                 icon: Image(systemName: "chart.line.uptrend.xyaxis"),
                 iconColor: theme.stroke.scrim,
-                title: "Net Growth",
+                title: "Net Growth".localized,
                 value: formatAmount(report.netGrowth),
                 valueColor: report.netGrowth >= 0
                     ? theme.text.foregroundSuccess1
@@ -62,7 +62,7 @@ struct FundReportScreen: View {
             makeRow(
                 icon: Image(systemName: "percent"),
                 iconColor: theme.text.foregroundWarning1,
-                title: "Growth",
+                title: "Growth".localized,
                 value: String(format: "%.2f%%", report.growthPercent),
                 valueColor: report.growthPercent >= 0
                     ? theme.text.foregroundSuccess1

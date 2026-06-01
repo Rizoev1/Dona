@@ -55,7 +55,7 @@ struct ThemeScreen: View {
             .padding(.horizontal, 16)
         }
         .background(theme.background.surface)
-        .navigationTitle("Theme")
+        .navigationTitle("Theme".localized)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

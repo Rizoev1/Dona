@@ -40,11 +40,11 @@ struct LanguageOnboardingScreen: View {
                 .frame(width: 280, height: 280)
 
             VStack(alignment: .center, spacing: 6) {
-                Text("Choose a language")
+                Text("Choose a language".localized)
                     .font(AppFont.heading2)
                     .foregroundStyle(theme.text.onSurface)
 
-                Text("You can change it later in settings")
+                Text("You can change it later in settings".localized)
                     .font(AppFont.largeRegular)
                     .foregroundStyle(theme.text.onTertiary)
             }
@@ -55,7 +55,8 @@ struct LanguageOnboardingScreen: View {
                 }
             }
             Spacer()
-            AppButton(title: "Continue", state: .default) {
+            AppButton(title: "Continue".localized, state: .default) {
+                UserDefaults.standard.set(true, forKey: "languageSelected")
                 navigator.push(.login)
             }
         }

@@ -24,8 +24,8 @@ struct ApprovalsScreen: View {
                 } else if !viewModel.isLoading && viewModel.withdrawals.isEmpty {
                     EmptyStateView(
                         icon: Image(systemName: "checkmark.circle"),
-                        title: "No pending approvals",
-                        subtitle: "All withdrawal requests have been reviewed"
+                        title: "No pending approvals".localized,
+                        subtitle: "All withdrawal requests have been reviewed".localized
                     )
                 } else {
                     ForEach(viewModel.withdrawals, id: \.id) { request in
@@ -36,7 +36,7 @@ struct ApprovalsScreen: View {
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
-        .navigationTitle("Approvals")
+        .navigationTitle("Approvals".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear() }
     }
@@ -55,7 +55,7 @@ struct ApprovalsScreen: View {
                     Text("User #\(request.userId)")
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
-                    Text("WITHDRAWAL REQUEST")
+                    Text("WITHDRAWAL REQUEST".localized)
                         .font(AppFont.smallMedium)
                         .foregroundStyle(theme.text.foregroundWarning1)
                         .padding(.horizontal, 8).padding(.vertical, 4)
@@ -72,7 +72,7 @@ struct ApprovalsScreen: View {
 
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("Amount")
+                    Text("Amount".localized)
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     Spacer()
@@ -87,7 +87,7 @@ struct ApprovalsScreen: View {
                 }
                 if request.fee > 0 {
                     HStack {
-                        Text("Fee")
+                        Text("Fee".localized)
                             .font(AppFont.mediumRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         Spacer()
@@ -102,10 +102,10 @@ struct ApprovalsScreen: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
 
             HStack(spacing: 10) {
-                AppButton(title: "Reject", state: .default) {
+                AppButton(title: "Reject".localized, state: .default) {
                     viewModel.reject(request)
                 }
-                AppButton(title: "Approve", state: .default) {
+                AppButton(title: "Approve".localized, state: .default) {
                     viewModel.approve(request)
                 }
             }

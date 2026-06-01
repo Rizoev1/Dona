@@ -176,20 +176,20 @@ struct PaymentScreen: View {
     @ViewBuilder func makeTopUpCard() -> some View {
         VStack(spacing: 4) {
             HStack {
-                Text("Dona Wallet Top-Up")
+                Text("Dona Wallet Top-Up".localized)
                     .font(AppFont.mediumSemibold)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
-                Text("2090 4821 0037 5516")
+                Text("2090 4821 0037 5516".localized)
                     .font(AppFont.mediumSemibold)
                     .foregroundStyle(theme.text.onSurface)
             }
             HStack {
-                Text("Humo Bank")
+                Text("Humo Bank".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onTertiary)
                 Spacer()
-                Text("DON-L8GESX")
+                Text("DON-L8GESX".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.onTertiary)
             }
@@ -231,7 +231,7 @@ struct PaymentScreen: View {
                 Spacer()
                 if showChange {
                     Button { dismiss() } label: {
-                        Text("Change")
+                        Text("Change".localized)
                             .font(AppFont.smallSemibold)
                             .foregroundStyle(theme.text.onSecondary)
                             .padding(.vertical, 4)
@@ -278,7 +278,7 @@ struct PaymentScreen: View {
                    .frame(width: 20, height: 20)
                    .foregroundStyle(theme.text.onTertiary)
                VStack(alignment: .leading, spacing: 4) {
-                   Text("Phone number")
+                   Text("Phone number".localized)
                        .font(AppFont.smallRegular)
                        .foregroundStyle(theme.text.onTertiary)
                    HStack(spacing: 0) {

@@ -20,15 +20,15 @@ struct AuthenticatedCoordinator: View {
     var body: some View {
         TabView(selection: $tabRouter.selectedTab) {
             HomeCoordinator()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+                .tabItem { Label("Home".localized, systemImage: "house.fill") }
                 .tag(0)
 
             FundsCoordinator()
-                .tabItem { Label("Funds", systemImage: "chart.pie.fill") }
+                .tabItem { Label("Funds".localized, systemImage: "chart.pie.fill") }
                 .tag(1)
 
             PaymentsCoordinator()
-                .tabItem { Label("Payments", systemImage: "creditcard.fill") }
+                .tabItem { Label("Payments".localized, systemImage: "creditcard.fill") }
                 .tag(2)
         }
         .environmentObject(tabRouter)

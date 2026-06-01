@@ -24,8 +24,8 @@ struct ActivityScreen: View {
                 } else if !viewModel.isLoading && viewModel.transactions.isEmpty {
                     EmptyStateView(
                         icon: Image(systemName: "clock.arrow.circlepath"),
-                        title: "No transactions yet",
-                        subtitle: "Your wallet activity will appear here"
+                        title: "No transactions yet".localized,
+                        subtitle: "Your wallet activity will appear here".localized
                     )
                 } else {
                     ForEach(viewModel.groupedByDate, id: \.title) { group in
@@ -74,7 +74,7 @@ struct ActivityScreen: View {
             .padding(.bottom, 8)
         }
         .background(theme.background.surface)
-        .navigationTitle("Activity")
+        .navigationTitle("Activity".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear() }
     }

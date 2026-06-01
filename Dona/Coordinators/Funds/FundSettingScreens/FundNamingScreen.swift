@@ -40,12 +40,12 @@ struct FundNamingScreen: View {
 
             Spacer()
 
-            AppButton(title: "Continue", state: fundName.isEmpty ? .disabled : .default) {
+            AppButton(title: "Continue".localized, state: fundName.isEmpty ? .disabled : .default) {
                 routes.push(.fundAmount(name: fundName))
             }
         }
         .padding(.horizontal)
-        .navigationTitle("Create fund")
+        .navigationTitle("Create fund".localized)
         .navigationBarTitleDisplayMode(.inline)
         .background(theme.background.surface)
         .onAppear {

@@ -24,7 +24,7 @@ struct SubServicesScreen: View {
                             Image(.tcellMock)
                                 .resizable()
                                 .frame(width: 36, height: 36)
-                            Text("Tcell")
+                            Text("Tcell".localized)
                                 .font(AppFont.largeMedium)
                                 .foregroundStyle(theme.text.onSurface)
                             Spacer()
@@ -53,5 +53,5 @@ struct SubServicesScreen: View {
 }
 
 #Preview {
-    SubServicesScreen(title: "Mobile Top-up") {}
+    SubServicesScreen(title: "Mobile Top-up".localized) {}
 }

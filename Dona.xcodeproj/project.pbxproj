@@ -68,6 +68,10 @@
 		84D5FF3F2FAB694D0033A8BD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF3E2FAB694D0033A8BD /* LoginViewModel.swift */; };
 		84D5FF412FAB695E0033A8BD /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D5FF402FAB695E0033A8BD /* VerificationViewModel.swift */; };
 		84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03D2F8E543900B44EA9 /* CardShadow.swift */; };
+		F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2040A789A4090AA6A20FE /* String+Localized.swift */; };
+		A0DB32B91B9A4572A74560B3 /* en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1613F2D445B64DB28DB26039 /* en.strings */; };
+		EC12D075C0D947E98A68741F /* ru.strings in Resources */ = {isa = PBXBuildFile; fileRef = B15FE5455C9C4B968BF227A3 /* ru.strings */; };
+		373B58127BA245DAA47DAC98 /* tg.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED050E2664B145EBB4E5B86B /* tg.strings */; };
 		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0432F9A000000B44EA9 /* Shimmer.swift */; };
 		84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */; };
 		84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */; };
@@ -162,6 +166,10 @@
 		84D5FF3E2FAB694D0033A8BD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		84D5FF402FAB695E0033A8BD /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
 		84DBE03D2F8E543900B44EA9 /* CardShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShadow.swift; sourceTree = "<group>"; };
+		09A2040A789A4090AA6A20FE /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
+		1613F2D445B64DB28DB26039 /* en.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en.strings; path = Localization/en.strings; sourceTree = "<group>"; };
+		B15FE5455C9C4B968BF227A3 /* ru.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru.strings; path = Localization/ru.strings; sourceTree = "<group>"; };
+		ED050E2664B145EBB4E5B86B /* tg.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tg.strings; path = Localization/tg.strings; sourceTree = "<group>"; };
 		84DBE0432F9A000000B44EA9 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFundCard.swift; sourceTree = "<group>"; };
 		84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPayCard.swift; sourceTree = "<group>"; };
@@ -232,6 +240,16 @@
 				84BBCC0100000000AABB0003 /* PinViewModel.swift */,
 			);
 			path = Pin;
+			sourceTree = "<group>";
+		};
+		371954CA21794416A172E64F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				1613F2D445B64DB28DB26039 /* en.strings */,
+				B15FE5455C9C4B968BF227A3 /* ru.strings */,
+				ED050E2664B145EBB4E5B86B /* tg.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		4B3F73D42F8A8B7600406292 /* AppServices */ = {
@@ -496,7 +514,18 @@
 				84D234062F865F7200C7DE80 /* Constants */,
 				84CE15412F890F4E000E9552 /* Components */,
 				84CE15442F89117A000E9552 /* Helpers */,
-				4B3F73D42F8A8B7600406292 /* AppServices */,
+				371954CA21794416A172E64F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				1613F2D445B64DB28DB26039 /* en.strings */,
+				B15FE5455C9C4B968BF227A3 /* ru.strings */,
+				ED050E2664B145EBB4E5B86B /* tg.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		4B3F73D42F8A8B7600406292 /* AppServices */,
+				371954CA21794416A172E64F /* Localization */,
 				84D234092F86626500C7DE80 /* ColorTokens */,
 				84D233ED2F865BC800C7DE80 /* Assets.xcassets */,
 			);
@@ -717,6 +746,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DB32B91B9A4572A74560B3 /* en.strings in Resources */,
+				EC12D075C0D947E98A68741F /* ru.strings in Resources */,
+				373B58127BA245DAA47DAC98 /* tg.strings in Resources */,
 				84D233F32F865BC800C7DE80 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,7 +826,11 @@
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
 				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
-				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
+				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2040A789A4090AA6A20FE /* String+Localized.swift */; };
+		A0DB32B91B9A4572A74560B3 /* en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1613F2D445B64DB28DB26039 /* en.strings */; };
+		EC12D075C0D947E98A68741F /* ru.strings in Resources */ = {isa = PBXBuildFile; fileRef = B15FE5455C9C4B968BF227A3 /* ru.strings */; };
+		373B58127BA245DAA47DAC98 /* tg.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED050E2664B145EBB4E5B86B /* tg.strings */; };
+		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
 				84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */,

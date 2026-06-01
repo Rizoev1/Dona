@@ -103,7 +103,7 @@ struct HomeScreen: View {
         VStack(spacing: 24) {
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Available balance")
+                    Text("Available balance".localized)
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     HStack(spacing: 4) {
@@ -117,7 +117,7 @@ struct HomeScreen: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 6) {
-                    Text("Personal wallet")
+                    Text("Personal wallet".localized)
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     Text(viewModel.cardSuffix)
@@ -143,7 +143,7 @@ struct HomeScreen: View {
                                     endPoint: .leading))
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
-                    Text("Top up")
+                    Text("Top up".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -160,7 +160,7 @@ struct HomeScreen: View {
                             .background(theme.background.secondaryContainer)
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
-                    Text("Request")
+                    Text("Request".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -177,7 +177,7 @@ struct HomeScreen: View {
                             .background(theme.background.secondaryContainer)
                             .clipShape(RoundedRectangle(cornerRadius: 60))
                     }
-                    Text("Send")
+                    Text("Send".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -192,13 +192,13 @@ struct HomeScreen: View {
     @ViewBuilder func makeCommunityFund() -> some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Community fund")
+                Text("Community fund".localized)
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
                 Button { tabRouter.selectedTab = 1 } label: {
                     HStack(spacing: 5) {
-                        Text("View All")
+                        Text("View All".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         Image(.arrowRight)
@@ -217,8 +217,8 @@ struct HomeScreen: View {
             if viewModel.funds.isEmpty {
                 EmptyStateView(
                     icon: Image(.people),
-                    title: "No communities yet",
-                    subtitle: "Join or create a fund to see it here"
+                    title: "No communities yet".localized,
+                    subtitle: "Join or create a fund to see it here".localized
                 )
                 .padding(.horizontal, 12)
             } else {
@@ -242,7 +242,7 @@ struct HomeScreen: View {
     @ViewBuilder func makeQuickPay() -> some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Quick Pay")
+                Text("Quick Pay".localized)
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
@@ -250,7 +250,7 @@ struct HomeScreen: View {
                     tabRouter.selectedTab = 2
                 } label: {
                     HStack(spacing: 5) {
-                        Text("View All")
+                        Text("View All".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         Image(.arrowRight)
@@ -280,7 +280,7 @@ struct HomeScreen: View {
     @ViewBuilder func makeRecentActivity() -> some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Recent Activity")
+                Text("Recent Activity".localized)
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
@@ -288,7 +288,7 @@ struct HomeScreen: View {
                     navigator.push(.activity)
                 } label: {
                     HStack(spacing: 5) {
-                        Text("View All")
+                        Text("View All".localized)
                             .font(AppFont.smallRegular)
                             .foregroundStyle(theme.text.onTertiary)
                         Image(.arrowRight)
@@ -305,8 +305,8 @@ struct HomeScreen: View {
             if viewModel.topRecentActivity.isEmpty {
                 EmptyStateView(
                     icon: Image(systemName: "clock.arrow.circlepath"),
-                    title: "No transactions yet",
-                    subtitle: "Your recent activity will appear here"
+                    title: "No transactions yet".localized,
+                    subtitle: "Your recent activity will appear here".localized
                 )
             } else {
                 VStack(alignment: .leading, spacing: 12) {
@@ -316,7 +316,7 @@ struct HomeScreen: View {
                                 .resizable()
                                 .frame(width: 36, height: 36)
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Community name")
+                                Text("Community name".localized)
                                     .font(AppFont.mediumMedium)
                                     .foregroundStyle(theme.text.onSurface)
                                 Text(activity.typeLabel)

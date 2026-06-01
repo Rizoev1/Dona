@@ -18,7 +18,7 @@ struct SplashScreen: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 80, height: 80)
-                Text("Dona")
+                Text("Dona".localized)
                     .font(AppFont.heading1)
                     .foregroundStyle(theme.text.onSurface)
             }

@@ -76,7 +76,7 @@ struct FundMemberInvitationScreen: View {
                 ) {
                     viewModel.inviteSelected(fundId: fundId)
                 }
-                AppButton(title: "Skip now", state: .white) {
+                AppButton(title: "Skip now".localized, state: .white) {
                     routes = []
                 }
             }
@@ -84,7 +84,7 @@ struct FundMemberInvitationScreen: View {
         }
         .padding(.horizontal, 12)
         .background(theme.background.surface)
-        .navigationTitle("Create fund")
+        .navigationTitle("Create fund".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.loadContacts()
@@ -174,10 +174,10 @@ struct FundMemberInvitationScreen: View {
             Image(systemName: "person.crop.circle.badge.xmark")
                 .font(.system(size: 48))
                 .foregroundStyle(theme.text.onTertiaryContainer)
-            Text("Contacts access denied")
+            Text("Contacts access denied".localized)
                 .font(AppFont.largeSemibold)
                 .foregroundStyle(theme.text.onSurface)
-            Text("Allow contacts access in Settings to invite members")
+            Text("Allow contacts access in Settings to invite members".localized)
                 .font(AppFont.mediumRegular)
                 .foregroundStyle(theme.text.onTertiary)
                 .multilineTextAlignment(.center)
@@ -186,7 +186,7 @@ struct FundMemberInvitationScreen: View {
                     UIApplication.shared.open(url)
                 }
             } label: {
-                Text("Open Settings")
+                Text("Open Settings".localized)
                     .font(AppFont.mediumMedium)
                     .foregroundStyle(theme.text.primaryContainer)
             }

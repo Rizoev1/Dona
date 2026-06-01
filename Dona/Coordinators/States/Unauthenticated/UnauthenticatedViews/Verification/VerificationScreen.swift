@@ -26,10 +26,10 @@ struct VerificationScreen: View {
 
             VStack(alignment: .leading, spacing: 20) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Enter the SMS code")
+                    Text("Enter the SMS code".localized)
                         .font(AppFont.heading2)
                         .foregroundStyle(theme.text.onSurface)
-                    Text("We sent it to your phone number")
+                    Text("We sent it to your phone number".localized)
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onSecondary)
                 }
@@ -44,7 +44,7 @@ struct VerificationScreen: View {
                 if viewModel.isResending {
                     ProgressView()
                 } else {
-                    Text("Resend code")
+                    Text("Resend code".localized)
                         .font(AppFont.mediumMedium)
                         .foregroundStyle(theme.text.primaryContainer)
                         .onTapGesture {

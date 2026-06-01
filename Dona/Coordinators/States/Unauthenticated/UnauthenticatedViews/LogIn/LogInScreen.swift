@@ -23,15 +23,15 @@ struct LogInScreen: View {
                     Image(.appLogo)
                         .resizable()
                         .frame(width: 28, height: 28)
-                    Text("Logo")
+                    Text("Logo".localized)
                         .font(AppFont.heading4)
                         .foregroundStyle(theme.text.onSurface)
                 }
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Login or Sign up")
+                    Text("Login or Sign up".localized)
                         .font(AppFont.heading2)
                         .foregroundStyle(theme.text.onSurface)
-                    Text("Enter your phone number")
+                    Text("Enter your phone number".localized)
                         .font(AppFont.largeRegular)
                         .foregroundStyle(theme.text.onSecondary)
                 }
@@ -62,9 +62,9 @@ struct LogInScreen: View {
                 }
 
                 Group {
-                    Text("By continuing, you agree to the ")
+                    Text("By continuing, you agree to the ".localized)
                         .foregroundColor(theme.text.onSecondary)
-                    + Text("Terms of Use")
+                    + Text("Terms of Use".localized)
                         .foregroundColor(theme.text.primaryContainer)
                 }
                 .font(AppFont.mediumRegular)
@@ -79,7 +79,7 @@ struct LogInScreen: View {
 
             Spacer()
 
-            AppButton(title: "Log In", state: viewModel.isLoading ? .loading : .default) {
+            AppButton(title: "Log In".localized, state: viewModel.isLoading ? .loading : .default) {
                 let digits = phoneNumber.filter { $0.isNumber }
                 let fullPhone = "992" + digits
                 viewModel.sendOtp(phone: fullPhone) {

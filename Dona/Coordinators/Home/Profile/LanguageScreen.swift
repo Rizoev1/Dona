@@ -18,6 +18,8 @@ private final class LanguageViewModel: ObservableObject {
 
     func select(_ code: String) {
         selected = code
+        UserDefaults.standard.set(code, forKey: "appLanguage")
+        invalidateLocalizationCache()
         APIManager.shared.updateProfile(language: code)
             .sink { _ in } receiveValue: { _ in }
             .store(in: &cancellables)
@@ -75,7 +77,7 @@ struct LanguageScreen: View {
             .padding(.horizontal, 16)
         }
         .background(theme.background.surface)
-        .navigationTitle("Language")
+        .navigationTitle("Language".localized)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
