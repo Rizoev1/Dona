@@ -33,7 +33,7 @@ struct ThemeScreen: View {
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                                 .foregroundStyle(theme.stroke.scrim)
-                            Text(mode.title)
+                            Text(mode.title.localized)
                                 .font(AppFont.largeMedium)
                                 .foregroundStyle(theme.text.onSurface)
                             Spacer()

@@ -32,6 +32,7 @@ struct AuthenticatedCoordinator: View {
                 .tabItem { Label("Payments".localized, systemImage: "creditcard.fill") }
                 .tag(2)
         }
+        .id(_language)
         .environmentObject(tabRouter)
     }
 }
