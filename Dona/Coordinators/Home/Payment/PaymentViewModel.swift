@@ -70,9 +70,11 @@ final class PaymentViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
+                    HapticManager.notification(.error)
                     self?.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] _ in
+                HapticManager.notification(.success)
                 self?.isSuccess = true
             }
             .store(in: &cancellables)
@@ -94,9 +96,11 @@ final class PaymentViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
+                    HapticManager.notification(.error)
                     self?.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] _ in
+                HapticManager.notification(.success)
                 self?.isSuccess = true
             }
             .store(in: &cancellables)
@@ -117,9 +121,11 @@ final class PaymentViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
+                    HapticManager.notification(.error)
                     self?.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] _ in
+                HapticManager.notification(.success)
                 self?.isSuccess = true
             }
             .store(in: &cancellables)
@@ -140,9 +146,11 @@ final class PaymentViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
+                    HapticManager.notification(.error)
                     self?.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] _ in
+                HapticManager.notification(.success)
                 self?.isSuccess = true
             }
             .store(in: &cancellables)
@@ -160,6 +168,7 @@ final class PaymentViewModel: ObservableObject {
         APIManager.shared.listPaymentMethods()
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
+                    HapticManager.notification(.error)
                     self?.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] response in

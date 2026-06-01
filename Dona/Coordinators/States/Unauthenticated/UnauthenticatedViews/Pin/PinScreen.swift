@@ -235,6 +235,7 @@ struct PinScreen: View {
     }
 
     private func showError() {
+        HapticManager.notification(.error)
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { isError = true }
 
         let shakes: [(CGFloat, Double)] = [

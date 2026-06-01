@@ -104,9 +104,11 @@ struct ApprovalsScreen: View {
 
             HStack(spacing: 10) {
                 AppButton(title: "Reject".localized, state: .default) {
+                    HapticManager.impact(.medium)
                     viewModel.reject(request)
                 }
                 AppButton(title: "Approve".localized, state: .default) {
+                    HapticManager.notification(.success)
                     viewModel.approve(request)
                 }
             }

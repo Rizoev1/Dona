@@ -25,6 +25,7 @@ struct AppButton: View {
     var body: some View {
         Button {
             guard state == .default || state == .white else { return }
+            HapticManager.impact(.light)
             action()
         } label: {
             ZStack {

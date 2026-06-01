@@ -23,6 +23,7 @@ struct ThemeScreen: View {
             VStack(spacing: 0) {
                 ForEach(Array(ThemeMode.allCases.enumerated()), id: \.offset) { index, mode in
                     Button {
+                        HapticManager.selection()
                         withAnimation(.easeInOut(duration: 0.15)) {
                             themeMode = mode.rawValue
                         }

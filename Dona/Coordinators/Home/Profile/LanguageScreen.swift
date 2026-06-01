@@ -18,6 +18,7 @@ private final class LanguageViewModel: ObservableObject {
 
     func select(_ code: String) {
         selected = code
+        HapticManager.selection()
         UserDefaults.standard.set(code, forKey: "appLanguage")
         invalidateLocalizationCache()
         APIManager.shared.updateProfile(language: code)
