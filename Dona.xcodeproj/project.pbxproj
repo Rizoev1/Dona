@@ -412,8 +412,7 @@
 			children = (
 				84DBE03D2F8E543900B44EA9 /* CardShadow.swift */,
 				84DBE0432F9A000000B44EA9 /* Shimmer.swift */,
-				6EC94E8EA9774570AE263171 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
-		09A2040A789A4090AA6A20FE /* String+Localized.swift */,
+				09A2040A789A4090AA6A20FE /* String+Localized.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
 			);
@@ -820,8 +819,7 @@
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
 				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
-				7E638AF715A947F4A57BE5C0 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC94E8EA9774570AE263171 /* HapticManager.swift */; };
-		F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */,
+				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */,
 				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
