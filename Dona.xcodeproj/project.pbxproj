@@ -817,6 +817,7 @@
 				84D2340B2F86627900C7DE80 /* Token.swift in Sources */,
 				84CE15492F891277000E9552 /* CustomSheet.swift in Sources */,
 				84DBE03E2F8E543900B44EA9 /* CardShadow.swift in Sources */,
+				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */,
 				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
