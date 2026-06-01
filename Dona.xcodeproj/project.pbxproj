@@ -412,6 +412,7 @@
 			children = (
 				84DBE03D2F8E543900B44EA9 /* CardShadow.swift */,
 				84DBE0432F9A000000B44EA9 /* Shimmer.swift */,
+				6EC94E8EA9774570AE263171 /* HapticManager.swift */,
 				09A2040A789A4090AA6A20FE /* String+Localized.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
