@@ -56,6 +56,7 @@ struct VerificationScreen: View {
             .padding(20)
             .background(theme.background.background)
             .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(.horizontal, 4)
 
             Spacer()
         }
