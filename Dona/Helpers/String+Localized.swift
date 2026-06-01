@@ -19,7 +19,7 @@ private final class LocalizationManager {
     private func resolvedLanguage() -> String {
         let stored = UserDefaults.standard.string(forKey: "appLanguage") ?? ""
         if ["en", "ru", "tg"].contains(stored) { return stored }
-        let system = Locale.current.language.languageCode?.identifier ?? "en"
+        let system = Locale.current.languageCode ?? "en"
         return ["en", "ru", "tg"].contains(system) ? system : "en"
     }
 
