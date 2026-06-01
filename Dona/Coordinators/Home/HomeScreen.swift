@@ -247,7 +247,7 @@ struct HomeScreen: View {
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
                 Button {
-                    navigator.push(.services)
+                    tabRouter.selectedTab = 2
                 } label: {
                     HStack(spacing: 5) {
                         Text("View All")

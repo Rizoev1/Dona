@@ -17,7 +17,6 @@ enum HomeRouter: Hashable {
     case home
     case notifications
     case activity
-    case services
     case subServices(title: String)
     case payment(PaymentScreenType)
     case fundSelection(FundSelectionType)
@@ -45,8 +44,6 @@ struct HomeCoordinator: View {
                         NotificationsScreen()
                     case .activity:
                         ActivityScreen()
-                    case .services:
-                        ServicesScreen()
                     case .subServices(let title):
                         SubServicesScreen(title: title) {
                             routes.push(.payment(.services(title: title)))
