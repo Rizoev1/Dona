@@ -26,7 +26,7 @@ struct CommunityFundCard: View {
                         .foregroundStyle(theme.text.onSurface)
                     Text("TJS")
                         .font(AppFont.mediumMedium)
-                        .foregroundStyle(theme.text.onTertiaryContainer)
+                        .foregroundStyle(theme.text.onTertiary)
                 }
             }
             Text(fund.apyFormatted)

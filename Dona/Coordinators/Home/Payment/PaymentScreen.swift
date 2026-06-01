@@ -61,6 +61,20 @@ struct PaymentScreen: View {
 
     let type: PaymentScreenType
 
+    private var isAmountValid: Bool {
+        guard let value = Double(amount), value > 0 else { return false }
+        return true
+    }
+
+    private var buttonState: AppButtonState {
+        isAmountValid ? .default : .disabled
+    }
+
+    private var servicesButtonState: AppButtonState {
+        if viewModel.isLoading { return .loading }
+        return (isAmountValid && phoneNumber.count == 9) ? .default : .disabled
+    }
+
     var body: some View {
         VStack(spacing: 24) {
             switch type {
@@ -106,7 +120,7 @@ struct PaymentScreen: View {
         makeAmountField()
         Spacer()
         makeTopUpCard()
-        AppButton(title: type.buttonTitle, state: .default) {
+        AppButton(title: type.buttonTitle, state: buttonState) {
             viewModel.topUp(amount: amount)
         }
     }
@@ -125,7 +139,7 @@ struct PaymentScreen: View {
             balance: viewModel.walletBalanceFormatted, // вместо "2 145.00 TJS"
             showChange: false
         )
-        AppButton(title: type.buttonTitle, state: .default) {
+        AppButton(title: type.buttonTitle, state: buttonState) {
             viewModel.requestWithdrawal(amount: amount)
         }
     }
@@ -140,7 +154,7 @@ struct PaymentScreen: View {
             name: viewModel.selectedFund?.name ?? "—",
             number: viewModel.selectedFundBalanceFormatted,
             balance: "", showChange: true)
-        AppButton(title: type.buttonTitle, state: .default) {
+        AppButton(title: type.buttonTitle, state: buttonState) {
             viewModel.sendToFund(amount: amount)
         }
     }
@@ -154,7 +168,7 @@ struct PaymentScreen: View {
         }
         makeAmountField()
         Spacer()
-        AppButton(title: type.buttonTitle, state: viewModel.isLoading ? .loading : .default) {
+        AppButton(title: type.buttonTitle, state: servicesButtonState) {
             viewModel.send(phone: phoneNumber, amount: amount)
         }
     }

@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
-import FlowStacks
 
 struct SubServicesScreen: View {
     @Environment(\.theme) private var theme
-    @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
 
     let title: String
+    let onServiceTap: () -> Void
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 12) {
                 ForEach(0 ..< 5, id: \.self) { index in
                     Button {
-                        navigator.push(.payment(.services(title: title)))
+                        onServiceTap()
                     } label: {
                         HStack(spacing: 12) {
                             Image(.tcellMock)
@@ -54,5 +53,5 @@ struct SubServicesScreen: View {
 }
 
 #Preview {
-    SubServicesScreen(title: "")
+    SubServicesScreen(title: "Mobile Top-up") {}
 }

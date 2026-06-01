@@ -74,19 +74,21 @@ extension View {
 struct EmptyStateView: View {
     @Environment(\.theme) private var theme
 
-    let icon: String
+    let icon: Image
     let title: String
     let subtitle: String
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.system(size: 48, weight: .light))
-                .foregroundStyle(theme.text.onTertiaryContainer)
+            icon
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(theme.stroke.scrim)
 
             VStack(spacing: 6) {
                 Text(title)
-                    .font(AppFont.largeSemibold)
+                    .font(AppFont.xLargeBold)
                     .foregroundStyle(theme.text.onSurface)
                 Text(subtitle)
                     .font(AppFont.mediumRegular)
@@ -97,5 +99,11 @@ struct EmptyStateView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 52)
         .padding(.horizontal, 32)
+        .background(
+            Image(.emptyGradient)
+                .resizable()
+                .scaledToFill()
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

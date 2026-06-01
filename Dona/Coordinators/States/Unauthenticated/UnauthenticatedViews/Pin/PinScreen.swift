@@ -26,11 +26,13 @@ struct PinScreen: View {
     }
 
     let mode: PinMode
+    let allowsBiometrics: Bool
     var onForgotPin: (() -> Void)?
     var onSuccess: (() -> Void)?
 
-    init(mode: PinMode, onForgotPin: (() -> Void)? = nil, onSuccess: (() -> Void)? = nil) {
+    init(mode: PinMode, allowsBiometrics: Bool = false, onForgotPin: (() -> Void)? = nil, onSuccess: (() -> Void)? = nil) {
         self.mode = mode
+        self.allowsBiometrics = allowsBiometrics
         self.onForgotPin = onForgotPin
         self.onSuccess = onSuccess
         switch mode {
@@ -128,7 +130,7 @@ struct PinScreen: View {
                                 .frame(height: 80)
                             } else if key.isEmpty {
                                 Group {
-                                    if screenState == .enter && viewModel.biometryType != .none {
+                                    if screenState == .enter && allowsBiometrics && viewModel.biometryType != .none {
                                         Button {
                                             triggerBiometrics()
                                         } label: {
@@ -184,7 +186,7 @@ struct PinScreen: View {
             showError()
         }
         .onAppear {
-            if case .enter = mode {
+            if case .enter = mode, allowsBiometrics {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     triggerBiometrics()
                 }

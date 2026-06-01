@@ -95,13 +95,6 @@ final class APIManager {
             .eraseToAnyPublisher()
     }
 
-    private func requestVoid(_ target: API) -> AnyPublisher<Void, MoyaError> {
-        return networking.provider.requestPublisher(target)
-            .filterSuccessfulStatusCodes()
-            .map { _ in () }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
 }
 
 // MARK: - Auth

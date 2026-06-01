@@ -18,7 +18,7 @@ struct NotificationsScreen: View {
                     notificationSectionSkeleton()
                 } else if !viewModel.isLoading && viewModel.notifications.isEmpty {
                     EmptyStateView(
-                        icon: "bell.slash",
+                        icon: Image(systemName: "bell.slash"),
                         title: "No notifications",
                         subtitle: "You're all caught up! New alerts will appear here"
                     )

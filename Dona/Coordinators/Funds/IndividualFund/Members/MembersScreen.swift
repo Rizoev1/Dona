@@ -22,7 +22,7 @@ struct MembersScreen: View {
                         ForEach(0..<6, id: \.self) { _ in memberSkeleton() }
                     } else if !viewModel.isLoading && viewModel.members.isEmpty {
                         EmptyStateView(
-                            icon: "person.3",
+                            icon: Image(.people),
                             title: "No members yet",
                             subtitle: "Invite people to join this community"
                         )

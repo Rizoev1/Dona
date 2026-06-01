@@ -224,6 +224,16 @@ struct Fund: Decodable, Hashable {
     }
 }
 
+extension Fund: Identifiable {
+    var balanceFormatted: String {
+        String(format: "%.2f", Double(balance) / 100.0)
+    }
+
+    var apyFormatted: String {
+        String(format: "Earns %.1f%% APY", apy)
+    }
+}
+
 struct FundMemberListResponse: Decodable {
     let message: String
     let payload: [FundMember]

@@ -15,16 +15,22 @@ enum AuthenticatedRouter: Hashable {
 }
 
 struct AuthenticatedCoordinator: View {
+    @StateObject private var tabRouter = TabRouter.shared
+
     var body: some View {
-        TabView {
+        TabView(selection: $tabRouter.selectedTab) {
             HomeCoordinator()
                 .tabItem { Label("Home", systemImage: "house.fill") }
+                .tag(0)
 
             FundsCoordinator()
                 .tabItem { Label("Funds", systemImage: "chart.pie.fill") }
+                .tag(1)
 
             PaymentsCoordinator()
                 .tabItem { Label("Payments", systemImage: "creditcard.fill") }
+                .tag(2)
         }
+        .environmentObject(tabRouter)
     }
 }

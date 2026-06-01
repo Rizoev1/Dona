@@ -22,6 +22,8 @@ enum HomeRouter: Hashable {
     case payment(PaymentScreenType)
     case fundSelection(FundSelectionType)
     case profile
+    case language(current: String)
+    case theme
     case fundDetails(fund: Fund)
     case fundActivity(fundId: Int)
     case fundReport(fundId: Int)
@@ -46,13 +48,19 @@ struct HomeCoordinator: View {
                     case .services:
                         ServicesScreen()
                     case .subServices(let title):
-                        SubServicesScreen(title: title)
+                        SubServicesScreen(title: title) {
+                            routes.push(.payment(.services(title: title)))
+                        }
                     case .payment(let type):
                         PaymentScreen(type: type)
                     case .fundSelection(let type):
                         FundSelectionScreen(type: type)
                     case .profile:
                         ProfileScreen()
+                    case .language(let current):
+                        LanguageScreen(current: current)
+                    case .theme:
+                        ThemeScreen()
                     case .fundDetails(let fund):
                         IndividualFundScreen(
                             fund: fund,

@@ -23,7 +23,7 @@ struct ActivityScreen: View {
                     activityGroupSkeleton()
                 } else if !viewModel.isLoading && viewModel.transactions.isEmpty {
                     EmptyStateView(
-                        icon: "clock.arrow.circlepath",
+                        icon: Image(systemName: "clock.arrow.circlepath"),
                         title: "No transactions yet",
                         subtitle: "Your wallet activity will appear here"
                     )

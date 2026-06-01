@@ -43,8 +43,11 @@ final class HomeViewModel: ObservableObject {
     }
 
     private var cancellables = Set<AnyCancellable>()
+    private var hasLoaded = false
 
     func onAppear() {
+        guard !hasLoaded else { return }
+        hasLoaded = true
         loadAll()
     }
 
@@ -153,13 +156,3 @@ extension TransactionListResponse.Transaction: Identifiable {
     }
 }
 
-extension Fund: Identifiable {
-    var balanceFormatted: String {
-        let tjs = Double(balance) / 100.0
-        return String(format: "%.2f", tjs)
-    }
-
-    var apyFormatted: String {
-        String(format: "Earns %.1f%% APY", apy)
-    }
-}

@@ -29,7 +29,7 @@ struct FundsScreen: View {
                     }
                 } else if !viewModel.isLoading && viewModel.funds.isEmpty {
                     EmptyStateView(
-                        icon: "person.3",
+                        icon: Image(.people),
                         title: "No communities yet",
                         subtitle: "Create your first savings community to get started"
                     )
@@ -157,7 +157,7 @@ struct FundsScreen: View {
                                 .foregroundStyle(theme.text.onSurface)
                             Text("TJS")
                                 .font(AppFont.largeMedium)
-                                .foregroundStyle(theme.text.onTertiaryContainer)
+                                .foregroundStyle(theme.text.onTertiary)
                         }
                     }
 

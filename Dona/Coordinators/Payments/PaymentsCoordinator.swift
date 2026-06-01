@@ -8,14 +8,27 @@
 import FlowStacks
 import SwiftUI
 
+enum PaymentsRouter: Hashable {
+    case subServices(title: String)
+    case payment(PaymentScreenType)
+}
+
 struct PaymentsCoordinator: View {
     @State private var routes: Routes<PaymentsRouter> = []
 
     var body: some View {
         FlowStack($routes, withNavigation: true) {
             PaymentsScreen()
+                .flowDestination(for: PaymentsRouter.self) { screen in
+                    switch screen {
+                    case .subServices(let title):
+                        SubServicesScreen(title: title) {
+                            routes.push(.payment(.services(title: title)))
+                        }
+                    case .payment(let type):
+                        PaymentScreen(type: type)
+                    }
+                }
         }
     }
 }
-
-enum PaymentsRouter: Hashable {}

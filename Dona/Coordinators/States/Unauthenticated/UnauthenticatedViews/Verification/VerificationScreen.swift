@@ -23,32 +23,38 @@ struct VerificationScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Spacer().frame(height: 80)
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Enter the SMS code")
-                    .font(AppFont.heading2)
-                    .foregroundStyle(theme.text.onSurface)
-                Text("We sent it to your phone number")
-                    .font(AppFont.largeRegular)
-                    .foregroundStyle(theme.text.onSecondary)
-            }
-            makeCodeField()
 
-            if let error = viewModel.errorMessage {
-                Text(error)
-                    .font(AppFont.mediumRegular)
-                    .foregroundStyle(.red)
-            }
+            VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Enter the SMS code")
+                        .font(AppFont.heading2)
+                        .foregroundStyle(theme.text.onSurface)
+                    Text("We sent it to your phone number")
+                        .font(AppFont.largeRegular)
+                        .foregroundStyle(theme.text.onSecondary)
+                }
+                makeCodeField()
 
-            if viewModel.isResending {
-                ProgressView()
-            } else {
-                Text("Resend code")
-                    .font(AppFont.mediumMedium)
-                    .foregroundStyle(theme.text.primaryContainer)
-                    .onTapGesture {
-                        viewModel.resendOtp()
-                    }
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .font(AppFont.mediumRegular)
+                        .foregroundStyle(theme.text.onErrorContainer)
+                }
+
+                if viewModel.isResending {
+                    ProgressView()
+                } else {
+                    Text("Resend code")
+                        .font(AppFont.mediumMedium)
+                        .foregroundStyle(theme.text.primaryContainer)
+                        .onTapGesture {
+                            viewModel.resendOtp()
+                        }
+                }
             }
+            .padding(20)
+            .background(theme.background.background)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
 
             Spacer()
         }

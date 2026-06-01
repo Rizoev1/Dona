@@ -139,7 +139,7 @@ struct IndividualFundScreen: View {
                                 .foregroundStyle(theme.text.onSurface)
                             Text("TJS")
                                 .font(AppFont.largeMedium)
-                                .foregroundStyle(theme.text.onTertiaryContainer)
+                                .foregroundStyle(theme.text.onTertiary)
                         }
                     }
                 }
@@ -359,7 +359,7 @@ struct IndividualFundScreen: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             } else if viewModel.activity.isEmpty {
                 EmptyStateView(
-                    icon: "clock.arrow.circlepath",
+                    icon: Image(systemName: "clock.arrow.circlepath"),
                     title: "No activity yet",
                     subtitle: "Fund transactions will appear here"
                 )

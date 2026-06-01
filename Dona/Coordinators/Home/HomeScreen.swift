@@ -11,6 +11,7 @@ import FlowStacks
 struct HomeScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject var navigator: FlowNavigator<HomeRouter>
+    @EnvironmentObject private var tabRouter: TabRouter
     @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
@@ -195,33 +196,45 @@ struct HomeScreen: View {
                     .font(AppFont.heading3)
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
-                HStack(spacing: 5) {
-                    Text("View All")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                    Image(.arrowRight)
-                        .resizable()
-                        .frame(width: 12, height: 12)
+                Button { tabRouter.selectedTab = 1 } label: {
+                    HStack(spacing: 5) {
+                        Text("View All")
+                            .font(AppFont.smallRegular)
+                            .foregroundStyle(theme.text.onTertiary)
+                        Image(.arrowRight)
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .foregroundStyle(theme.text.onTertiary)
+                    }
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 8)
+                    .background(theme.background.background)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-                .padding(.vertical, 3)
-                .padding(.horizontal, 8)
-                .background(theme.background.background)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             .padding(.horizontal, 12)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(viewModel.funds) { fund in
-                        Button {
-                            navigator.push(.fundDetails(fund: fund))
-                        } label: {
-                            CommunityFundCard(fund: fund)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
+
+            if viewModel.funds.isEmpty {
+                EmptyStateView(
+                    icon: Image(.people),
+                    title: "No communities yet",
+                    subtitle: "Join or create a fund to see it here"
+                )
                 .padding(.horizontal, 12)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(viewModel.funds) { fund in
+                            Button {
+                                navigator.push(.fundDetails(fund: fund))
+                            } label: {
+                                CommunityFundCard(fund: fund)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                }
             }
         }
     }
@@ -289,41 +302,49 @@ struct HomeScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
             }
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(Array(viewModel.topRecentActivity.enumerated()), id: \.element.id) { index, activity in
-                    HStack(spacing: 12) {
-                        Image(.amazonMock)
-                            .resizable()
-                            .frame(width: 36, height: 36)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Community name")
-                                .font(AppFont.mediumMedium)
-                                .foregroundStyle(theme.text.onSurface)
-                            Text(activity.typeLabel)
-                                .font(AppFont.mediumRegular)
-                                .foregroundStyle(theme.text.onTertiary)
+            if viewModel.topRecentActivity.isEmpty {
+                EmptyStateView(
+                    icon: Image(systemName: "clock.arrow.circlepath"),
+                    title: "No transactions yet",
+                    subtitle: "Your recent activity will appear here"
+                )
+            } else {
+                VStack(alignment: .leading, spacing: 12) {
+                    ForEach(Array(viewModel.topRecentActivity.enumerated()), id: \.element.id) { index, activity in
+                        HStack(spacing: 12) {
+                            Image(.amazonMock)
+                                .resizable()
+                                .frame(width: 36, height: 36)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Community name")
+                                    .font(AppFont.mediumMedium)
+                                    .foregroundStyle(theme.text.onSurface)
+                                Text(activity.typeLabel)
+                                    .font(AppFont.mediumRegular)
+                                    .foregroundStyle(theme.text.onTertiary)
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing, spacing: 4) {
+                                Text(activity.amountFormatted)
+                                    .font(AppFont.mediumMedium)
+                                    .foregroundStyle(activity.isIncoming ? theme.text.foregroundSuccess1 : theme.text.onErrorContainer)
+                                Text(activity.shortDate)
+                                    .font(AppFont.mediumRegular)
+                                    .foregroundStyle(theme.text.onTertiary)
+                            }
                         }
-                        Spacer()
-                        VStack(alignment: .trailing, spacing: 4) {
-                            Text(activity.amountFormatted)
-                                .font(AppFont.mediumMedium)
-                                .foregroundStyle(activity.isIncoming ? theme.text.foregroundSuccess1 : theme.text.onErrorContainer)
-                            Text(activity.shortDate)
-                                .font(AppFont.mediumRegular)
-                                .foregroundStyle(theme.text.onTertiary)
+                        if index < viewModel.topRecentActivity.count - 1 {
+                            Divider()
+                                .padding(.leading, 48)
                         }
-                    }
-                    if index < viewModel.topRecentActivity.count - 1 {
-                        Divider()
-                            .padding(.leading, 48)
                     }
                 }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 26)
+                .background(theme.background.background)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .cardShadow()
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 26)
-            .background(theme.background.background)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .cardShadow()
         }
     }
 

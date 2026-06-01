@@ -23,7 +23,7 @@ struct ApprovalsScreen: View {
                     withdrawalSkeleton()
                 } else if !viewModel.isLoading && viewModel.withdrawals.isEmpty {
                     EmptyStateView(
-                        icon: "checkmark.circle",
+                        icon: Image(systemName: "checkmark.circle"),
                         title: "No pending approvals",
                         subtitle: "All withdrawal requests have been reviewed"
                     )

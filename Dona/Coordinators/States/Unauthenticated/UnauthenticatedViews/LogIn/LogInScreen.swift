@@ -17,59 +17,65 @@ struct LogInScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Spacer().frame(height: 80)
-            HStack(spacing: 12) {
-                Image(.appLogo)
-                    .resizable()
-                    .frame(width: 28, height: 28)
-                Text("Logo")
-                    .font(AppFont.heading4)
-                    .foregroundStyle(theme.text.onSurface)
-            }
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Login or Sign up")
-                    .font(AppFont.heading2)
-                    .foregroundStyle(theme.text.onSurface)
-                Text("Enter your phone number")
-                    .font(AppFont.largeRegular)
-                    .foregroundStyle(theme.text.onSecondary)
-            }
 
-            HStack(spacing: 0) {
-                Text("+992 ")
-                    .font(AppFont.mediumMedium)
-                    .foregroundStyle(theme.text.onSurface)
-                    .padding(.leading, 16)
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(spacing: 12) {
+                    Image(.appLogo)
+                        .resizable()
+                        .frame(width: 28, height: 28)
+                    Text("Logo")
+                        .font(AppFont.heading4)
+                        .foregroundStyle(theme.text.onSurface)
+                }
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Login or Sign up")
+                        .font(AppFont.heading2)
+                        .foregroundStyle(theme.text.onSurface)
+                    Text("Enter your phone number")
+                        .font(AppFont.largeRegular)
+                        .foregroundStyle(theme.text.onSecondary)
+                }
 
-                TextField("", text: $phoneNumber)
-                    .font(AppFont.mediumMedium)
-                    .foregroundStyle(theme.text.onSurface)
-                    .keyboardType(.numberPad)
-                    .padding(.vertical, 17)
-                    .onChange(of: phoneNumber) { newValue in
-                        phoneNumber = format(newValue)
-                    }
-            }
-            .frame(height: 56)
-            .background(theme.background.secondaryContainer)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+                HStack(spacing: 0) {
+                    Text("+992 ")
+                        .font(AppFont.mediumMedium)
+                        .foregroundStyle(theme.text.onSurface)
+                        .padding(.leading, 16)
 
-            if let error = viewModel.errorMessage {
-                Text(error)
-                    .font(AppFont.mediumRegular)
-                    .foregroundStyle(.red)
-            }
+                    TextField("", text: $phoneNumber)
+                        .font(AppFont.mediumMedium)
+                        .foregroundStyle(theme.text.onSurface)
+                        .keyboardType(.numberPad)
+                        .padding(.vertical, 17)
+                        .onChange(of: phoneNumber) { newValue in
+                            phoneNumber = format(newValue)
+                        }
+                }
+                .frame(height: 56)
+                .background(theme.background.secondaryContainer)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            Group {
-                Text("By continuing, you agree to the ")
-                    .foregroundColor(theme.text.onSecondary)
-                + Text("Terms of Use")
-                    .foregroundColor(theme.text.primaryContainer)
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .font(AppFont.mediumRegular)
+                        .foregroundStyle(theme.text.onErrorContainer)
+                }
+
+                Group {
+                    Text("By continuing, you agree to the ")
+                        .foregroundColor(theme.text.onSecondary)
+                    + Text("Terms of Use")
+                        .foregroundColor(theme.text.primaryContainer)
+                }
+                .font(AppFont.mediumRegular)
+                .multilineTextAlignment(.center)
+                .onTapGesture {
+                    // открыть Terms of Use
+                }
             }
-            .font(AppFont.mediumRegular)
-            .multilineTextAlignment(.center)
-            .onTapGesture {
-                // открыть Terms of Use
-            }
+            .padding(20)
+            .background(theme.background.background)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
 
             Spacer()
 

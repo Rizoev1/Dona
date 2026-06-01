@@ -20,6 +20,7 @@ struct AppCoordinator: View {
         case .pendingPin:
             PinScreen(
                 mode: .enter,
+                allowsBiometrics: true,
                 onForgotPin: {
                     KeychainService.shared.clear()
                     AuthenticationService.shared.status = .unauthenticated

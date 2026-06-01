@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B3F73C52F8A834500406292 /* PinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73C42F8A834500406292 /* PinScreen.swift */; };
 		4B3F73D62F8A8B8F00406292 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73D52F8A8B8F00406292 /* AuthenticationService.swift */; };
+		50966E92ECCF44DCB045AF4D /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131DA7C187714EC490B2D93C /* TabRouter.swift */; };
 		4B3F73DA2F8A8D9200406292 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73D92F8A8D9200406292 /* AppCoordinator.swift */; };
 		4B3F73DC2F8A8DBA00406292 /* UnauthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73DB2F8A8DBA00406292 /* UnauthenticatedCoordinator.swift */; };
 		4B3F73DF2F8A8F1C00406292 /* AuthenticatedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73DE2F8A8F1C00406292 /* AuthenticatedCoordinator.swift */; };
@@ -35,6 +36,8 @@
 		84C0EB042FA2201F00373558 /* FundCommunityRulesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */; };
 		84C0EB062FA22B7300373558 /* FundMemberInvitationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */; };
 		84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */; };
+		23EAFFD805BE4842871F0EBA /* LanguageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3790D88124EC4EE6B8348980 /* LanguageScreen.swift */; };
+		8311FF3A2F5A48528A50FB14 /* ThemeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2563E7D45EC45548A9E572D /* ThemeScreen.swift */; };
 		84CE15432F890F59000E9552 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15422F890F59000E9552 /* AppButton.swift */; };
 		84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */; };
 		84CE15492F891277000E9552 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15482F891277000E9552 /* CustomSheet.swift */; };
@@ -104,6 +107,7 @@
 /* Begin PBXFileReference section */
 		4B3F73C42F8A834500406292 /* PinScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinScreen.swift; sourceTree = "<group>"; };
 		4B3F73D52F8A8B8F00406292 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		131DA7C187714EC490B2D93C /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
 		4B3F73D92F8A8D9200406292 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		4B3F73DB2F8A8DBA00406292 /* UnauthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthenticatedCoordinator.swift; sourceTree = "<group>"; };
 		4B3F73DE2F8A8F1C00406292 /* AuthenticatedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedCoordinator.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 		84C0EB032FA2201F00373558 /* FundCommunityRulesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundCommunityRulesScreen.swift; sourceTree = "<group>"; };
 		84C0EB052FA22B7300373558 /* FundMemberInvitationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundMemberInvitationScreen.swift; sourceTree = "<group>"; };
 		84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		3790D88124EC4EE6B8348980 /* LanguageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageScreen.swift; sourceTree = "<group>"; };
+		C2563E7D45EC45548A9E572D /* ThemeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeScreen.swift; sourceTree = "<group>"; };
 		84CE15422F890F59000E9552 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBackgroundModifier.swift; sourceTree = "<group>"; };
 		84CE15482F891277000E9552 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
@@ -235,6 +241,7 @@
 			children = (
 				4B3F73D52F8A8B8F00406292 /* AuthenticationService.swift */,
 				84D5FF392FAB65D30033A8BD /* KeychainService.swift */,
+				131DA7C187714EC490B2D93C /* TabRouter.swift */,
 			);
 			path = AppServices;
 			sourceTree = "<group>";
@@ -365,6 +372,8 @@
 			children = (
 				84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */,
 				4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */,
+				3790D88124EC4EE6B8348980 /* LanguageScreen.swift */,
+				C2563E7D45EC45548A9E572D /* ThemeScreen.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -763,6 +772,7 @@
 				84C00EB12F92564600E6771B /* RequestStatusSheet.swift in Sources */,
 				84D5FF3D2FAB68910033A8BD /* ResponseModels.swift in Sources */,
 				4B3F73D62F8A8B8F00406292 /* AuthenticationService.swift in Sources */,
+				50966E92ECCF44DCB045AF4D /* TabRouter.swift in Sources */,
 				84D233F12F865BC800C7DE80 /* LanguageOnboardingScreen.swift in Sources */,
 				84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */,
 				84C0EB022FA21B0E00373558 /* FundAmountSetting.swift in Sources */,
@@ -776,6 +786,8 @@
 				84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */,
 				84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */,
 				84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */,
+				23EAFFD805BE4842871F0EBA /* LanguageScreen.swift in Sources */,
+				8311FF3A2F5A48528A50FB14 /* ThemeScreen.swift in Sources */,
 				84D234082F865F8800C7DE80 /* AppFont.swift in Sources */,
 				84D5FF172FAA0EE00033A8BD /* MembersScreen.swift in Sources */,
 				84007D222FA0CE2D0042708A /* StepProgressBar.swift in Sources */,

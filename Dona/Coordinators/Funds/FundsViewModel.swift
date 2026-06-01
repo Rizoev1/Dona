@@ -13,8 +13,11 @@ final class FundsViewModel: ObservableObject {
     @Published var errorMessage: String?
 
     private var cancellables = Set<AnyCancellable>()
+    private var hasLoaded = false
 
     func onAppear() {
+        guard !hasLoaded else { return }
+        hasLoaded = true
         isLoading = true
         APIManager.shared.listFunds()
             .sink { [weak self] completion in

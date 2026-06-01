@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import FlowStacks
 
 struct ProfileScreen: View {
     @Environment(\.theme) private var theme
+    @EnvironmentObject private var navigator: FlowNavigator<HomeRouter>
     @StateObject private var viewModel = ProfileViewModel()
     @State private var isEditSheetPresented = false
     @State private var editName: String = ""
@@ -72,7 +74,7 @@ struct ProfileScreen: View {
             }
             Divider().padding(.leading, 48)
             Button {
-                viewModel.updateLanguage("en")
+                navigator.push(.language(current: viewModel.currentLanguage))
             } label: {
                 HStack(spacing: 12) {
                     Image(.languageCircle)
@@ -85,9 +87,6 @@ struct ProfileScreen: View {
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
-                    Text(viewModel.currentLanguage)
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
                     Image(.right)
                         .resizable()
                         .frame(width: 16, height: 16)
@@ -95,7 +94,9 @@ struct ProfileScreen: View {
                 }
             }
             Divider().padding(.leading, 48)
-            Button {} label: {
+            Button {
+                navigator.push(.theme)
+            } label: {
                 HStack(spacing: 12) {
                     Image(.moon)
                         .resizable()

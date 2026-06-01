@@ -20,7 +20,7 @@ struct FundReportScreen: View {
                     makeReportCard(report)
                 } else if let error = viewModel.errorMessage {
                     EmptyStateView(
-                        icon: "exclamationmark.triangle",
+                        icon: Image(systemName: "exclamationmark.triangle"),
                         title: "Failed to load report",
                         subtitle: error
                     )
@@ -37,21 +37,21 @@ struct FundReportScreen: View {
     @ViewBuilder func makeReportCard(_ report: ReportResponse.Report) -> some View {
         VStack(spacing: 1) {
             makeRow(
-                icon: "arrow.down.circle.fill",
+                icon: Image(systemName: "arrow.down.circle.fill"),
                 iconColor: theme.text.foregroundSuccess1,
                 title: "Total Contributions",
                 value: formatAmount(report.contributions),
                 valueColor: theme.text.foregroundSuccess1
             )
             makeRow(
-                icon: "arrow.up.circle.fill",
+                icon: Image(systemName: "arrow.up.circle.fill"),
                 iconColor: theme.text.onErrorContainer,
                 title: "Total Disbursements",
                 value: formatAmount(report.disbursements),
                 valueColor: theme.text.onErrorContainer
             )
             makeRow(
-                icon: "chart.line.uptrend.xyaxis",
+                icon: Image(systemName: "chart.line.uptrend.xyaxis"),
                 iconColor: theme.stroke.scrim,
                 title: "Net Growth",
                 value: formatAmount(report.netGrowth),
@@ -60,7 +60,7 @@ struct FundReportScreen: View {
                     : theme.text.onErrorContainer
             )
             makeRow(
-                icon: "percent",
+                icon: Image(systemName: "percent"),
                 iconColor: theme.text.foregroundWarning1,
                 title: "Growth",
                 value: String(format: "%.2f%%", report.growthPercent),
@@ -75,7 +75,7 @@ struct FundReportScreen: View {
     }
 
     @ViewBuilder func makeRow(
-        icon: String,
+        icon: Image,
         iconColor: Color,
         title: String,
         value: String,
@@ -84,7 +84,7 @@ struct FundReportScreen: View {
     ) -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
-                Image(systemName: icon)
+                icon
                     .font(.system(size: 18))
                     .foregroundStyle(iconColor)
                     .frame(width: 20)

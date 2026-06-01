@@ -28,7 +28,7 @@ struct FundSelectionScreen: View {
                     ForEach(0..<3, id: \.self) { _ in makeFundCardSkeleton() }
                 } else if !viewModel.isLoading && viewModel.funds.isEmpty {
                     EmptyStateView(
-                        icon: "person.3",
+                        icon: Image(.people),
                         title: "No communities",
                         subtitle: "You don't belong to any savings community yet"
                     )

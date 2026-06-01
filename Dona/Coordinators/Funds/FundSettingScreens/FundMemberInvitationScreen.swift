@@ -48,7 +48,7 @@ struct FundMemberInvitationScreen: View {
                     makePermissionDenied()
                 } else if viewModel.filteredContacts.isEmpty {
                     EmptyStateView(
-                        icon: "person.2",
+                        icon: Image(.people),
                         title: viewModel.searchQuery.isEmpty ? "No contacts" : "No results",
                         subtitle: viewModel.searchQuery.isEmpty
                             ? "No contacts available to invite"

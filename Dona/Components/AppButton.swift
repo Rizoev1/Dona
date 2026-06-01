@@ -47,9 +47,7 @@ struct AppButton: View {
                     theme.background.background
                 } else {
                     LinearGradient(
-                        colors: state == .disabled
-                            ? [Color(hex: "#9E9EA7"), Color(hex: "#9E9EA7")]
-                            : [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
+                        colors: [Color(hex: "#2A8AE4"), Color(hex: "#3A49F9")],
                         startPoint: .trailing,
                         endPoint: .leading
                     )
@@ -57,6 +55,7 @@ struct AppButton: View {
             }
             .clipShape(RoundedRectangle(cornerRadius: 40))
         }
+        .opacity(state == .disabled ? 0.4 : 1.0)
         .disabled(state == .disabled || state == .loading)
         .animation(.easeInOut(duration: 0.2), value: state)
     }
