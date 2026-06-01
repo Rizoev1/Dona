@@ -167,9 +167,9 @@
 		84D5FF402FAB695E0033A8BD /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
 		84DBE03D2F8E543900B44EA9 /* CardShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardShadow.swift; sourceTree = "<group>"; };
 		09A2040A789A4090AA6A20FE /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
-		1613F2D445B64DB28DB26039 /* en.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en.strings; path = Localization/en.strings; sourceTree = "<group>"; };
-		B15FE5455C9C4B968BF227A3 /* ru.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru.strings; path = Localization/ru.strings; sourceTree = "<group>"; };
-		ED050E2664B145EBB4E5B86B /* tg.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tg.strings; path = Localization/tg.strings; sourceTree = "<group>"; };
+		1613F2D445B64DB28DB26039 /* en.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en.strings; path = en.strings; sourceTree = "<group>"; };
+		B15FE5455C9C4B968BF227A3 /* ru.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru.strings; path = ru.strings; sourceTree = "<group>"; };
+		ED050E2664B145EBB4E5B86B /* tg.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tg.strings; path = tg.strings; sourceTree = "<group>"; };
 		84DBE0432F9A000000B44EA9 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFundCard.swift; sourceTree = "<group>"; };
 		84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPayCard.swift; sourceTree = "<group>"; };
