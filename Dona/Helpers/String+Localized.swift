@@ -24,12 +24,11 @@ private final class LocalizationManager {
     }
 
     private func load(_ lang: String) {
-        guard let url = Bundle.main.url(
-            forResource: lang,
-            withExtension: "strings",
-            subdirectory: "Localization"
-        ),
-        let dict = NSDictionary(contentsOf: url) as? [String: String] else {
+        // Groups copy files flat into the bundle; try without subdirectory first
+        let url = Bundle.main.url(forResource: lang, withExtension: "strings")
+            ?? Bundle.main.url(forResource: lang, withExtension: "strings", subdirectory: "Localization")
+        guard let url,
+              let dict = NSDictionary(contentsOf: url) as? [String: String] else {
             cache[lang] = [:]
             return
         }
