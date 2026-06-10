@@ -135,12 +135,17 @@ extension APIManager {
     func updateProfile(
         fullName: String? = nil,
         email: String? = nil,
-        language: String? = nil
+        language: String? = nil,
+        avatarUrl: String? = nil
     ) -> AnyPublisher<MessageResponse, MoyaError> {
         requestObject(
-            .updateProfile(fullName: fullName, email: email, language: language),
+            .updateProfile(fullName: fullName, email: email, language: language, avatarUrl: avatarUrl),
             type: MessageResponse.self
         )
+    }
+
+    func uploadAvatar(imageData: Data) -> AnyPublisher<UploadAvatarResponse, MoyaError> {
+        requestObject(.uploadAvatar(imageData: imageData), type: UploadAvatarResponse.self)
     }
 }
 
@@ -190,8 +195,13 @@ extension APIManager {
 // MARK: - Funds
 
 extension APIManager {
-    func createFund(name: String, apy: Double? = nil) -> AnyPublisher<FundResponse, MoyaError> {
-        requestObject(.createFund(name: name, apy: apy), type: FundResponse.self)
+    func createFund(
+        name: String,
+        apy: Double? = nil,
+        generalRules: String? = nil,
+        logoUrl: String? = nil
+    ) -> AnyPublisher<FundResponse, MoyaError> {
+        requestObject(.createFund(name: name, apy: apy, generalRules: generalRules, logoUrl: logoUrl), type: FundResponse.self)
     }
 
     func listFunds() -> AnyPublisher<FundListResponse, MoyaError> {
@@ -259,6 +269,30 @@ extension APIManager {
 
     func markNotificationRead(id: Int) -> AnyPublisher<MessageResponse, MoyaError> {
         requestObject(.markNotificationRead(id: id), type: MessageResponse.self)
+    }
+}
+
+// MARK: - Services
+
+extension APIManager {
+    func listServices() -> AnyPublisher<ServiceListResponse, MoyaError> {
+        requestObject(.listServices, type: ServiceListResponse.self)
+    }
+
+    func listSubServices(serviceId: Int) -> AnyPublisher<SubServiceListResponse, MoyaError> {
+        requestObject(.listSubServices(serviceId: serviceId), type: SubServiceListResponse.self)
+    }
+
+    func payService(
+        serviceId: Int,
+        subServiceId: Int,
+        account: String,
+        amount: Int
+    ) -> AnyPublisher<TransactionResponse, MoyaError> {
+        requestObject(
+            .payService(serviceId: serviceId, subServiceId: subServiceId, account: account, amount: amount),
+            type: TransactionResponse.self
+        )
     }
 }
 

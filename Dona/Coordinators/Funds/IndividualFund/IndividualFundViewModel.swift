@@ -8,7 +8,7 @@ import Combine
 
 @MainActor
 final class IndividualFundViewModel: ObservableObject {
-    @Published var activity: [TransactionListResponse.Transaction] = []
+    @Published var activity: [Transaction] = []
     @Published var members: [FundMemberListResponse.FundMember] = []
     @Published var pendingWithdrawals: Int = 0
     @Published var isLoadingActivity = false

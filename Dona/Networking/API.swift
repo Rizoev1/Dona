@@ -14,7 +14,7 @@ enum API {
     case sendOtp(phone: String)
     case verifyOtp(phone: String, code: String)
     case getProfile
-    case updateProfile(fullName: String?, email: String?, language: String?)
+    case updateProfile(fullName: String?, email: String?, language: String?, avatarUrl: String?)
     case getWallet
     case topUpWallet(paymentMethodId: Int, amount: Int)
     case sendWallet(phone: String, amount: Int)
@@ -22,7 +22,11 @@ enum API {
     case listPaymentMethods
     case addPaymentMethod(cardSuffix: String, cardType: String, balance: Int?)
     case deletePaymentMethod(id: Int)
-    case createFund(name: String, apy: Double?)
+    case uploadAvatar(imageData: Data)
+    case createFund(name: String, apy: Double?, generalRules: String?, logoUrl: String?)
+    case listServices
+    case listSubServices(serviceId: Int)
+    case payService(serviceId: Int, subServiceId: Int, account: String, amount: Int)
     case listFunds
     case getFund(id: Int)
     case listFundMembers(fundId: Int)
@@ -54,6 +58,8 @@ extension API: TargetType {
             return "/auth/otp/verify"
         case .getProfile, .updateProfile:
             return "/profile"
+        case .uploadAvatar:
+            return "/profile/avatar"
         case .getWallet:
             return "/wallet"
         case .topUpWallet:
@@ -66,6 +72,12 @@ extension API: TargetType {
             return "/payment-methods"
         case .deletePaymentMethod(let id):
             return "/payment-methods/\(id)"
+        case .listServices:
+            return "/services"
+        case .listSubServices(let serviceId):
+            return "/services/\(serviceId)/sub-services"
+        case .payService:
+            return "/services/pay"
         case .createFund, .listFunds:
             return "/funds"
         case .getFund(let id):
@@ -107,11 +119,13 @@ extension API: TargetType {
         switch self {
         case .getProfile, .getWallet, .getWalletActivity, .listPaymentMethods,
              .listFunds, .getFund, .listFundMembers, .getFundActivity,
-             .getFundReport, .listWithdrawals, .listNotifications, .ping:
+             .getFundReport, .listWithdrawals, .listNotifications, .listServices,
+             .listSubServices, .ping:
             return .get
 
         case .sendOtp, .verifyOtp, .topUpWallet, .sendWallet, .addPaymentMethod,
-             .createFund, .inviteFundMember, .topUpFund, .createWithdrawal, .setPin, .verifyPin, .refreshTokens, .logout:
+             .createFund, .inviteFundMember, .topUpFund, .createWithdrawal, .setPin,
+             .verifyPin, .refreshTokens, .logout, .uploadAvatar, .payService:
             return .post
 
         case .updateProfile, .approveWithdrawal, .rejectWithdrawal:
@@ -132,9 +146,9 @@ extension API: TargetType {
         switch self {
         case .getProfile, .getWallet, .getWalletActivity, .listPaymentMethods,
              .listFunds, .getFund, .listFundMembers, .getFundActivity,
-             .getFundReport, .listWithdrawals, .listNotifications,
-             .deletePaymentMethod, .approveWithdrawal, .rejectWithdrawal,
-             .markNotificationRead, .ping:
+             .getFundReport, .listWithdrawals, .listNotifications, .listServices,
+             .listSubServices, .deletePaymentMethod, .approveWithdrawal,
+             .rejectWithdrawal, .markNotificationRead, .ping:
             return .requestPlain
 
         case let .sendOtp(phone):
@@ -149,12 +163,17 @@ extension API: TargetType {
                 encoding: jsonEncoding
             )
 
-        case let .updateProfile(fullName, email, language):
+        case let .updateProfile(fullName, email, language, avatarUrl):
             var params: [String: Any] = [:]
             if let fullName { params["full_name"] = fullName }
             if let email { params["email"] = email }
             if let language { params["language"] = language }
+            if let avatarUrl { params["avatar_url"] = avatarUrl }
             return params.isEmpty ? .requestPlain : .requestParameters(parameters: params, encoding: jsonEncoding)
+
+        case let .uploadAvatar(imageData):
+            let formData = MultipartFormData(provider: .data(imageData), name: "avatar", fileName: "avatar.jpg", mimeType: "image/jpeg")
+            return .uploadMultipart([formData])
 
         case let .topUpWallet(paymentMethodId, amount):
             return .requestParameters(
@@ -173,10 +192,18 @@ extension API: TargetType {
             if let balance { params["balance"] = balance }
             return .requestParameters(parameters: params, encoding: jsonEncoding)
 
-        case let .createFund(name, apy):
+        case let .createFund(name, apy, generalRules, logoUrl):
             var params: [String: Any] = ["name": name]
             if let apy { params["apy"] = apy }
+            if let generalRules { params["general_rules"] = generalRules }
+            if let logoUrl { params["logo_url"] = logoUrl }
             return .requestParameters(parameters: params, encoding: jsonEncoding)
+
+        case let .payService(serviceId, subServiceId, account, amount):
+            return .requestParameters(
+                parameters: ["service_id": serviceId, "sub_service_id": subServiceId, "account": account, "amount": amount],
+                encoding: jsonEncoding
+            )
 
         case let .inviteFundMember(_, phone):
             return .requestParameters(
@@ -222,7 +249,12 @@ extension API: TargetType {
     }
 
     var headers: [String: String]? {
-        return ["Content-Type": "application/json"]
+        switch self {
+        case .uploadAvatar:
+            return nil
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
 
     var validationType: ValidationType {

@@ -9,7 +9,7 @@ import FlowStacks
 import SwiftUI
 
 enum PaymentsRouter: Hashable {
-    case subServices(title: String)
+    case subServices(serviceId: Int, title: String)
     case payment(PaymentScreenType)
 }
 
@@ -21,9 +21,9 @@ struct PaymentsCoordinator: View {
             PaymentsScreen()
                 .flowDestination(for: PaymentsRouter.self) { screen in
                     switch screen {
-                    case .subServices(let title):
-                        SubServicesScreen(title: title) {
-                            routes.push(.payment(.services(title: title)))
+                    case .subServices(let serviceId, let title):
+                        SubServicesScreen(serviceId: serviceId, title: title) { subService in
+                            routes.push(.payment(.services(serviceId: subService.serviceId, subServiceId: subService.id, title: title)))
                         }
                     case .payment(let type):
                         PaymentScreen(type: type)

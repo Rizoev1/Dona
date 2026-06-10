@@ -15,7 +15,7 @@ final class HomeViewModel: ObservableObject {
     @Published var profile: ProfileResponse.Profile?
     @Published var wallet: WalletResponse.Wallet?
     @Published var funds: [Fund] = []
-    @Published var recentActivity: [TransactionListResponse.Transaction] = []
+    @Published var recentActivity: [Transaction] = []
 
     @Published var isLoadingWallet = false
     @Published var isLoadingFunds = false
@@ -38,7 +38,7 @@ final class HomeViewModel: ObservableObject {
         wallet.map { "•• \($0.cardSuffix)" } ?? "—"
     }
 
-    var topRecentActivity: [TransactionListResponse.Transaction] {
+    var topRecentActivity: [Transaction] {
         Array(recentActivity.prefix(3))
     }
 
@@ -117,7 +117,7 @@ final class HomeViewModel: ObservableObject {
     }
 }
 
-extension TransactionListResponse.Transaction: Identifiable {
+extension Transaction: Identifiable {
 
     var isIncoming: Bool {
         type == .topup || type == .disbursement
@@ -131,10 +131,11 @@ extension TransactionListResponse.Transaction: Identifiable {
 
     var typeLabel: String {
         switch type {
-        case .topup:        return "Top up"
-        case .send:         return "Sent"
-        case .contribution: return "Monthly Contribution"
-        case .disbursement: return "Received"
+        case .topup:          return "Top up"
+        case .send:           return "Sent"
+        case .contribution:   return "Monthly Contribution"
+        case .disbursement:   return "Received"
+        case .servicePayment: return "Service Payment"
         }
     }
 

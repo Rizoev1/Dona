@@ -12,14 +12,14 @@ enum PaymentScreenType: Hashable {
     case topUp
     case request(fund: Fund)
     case send(fund: Fund)
-    case services(title: String)
+    case services(serviceId: Int, subServiceId: Int, title: String)
 
     var navigationTitle: String {
         switch self {
         case .topUp: return "Top Up"
         case .request(_): return "Request"
         case .send(_): return "Send"
-        case .services(let title): return title
+        case .services(_, _, let title): return title
         }
     }
 
@@ -28,7 +28,7 @@ enum PaymentScreenType: Hashable {
         case .topUp: return "Top Up"
         case .request(_): return "Continue"
         case .send(_): return "Send"
-        case .services(_): return "Top-up"
+        case .services: return "Top-up"
         }
     }
 
@@ -170,7 +170,7 @@ struct PaymentScreen: View {
         makeAmountField()
         Spacer()
         AppButton(title: type.buttonTitle, state: servicesButtonState) {
-            viewModel.send(phone: phoneNumber, amount: amount)
+            viewModel.payService(account: phoneNumber, amount: amount)
         }
     }
     

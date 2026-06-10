@@ -9,7 +9,7 @@ import Moya
 
 @MainActor
 final class ActivityViewModel: ObservableObject {
-    @Published var transactions: [TransactionListResponse.Transaction] = []
+    @Published var transactions: [Transaction] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 
@@ -47,11 +47,11 @@ final class ActivityViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    var groupedByDate: [(title: String, date: Date?, transactions: [TransactionListResponse.Transaction])] {
+    var groupedByDate: [(title: String, date: Date?, transactions: [Transaction])] {
         let fmt = DateFormatter()
         fmt.dateFormat = "dd.MM.yyyy"
 
-        var groups: [(title: String, date: Date?, transactions: [TransactionListResponse.Transaction])] = []
+        var groups: [(title: String, date: Date?, transactions: [Transaction])] = []
         var seen: [String: Int] = [:]
 
         for tx in transactions {

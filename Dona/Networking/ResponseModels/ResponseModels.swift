@@ -105,43 +105,51 @@ struct WalletResponse: Decodable {
     }
 }
 
+enum TransactionType: String, Decodable {
+    case topup          = "topup"
+    case send           = "send"
+    case contribution   = "contribution"
+    case disbursement   = "disbursement"
+    case servicePayment = "service_payment"
+}
+
+struct Transaction: Decodable {
+    let id: Int
+    let type: TransactionType
+    /// Сумма в дирамах
+    let amount: Int
+    let fee: Int
+    let senderType: String
+    let senderId: Int
+    let receiverType: String
+    let receiverId: Int
+    let description: String
+    let iconUrl: String?
+    let createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case amount
+        case fee
+        case senderType   = "sender_type"
+        case senderId     = "sender_id"
+        case receiverType = "receiver_type"
+        case receiverId   = "receiver_id"
+        case description
+        case iconUrl      = "icon_url"
+        case createdAt    = "created_at"
+    }
+}
+
+struct TransactionResponse: Decodable {
+    let message: String
+    let payload: Transaction
+}
+
 struct TransactionListResponse: Decodable {
     let message: String
     let payload: [Transaction]
-
-    struct Transaction: Decodable {
-        let id: Int
-        let type: TransactionType
-        /// Сумма в дирамах
-        let amount: Int
-        let fee: Int
-        let senderType: String
-        let senderId: Int
-        let receiverType: String
-        let receiverId: Int
-        let description: String
-        let createdAt: String
-
-        enum CodingKeys: String, CodingKey {
-            case id
-            case type
-            case amount
-            case fee
-            case senderType   = "sender_type"
-            case senderId     = "sender_id"
-            case receiverType = "receiver_type"
-            case receiverId   = "receiver_id"
-            case description
-            case createdAt    = "created_at"
-        }
-    }
-
-    enum TransactionType: String, Decodable {
-        case topup        = "topup"
-        case send         = "send"
-        case contribution = "contribution"
-        case disbursement = "disbursement"
-    }
 }
 
 // ─────────────────────────────────────────────
@@ -205,6 +213,8 @@ struct Fund: Decodable, Hashable {
     let balance: Int
     let apy: Double
     let status: String
+    let generalRules: String?
+    let logoUrl: String?
     let memberCount: Int
     let role: FundRole
 
@@ -214,7 +224,9 @@ struct Fund: Decodable, Hashable {
         case balance
         case apy
         case status
-        case memberCount = "member_count"
+        case generalRules = "general_rules"
+        case logoUrl      = "logo_url"
+        case memberCount  = "member_count"
         case role
     }
 
@@ -290,6 +302,9 @@ struct WithdrawalRequest: Decodable {
     let id: Int
     let fundId: Int
     let userId: Int
+    let userName: String
+    let userPhone: String
+    let userAvatar: String
     let toPaymentId: Int
     let amount: Int
     let fee: Int
@@ -302,6 +317,9 @@ struct WithdrawalRequest: Decodable {
         case id
         case fundId      = "fund_id"
         case userId      = "user_id"
+        case userName    = "user_name"
+        case userPhone   = "user_phone"
+        case userAvatar  = "user_avatar"
         case toPaymentId = "to_payment_id"
         case amount
         case fee
@@ -365,4 +383,73 @@ struct AppNotification: Decodable, Identifiable {
         case isRead    = "is_read"
         case createdAt = "created_at"
     }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Profile Avatar
+// ─────────────────────────────────────────────
+
+struct UploadAvatarResponse: Decodable {
+    let message: String
+    let payload: Payload
+
+    struct Payload: Decodable {
+        let avatarUrl: String
+
+        enum CodingKeys: String, CodingKey {
+            case avatarUrl = "avatar_url"
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// MARK: - Services (Quick Pay)
+// ─────────────────────────────────────────────
+
+struct Service: Decodable, Identifiable, Hashable {
+    let id: Int
+    let serviceName: String
+    let clientAccess: Bool
+    let hasPreCheck: Bool
+    let imageName: String
+    let category: String
+
+    enum CodingKeys: String, CodingKey {
+        case id           = "service_id"
+        case serviceName  = "service_name"
+        case clientAccess = "client_access"
+        case hasPreCheck  = "has_pre_check"
+        case imageName    = "image_name"
+        case category
+    }
+}
+
+struct ServiceListResponse: Decodable {
+    let message: String
+    let payload: [Service]
+}
+
+struct SubService: Decodable, Identifiable, Hashable {
+    let id: Int
+    let serviceId: Int
+    let name: String
+    let imageName: String
+    let prefix: String
+    let minAmount: Int
+    let maxAmount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case serviceId  = "service_id"
+        case name
+        case imageName  = "image_name"
+        case prefix
+        case minAmount  = "min_amount"
+        case maxAmount  = "max_amount"
+    }
+}
+
+struct SubServiceListResponse: Decodable {
+    let message: String
+    let payload: [SubService]
 }

@@ -80,8 +80,9 @@ final class PaymentViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func send(phone: String, amount: String) {
-        guard !phone.isEmpty else {
+    func payService(account: String, amount: String) {
+        guard case .services(let serviceId, let subServiceId, _) = type else { return }
+        guard !account.isEmpty else {
             errorMessage = "Введите номер телефона"
             return
         }
@@ -91,8 +92,8 @@ final class PaymentViewModel: ObservableObject {
         }
 
         isLoading = true
-        let fullPhone = "992\(phone)"
-        APIManager.shared.sendWallet(phone: fullPhone, amount: amountInt)
+        let fullAccount = "992\(account)"
+        APIManager.shared.payService(serviceId: serviceId, subServiceId: subServiceId, account: fullAccount, amount: amountInt)
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
