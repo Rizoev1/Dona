@@ -21,6 +21,7 @@ enum HomeRouter: Hashable {
     case payment(PaymentScreenType)
     case fundSelection(FundSelectionType)
     case profile
+    case editProfile
     case language(current: String)
     case theme
     case fundDetails(fund: Fund)
@@ -54,6 +55,8 @@ struct HomeCoordinator: View {
                         FundSelectionScreen(type: type)
                     case .profile:
                         ProfileScreen()
+                    case .editProfile:
+                        EditProfileScreen()
                     case .language(let current):
                         LanguageScreen(current: current)
                     case .theme:

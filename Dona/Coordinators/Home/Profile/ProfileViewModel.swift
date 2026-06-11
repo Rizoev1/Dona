@@ -23,6 +23,11 @@ final class ProfileViewModel: ObservableObject {
         return profile.fullName.isEmpty ? profile.phone : profile.fullName
     }
 
+    var displayPhone: String {
+        guard let profile else { return "—" }
+        return profile.phone.isEmpty ? "—" : profile.phone
+    }
+
     var displayEmail: String {
         guard let profile else { return "—" }
         return profile.email.isEmpty ? "—" : profile.email

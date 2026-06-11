@@ -21,15 +21,15 @@ struct AuthenticatedCoordinator: View {
     var body: some View {
         TabView(selection: $tabRouter.selectedTab) {
             HomeCoordinator()
-                .tabItem { Label("Home".localized, systemImage: "house.fill") }
+                .tabItem { Label("Home".localized, image: "home") }
                 .tag(0)
 
             FundsCoordinator()
-                .tabItem { Label("Funds".localized, systemImage: "chart.pie.fill") }
+                .tabItem { Label("Funds".localized, image: "funds") }
                 .tag(1)
 
             PaymentsCoordinator()
-                .tabItem { Label("Payments".localized, systemImage: "creditcard.fill") }
+                .tabItem { Label("Payments".localized, image: "payments") }
                 .tag(2)
         }
         .id(_language)

@@ -12,9 +12,6 @@ struct ProfileScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject private var navigator: FlowNavigator<HomeRouter>
     @StateObject private var viewModel = ProfileViewModel()
-    @State private var isEditSheetPresented = false
-    @State private var editName: String = ""
-    @State private var editEmail: String = ""
     @AppStorage("appLanguage") private var _language: String = "en"
 
     var body: some View {
@@ -29,9 +26,21 @@ struct ProfileScreen: View {
                     Text(viewModel.displayName)
                         .font(AppFont.xLargeSemibold)
                         .foregroundStyle(theme.text.onSurface)
-                    Text(viewModel.displayEmail)
+                    Text("+\(viewModel.displayPhone)")
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onTertiary)
+                }
+                Button {
+                    navigator.push(.editProfile)
+                } label: {
+                    Text("Edit profile".localized)
+                        .font(AppFont.largeMedium)
+                        .foregroundStyle(theme.text.onSurface)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 4)
+                        .background(theme.background.background)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                        .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 2)
                 }
             }
             makeOptions()
@@ -41,39 +50,10 @@ struct ProfileScreen: View {
         .padding(.horizontal)
         .background(theme.background.surface)
         .onAppear { viewModel.onAppear() }
-        .sheet(isPresented: $isEditSheetPresented) {
-            editSheet()
-        }
     }
 
     @ViewBuilder func makeOptions() -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Button {
-                editName = viewModel.profile?.fullName ?? ""
-                editEmail = viewModel.profile?.email ?? ""
-                viewModel.saveSuccess = false
-                viewModel.errorMessage = nil
-                isEditSheetPresented = true
-            } label: {
-                HStack(spacing: 12) {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(theme.stroke.scrim)
-                        .padding(8)
-                        .background(theme.background.inversePrimary)
-                        .clipShape(Circle())
-                    Text("Edit Profile".localized)
-                        .font(AppFont.largeMedium)
-                        .foregroundStyle(theme.text.onSurface)
-                    Spacer()
-                    Image(.right)
-                        .resizable()
-                        .frame(width: 16, height: 16)
-                        .foregroundStyle(theme.text.onTertiary)
-                }
-            }
-            Divider().padding(.leading, 48)
             Button {
                 navigator.push(.language(current: viewModel.currentLanguage))
             } label: {
@@ -186,79 +166,6 @@ struct ProfileScreen: View {
             .background(theme.background.background)
             .clipShape(RoundedRectangle(cornerRadius: 20))
         }
-    }
-
-    @ViewBuilder func editSheet() -> some View {
-        VStack(spacing: 20) {
-            Text("Edit Profile".localized)
-                .font(AppFont.heading3)
-                .foregroundStyle(theme.text.onSurface)
-                .padding(.top, 8)
-
-            VStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Full name")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                    TextField("Your name", text: $editName)
-                        .font(AppFont.mediumMedium)
-                        .foregroundStyle(theme.text.onSurface)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(theme.background.secondaryContainer)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                }
-
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Email")
-                        .font(AppFont.smallRegular)
-                        .foregroundStyle(theme.text.onTertiary)
-                    TextField("your@email.com", text: $editEmail)
-                        .font(AppFont.mediumMedium)
-                        .foregroundStyle(theme.text.onSurface)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(theme.background.secondaryContainer)
-                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                }
-            }
-
-            if let error = viewModel.errorMessage {
-                Text(error)
-                    .font(AppFont.mediumRegular)
-                    .foregroundStyle(theme.text.onErrorContainer)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-
-            if viewModel.saveSuccess {
-                HStack(spacing: 8) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(theme.text.foregroundSuccess1)
-                    Text("Profile updated!".localized)
-                        .font(AppFont.mediumMedium)
-                        .foregroundStyle(theme.text.foregroundSuccess1)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(12)
-                .background(theme.background.backgroundSuccess)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-
-            AppButton(
-                title: "Save".localized,
-                state: viewModel.isSaving ? .loading : .default
-            ) {
-                viewModel.updateProfileInfo(fullName: editName, email: editEmail)
-            }
-
-            AppButton(title: "Cancel".localized, state: .white) {
-                isEditSheetPresented = false
-            }
-        }
-        .padding(.horizontal, 24)
-        .adaptivePresentationDetents(height: 420)
     }
 }
 

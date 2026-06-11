@@ -17,6 +17,8 @@
 		4B3F73E52F8A91F500406292 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F73E42F8A91F500406292 /* SplashScreen.swift */; };
 		4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743B2FAF778A00406292 /* HomeViewModel.swift */; };
 		4B3F743E2FAF7B9800406292 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */; };
+		AA01EE012FA0000100000001 /* EditProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01EE002FA0000100000001 /* EditProfileScreen.swift */; };
+		AA01EE032FA0000100000003 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01EE022FA0000100000002 /* EditProfileViewModel.swift */; };
 		4B3F74402FAF7E5700406292 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F743F2FAF7E5700406292 /* NotificationsViewModel.swift */; };
 		4B3F74422FB4B9FB00406292 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3F74412FB4B9FA00406292 /* PaymentViewModel.swift */; };
 		84007D122FA0BA7B0042708A /* FundsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84007D112FA0BA7B0042708A /* FundsScreen.swift */; };
@@ -74,6 +76,7 @@
 		EC12D075C0D947E98A68741F /* ru.strings in Resources */ = {isa = PBXBuildFile; fileRef = B15FE5455C9C4B968BF227A3 /* ru.strings */; };
 		373B58127BA245DAA47DAC98 /* tg.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED050E2664B145EBB4E5B86B /* tg.strings */; };
 		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0432F9A000000B44EA9 /* Shimmer.swift */; };
+		AA02BB012FA1000100000001 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02BB002FA1000100000000 /* ImagePickerView.swift */; };
 		84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */; };
 		84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */; };
 		84F0EFDB2F8F638B00DD98C5 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */; };
@@ -119,6 +122,8 @@
 		4B3F73E42F8A91F500406292 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		4B3F743B2FAF778A00406292 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		AA01EE002FA0000100000001 /* EditProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileScreen.swift; sourceTree = "<group>"; };
+		AA01EE022FA0000100000002 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		4B3F743F2FAF7E5700406292 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		4B3F74412FB4B9FA00406292 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		84007D112FA0BA7B0042708A /* FundsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsScreen.swift; sourceTree = "<group>"; };
@@ -173,6 +178,7 @@
 		B15FE5455C9C4B968BF227A3 /* ru.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru.strings; path = ru.strings; sourceTree = "<group>"; };
 		ED050E2664B145EBB4E5B86B /* tg.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tg.strings; path = tg.strings; sourceTree = "<group>"; };
 		84DBE0432F9A000000B44EA9 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		AA02BB002FA1000100000000 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFundCard.swift; sourceTree = "<group>"; };
 		84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPayCard.swift; sourceTree = "<group>"; };
 		84F0EFDA2F8F638B00DD98C5 /* NotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
@@ -389,6 +395,8 @@
 			children = (
 				84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */,
 				4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */,
+				AA01EE002FA0000100000001 /* EditProfileScreen.swift */,
+				AA01EE022FA0000100000002 /* EditProfileViewModel.swift */,
 				3790D88124EC4EE6B8348980 /* LanguageScreen.swift */,
 				C2563E7D45EC45548A9E572D /* ThemeScreen.swift */,
 			);
@@ -413,6 +421,7 @@
 				84DBE03D2F8E543900B44EA9 /* CardShadow.swift */,
 				84DBE0432F9A000000B44EA9 /* Shimmer.swift */,
 				6EC94E8EA9774570AE263171 /* HapticManager.swift */,
+				AA02BB002FA1000100000000 /* ImagePickerView.swift */,
 				09A2040A789A4090AA6A20FE /* String+Localized.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
@@ -809,6 +818,8 @@
 				84D233F22F865BC800C7DE80 /* DonaApp.swift in Sources */,
 				84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */,
 				84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */,
+				AA01EE012FA0000100000001 /* EditProfileScreen.swift in Sources */,
+				AA01EE032FA0000100000003 /* EditProfileViewModel.swift in Sources */,
 				23EAFFD805BE4842871F0EBA /* LanguageScreen.swift in Sources */,
 				8311FF3A2F5A48528A50FB14 /* ThemeScreen.swift in Sources */,
 				84D234082F865F8800C7DE80 /* AppFont.swift in Sources */,
@@ -823,6 +834,7 @@
 				7E638AF715A947F4A57BE5C0 /* HapticManager.swift in Sources */,
 				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */,
 				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
+				AA02BB012FA1000100000001 /* ImagePickerView.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,
 				84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */,
