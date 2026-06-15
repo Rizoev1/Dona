@@ -96,7 +96,9 @@ struct ProfileScreen: View {
                 }
             }
             Divider().padding(.leading, 48)
-            Button {} label: {
+            Button {
+                navigator.push(.paymentMethod)
+            } label: {
                 HStack(spacing: 12) {
                     Image(.card)
                         .resizable()

@@ -24,6 +24,9 @@ enum HomeRouter: Hashable {
     case editProfile
     case language(current: String)
     case theme
+    case paymentMethod
+    case cardDetail(PaymentMethod)
+    case renameCard(PaymentMethod)
     case fundDetails(fund: Fund)
     case fundActivity(fundId: Int)
     case fundReport(fundId: Int)
@@ -61,6 +64,12 @@ struct HomeCoordinator: View {
                         LanguageScreen(current: current)
                     case .theme:
                         ThemeScreen()
+                    case .paymentMethod:
+                        PaymentMethodScreen()
+                    case .cardDetail(let card):
+                        CardDetailScreen(card: card)
+                    case .renameCard(let card):
+                        RenameCardScreen(card: card)
                     case .fundDetails(let fund):
                         IndividualFundScreen(
                             fund: fund,

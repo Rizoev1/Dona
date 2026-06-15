@@ -39,6 +39,9 @@
 		84C838B12F9B6A2C00D7D942 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */; };
 		23EAFFD805BE4842871F0EBA /* LanguageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3790D88124EC4EE6B8348980 /* LanguageScreen.swift */; };
 		8311FF3A2F5A48528A50FB14 /* ThemeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2563E7D45EC45548A9E572D /* ThemeScreen.swift */; };
+		AA02EE012FA0000100000002 /* PaymentMethodScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02EE002FA0000100000002 /* PaymentMethodScreen.swift */; };
+		AA03EE012FA0000100000003 /* CardDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA03EE002FA0000100000003 /* CardDetailScreen.swift */; };
+		AA04EE012FA0000100000004 /* RenameCardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04EE002FA0000100000004 /* RenameCardScreen.swift */; };
 		84CE15432F890F59000E9552 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15422F890F59000E9552 /* AppButton.swift */; };
 		84CE15462F89118C000E9552 /* AppBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */; };
 		84CE15492F891277000E9552 /* CustomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CE15482F891277000E9552 /* CustomSheet.swift */; };
@@ -144,6 +147,9 @@
 		84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		3790D88124EC4EE6B8348980 /* LanguageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageScreen.swift; sourceTree = "<group>"; };
 		C2563E7D45EC45548A9E572D /* ThemeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeScreen.swift; sourceTree = "<group>"; };
+		AA02EE002FA0000100000002 /* PaymentMethodScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodScreen.swift; sourceTree = "<group>"; };
+		AA03EE002FA0000100000003 /* CardDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailScreen.swift; sourceTree = "<group>"; };
+		AA04EE002FA0000100000004 /* RenameCardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameCardScreen.swift; sourceTree = "<group>"; };
 		84CE15422F890F59000E9552 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBackgroundModifier.swift; sourceTree = "<group>"; };
 		84CE15482F891277000E9552 /* CustomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSheet.swift; sourceTree = "<group>"; };
@@ -396,6 +402,9 @@
 				84C838B02F9B6A2C00D7D942 /* ProfileScreen.swift */,
 				4B3F743D2FAF7B9800406292 /* ProfileViewModel.swift */,
 				AA01EE002FA0000100000001 /* EditProfileScreen.swift */,
+				AA02EE002FA0000100000002 /* PaymentMethodScreen.swift */,
+				AA03EE002FA0000100000003 /* CardDetailScreen.swift */,
+				AA04EE002FA0000100000004 /* RenameCardScreen.swift */,
 				AA01EE022FA0000100000002 /* EditProfileViewModel.swift */,
 				3790D88124EC4EE6B8348980 /* LanguageScreen.swift */,
 				C2563E7D45EC45548A9E572D /* ThemeScreen.swift */,
@@ -822,6 +831,9 @@
 				AA01EE032FA0000100000003 /* EditProfileViewModel.swift in Sources */,
 				23EAFFD805BE4842871F0EBA /* LanguageScreen.swift in Sources */,
 				8311FF3A2F5A48528A50FB14 /* ThemeScreen.swift in Sources */,
+				AA02EE012FA0000100000002 /* PaymentMethodScreen.swift in Sources */,
+				AA03EE012FA0000100000003 /* CardDetailScreen.swift in Sources */,
+				AA04EE012FA0000100000004 /* RenameCardScreen.swift in Sources */,
 				84D234082F865F8800C7DE80 /* AppFont.swift in Sources */,
 				84D5FF172FAA0EE00033A8BD /* MembersScreen.swift in Sources */,
 				84007D222FA0CE2D0042708A /* StepProgressBar.swift in Sources */,

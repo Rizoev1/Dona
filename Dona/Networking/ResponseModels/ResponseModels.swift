@@ -166,7 +166,7 @@ struct PaymentMethodResponse: Decodable {
     let payload: PaymentMethod
 }
 
-struct PaymentMethod: Decodable {
+struct PaymentMethod: Decodable, Hashable {
     let id: Int
     let userId: Int
     /// Последние 4 цифры карты
