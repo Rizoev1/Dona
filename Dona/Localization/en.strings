@@ -146,6 +146,14 @@
 "Language" = "Language";
 "Theme" = "Theme";
 "Payment method" = "Payment method";
+"Add card" = "Add card";
+"Card name" = "Card name";
+"Card number" = "Card number";
+"Expiry date" = "Expiry date";
+"Rename card" = "Rename card";
+"Delete card" = "Delete card";
+"Payment history" = "Payment history";
+"Are you sure you want to delete card?" = "Are you sure you want to delete card?";
 "Notification" = "Notification";
 "FAQ" = "FAQ";
 "Log out" = "Log out";

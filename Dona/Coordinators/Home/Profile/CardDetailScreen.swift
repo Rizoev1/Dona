@@ -3,42 +3,74 @@
 //  Dona
 
 import SwiftUI
+import Combine
 import FlowStacks
+
+@MainActor
+private final class CardDetailViewModel: ObservableObject {
+    @Published var card: PaymentMethod
+    @Published var isLoading = false
+
+    private var cancellables = Set<AnyCancellable>()
+
+    init(card: PaymentMethod) {
+        self.card = card
+    }
+
+    func onAppear() {
+        isLoading = true
+        APIManager.shared.listPaymentMethods()
+            .sink { [weak self] _ in
+                self?.isLoading = false
+            } receiveValue: { [weak self] response in
+                guard let self else { return }
+                if let fresh = response.payload.first(where: { $0.id == self.card.id }) {
+                    self.card = fresh
+                }
+                self.isLoading = false
+            }
+            .store(in: &cancellables)
+    }
+}
 
 struct CardDetailScreen: View {
     @Environment(\.theme) private var theme
     @EnvironmentObject private var navigator: FlowNavigator<HomeRouter>
 
-    let card: PaymentMethod
+    @StateObject private var viewModel: CardDetailViewModel
 
     @State private var isCardNumberVisible = false
     @State private var showDeleteSheet = false
 
-    private var formattedBalance: String {
-        let tjs = Double(card.balance) / 100.0
-        let formatted = String(format: "%.2f", tjs).replacingOccurrences(of: ".", with: ",")
-        return formatted
+    init(card: PaymentMethod) {
+        _viewModel = StateObject(wrappedValue: CardDetailViewModel(card: card))
     }
 
-    private var maskedNumber: String {
-        isCardNumberVisible
-            ? "•••• •••• •••• \(card.cardSuffix)"
-            : "•••• •••• •••• \(card.cardSuffix)"
+    private var formattedBalance: String {
+        let tjs = Double(viewModel.card.balance) / 100.0
+        let formatted = String(format: "%.2f", tjs).replacingOccurrences(of: ".", with: ",")
+        return formatted
     }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 12) {
-                balanceSection
-                cardInfoSection
+                if viewModel.isLoading {
+                    shimmerBalanceSection
+                    shimmerCardInfoSection
+                } else {
+                    balanceSection
+                    cardInfoSection
+                }
                 actionsSection
             }
             .padding(.horizontal, 16)
             .padding(.top, 8)
         }
-        .background(theme.background.surface)
-        .navigationTitle("Корти милли **\(card.cardSuffix)")
+        .appBackground()
+        .navigationTitle("Корти милли **\(viewModel.card.cardSuffix)")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { viewModel.onAppear() }
         .halfSheet(isPresented: $showDeleteSheet) {
             deleteSheetContent
         }
@@ -71,13 +103,13 @@ struct CardDetailScreen: View {
     }
 
     private var balanceSection: some View {
-        VStack(spacing: 20) {
-            HStack(alignment: .top) {
+        VStack(spacing: 24) {
+            HStack {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Available balance".localized)
                         .font(AppFont.mediumRegular)
                         .foregroundStyle(theme.text.onTertiary)
-                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    HStack(spacing: 4) {
                         Text(formattedBalance)
                             .font(AppFont.heading2)
                             .foregroundStyle(theme.text.onSurface)
@@ -87,11 +119,14 @@ struct CardDetailScreen: View {
                     }
                 }
                 Spacer()
-                Image(.cardMock)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 60, height: 40)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                VStack(alignment: .trailing, spacing: 6) {
+                    Text("Payment method".localized)
+                        .font(AppFont.mediumRegular)
+                        .foregroundStyle(theme.text.onTertiary)
+                    Text("•••• \(viewModel.card.cardSuffix)")
+                        .font(AppFont.mediumMedium)
+                        .foregroundStyle(theme.text.onSurface)
+                }
             }
 
             HStack(spacing: 14) {
@@ -114,19 +149,20 @@ struct CardDetailScreen: View {
                 ) {}
             }
         }
-        .padding(16)
+        .padding()
         .background(theme.background.background)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .clipShape(RoundedRectangle(cornerRadius: 28))
+        .cardShadow()
     }
 
     private var cardInfoSection: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Номер карты".localized)
+                    Text("Card number".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
-                    Text("•••• •••• •••• \(card.cardSuffix)")
+                    Text("•••• •••• •••• \(viewModel.card.cardSuffix)")
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                 }
@@ -140,15 +176,13 @@ struct CardDetailScreen: View {
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 16)
+            .padding(.vertical, 14)
+            .background(theme.background.secondaryContainer)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
 
-            Rectangle()
-                .fill(theme.stroke.outlineVariant)
-                .frame(height: 0.5)
-
-            HStack(spacing: 0) {
+            HStack(spacing: 8) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Срок действия".localized)
+                    Text("Expiry date".localized)
                         .font(AppFont.smallRegular)
                         .foregroundStyle(theme.text.onTertiary)
                     Text("••/••")
@@ -157,12 +191,9 @@ struct CardDetailScreen: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 16)
-
-                Rectangle()
-                    .fill(theme.stroke.outlineVariant)
-                    .frame(width: 0.5)
-                    .padding(.vertical, 12)
+                .padding(.vertical, 14)
+                .background(theme.background.secondaryContainer)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("CVV")
@@ -174,29 +205,32 @@ struct CardDetailScreen: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 16)
+                .padding(.vertical, 14)
+                .background(theme.background.secondaryContainer)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             }
         }
+        .padding(12)
         .background(theme.background.background)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 
     private var actionsSection: some View {
         VStack(spacing: 0) {
             optionRow(
-                icon: .edit,
-                iconBg: Color(hex: "#EEF2FF"),
-                iconFg: Color(hex: "#4F46E5"),
+                icon: .editFilled,
+                iconBg: theme.background.inversePrimary,
+                iconFg: Color(hex: "#2563EB"),
                 title: "Rename card".localized
             ) {
-                navigator.push(.renameCard(card))
+                navigator.push(.renameCard(viewModel.card))
             }
 
             Divider().padding(.leading, 52)
 
             optionRow(
                 icon: .clockBlue,
-                iconBg: Color(hex: "#EFF6FF"),
+                iconBg: theme.background.inversePrimary,
                 iconFg: Color(hex: "#2563EB"),
                 title: "Payment history".localized
             ) {}
@@ -204,9 +238,9 @@ struct CardDetailScreen: View {
             Divider().padding(.leading, 52)
 
             optionRow(
-                icon: .tagCross,
-                iconBg: Color(hex: "#FFF1F2"),
-                iconFg: Color(hex: "#E11D48"),
+                icon: .closeCircle,
+                iconBg: theme.background.inversePrimary,
+                iconFg: Color(hex: "#2563EB"),
                 title: "Delete card".localized
             ) {
                 showDeleteSheet = true
@@ -214,6 +248,76 @@ struct CardDetailScreen: View {
         }
         .background(theme.background.background)
         .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+
+    private var shimmerBalanceSection: some View {
+        VStack(spacing: 24) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerBox(width: 110, height: 13)
+                    ShimmerBox(width: 160, height: 30)
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 8) {
+                    ShimmerBox(width: 90, height: 13)
+                    ShimmerBox(width: 65, height: 16)
+                }
+            }
+            HStack(spacing: 14) {
+                ForEach(0..<3, id: \.self) { _ in
+                    VStack(spacing: 6) {
+                        ShimmerBox(height: 46, cornerRadius: 60)
+                        ShimmerBox(width: 42, height: 13)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+        }
+        .padding()
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 28))
+        .cardShadow()
+    }
+
+    private var shimmerCardInfoSection: some View {
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerBox(width: 80, height: 12)
+                    ShimmerBox(width: 150, height: 16)
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(theme.background.secondaryContainer)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+
+            HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerBox(width: 70, height: 12)
+                    ShimmerBox(width: 50, height: 16)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(theme.background.secondaryContainer)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerBox(width: 30, height: 12)
+                    ShimmerBox(width: 36, height: 16)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(theme.background.secondaryContainer)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
+        }
+        .padding(12)
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 
     @ViewBuilder
@@ -230,7 +334,7 @@ struct CardDetailScreen: View {
                     .frame(width: 22, height: 22)
                     .foregroundStyle(isPrimary ? theme.text.foregroundStaticWhite : theme.text.onSurface)
                     .padding(.vertical, 12)
-                    .padding(.horizontal, 30)
+                    .padding(.horizontal, 36)
                     .background {
                         if isPrimary {
                             LinearGradient(

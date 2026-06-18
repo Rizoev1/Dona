@@ -33,7 +33,10 @@ struct RenameCardScreen: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .background(theme.background.secondaryContainer)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .padding(12)
+            .background(theme.background.background)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .padding(.horizontal, 16)
             .padding(.top, 16)
 

@@ -9,13 +9,19 @@ import FlowStacks
 @MainActor
 private final class PaymentMethodViewModel: ObservableObject {
     @Published var paymentMethods: [PaymentMethod] = []
+    @Published var isLoading = false
 
     private var cancellables = Set<AnyCancellable>()
 
     func onAppear() {
+        guard paymentMethods.isEmpty else { return }
+        isLoading = true
         APIManager.shared.listPaymentMethods()
-            .sink { _ in } receiveValue: { [weak self] response in
+            .sink { [weak self] _ in
+                self?.isLoading = false
+            } receiveValue: { [weak self] response in
                 self?.paymentMethods = response.payload
+                self?.isLoading = false
             }
             .store(in: &cancellables)
     }
@@ -35,9 +41,11 @@ struct PaymentMethodScreen: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 12) {
-                if !viewModel.paymentMethods.isEmpty {
+                if viewModel.isLoading {
+                    shimmerSection
+                } else if !viewModel.paymentMethods.isEmpty {
                     cardSection(withBalance: true)
-                    cardSection(withBalance: false)
+//                    cardSection(withBalance: false)
                 }
             }
             .padding(.horizontal, 16)
@@ -109,6 +117,28 @@ struct PaymentMethodScreen: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
+    }
+
+    private var shimmerSection: some View {
+        VStack(spacing: 0) {
+            ForEach(0..<3, id: \.self) { index in
+                HStack(spacing: 12) {
+                    ShimmerBox(width: 48, height: 32, cornerRadius: 6)
+                    VStack(alignment: .leading, spacing: 6) {
+                        ShimmerBox(width: 130, height: 14)
+                        ShimmerBox(width: 80, height: 12)
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                if index < 2 {
+                    Divider().padding(.leading, 72)
+                }
+            }
+        }
+        .background(theme.background.background)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 
     private var addCardButton: some View {

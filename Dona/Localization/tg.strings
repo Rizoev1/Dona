@@ -146,6 +146,14 @@
 "Language" = "Забон";
 "Theme" = "Ороиш";
 "Payment method" = "Тариқи пардохт";
+"Add card" = "Илова кардани корт";
+"Card name" = "Номи корт";
+"Card number" = "Рақами корт";
+"Expiry date" = "Мӯҳлати амал";
+"Rename card" = "Тағйири номи корт";
+"Delete card" = "Нест кардани корт";
+"Payment history" = "Таърихи пардохтҳо";
+"Are you sure you want to delete card?" = "Шумо мутмаинед, ки мехоҳед картро нест кунед?";
 "Notification" = "Огоҳӣ";
 "FAQ" = "FAQ";
 "Log out" = "Баромадан";

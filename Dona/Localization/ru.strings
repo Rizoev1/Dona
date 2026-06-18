@@ -146,6 +146,14 @@
 "Language" = "Язык";
 "Theme" = "Фон";
 "Payment method" = "Способ оплаты";
+"Add card" = "Добавить карту";
+"Card name" = "Название карты";
+"Card number" = "Номер карты";
+"Expiry date" = "Срок действия";
+"Rename card" = "Переименовать карту";
+"Delete card" = "Удалить карту";
+"Payment history" = "История платежей";
+"Are you sure you want to delete card?" = "Вы уверены, что хотите удалить карту?";
 "Notification" = "Уведомление";
 "FAQ" = "FAQ";
 "Log out" = "Выйти";
