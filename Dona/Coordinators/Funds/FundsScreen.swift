@@ -110,9 +110,7 @@ struct FundsScreen: View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top, spacing: 16) {
-                    Image(.amazonMock)
-                        .resizable()
-                        .frame(width: 45, height: 45)
+                    FundLogoView(urlString: fund.logoUrl, size: 45)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(fund.name)

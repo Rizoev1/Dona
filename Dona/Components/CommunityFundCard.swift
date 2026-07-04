@@ -14,9 +14,7 @@ struct CommunityFundCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Image(.amazonMock)
-                .resizable()
-                .frame(width: 32, height: 32)
+            FundLogoView(urlString: fund.logoUrl, size: 32)
             VStack(alignment: .leading, spacing: 4) {
                 Text(fund.name)
                     .font(AppFont.mediumRegular)

@@ -14,19 +14,6 @@ import Alamofire
 struct Networking<API: TargetType>: NetworkingType {
     let provider: MoyaProvider<API>
 
-    func request(_ target: API) -> AnyPublisher<Any, MoyaError> {
-        return provider.requestPublisher(target)
-            .mapJSON()
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-
-    func requestWithoutMapping(_ target: API) -> AnyPublisher<Response, MoyaError> {
-        return provider.requestPublisher(target)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-
     static func defaultNetworking() -> Networking {
         return Networking(provider: MoyaProvider(
             endpointClosure: endpointsClosure(),

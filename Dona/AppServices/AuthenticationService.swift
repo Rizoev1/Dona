@@ -16,7 +16,7 @@ class AuthenticationService: ObservableObject {
         case authenticated
     }
 
-    static var shared = AuthenticationService()
+    static let shared = AuthenticationService()
 
     @Published var status: Status = .idle
 

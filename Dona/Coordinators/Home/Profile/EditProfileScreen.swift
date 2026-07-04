@@ -23,13 +23,13 @@ struct EditProfileScreen: View {
                         if let img = viewModel.selectedImage {
                             Image(uiImage: img)
                                 .resizable()
+                                .scaledToFill()
+                                .frame(width: 72, height: 72)
+                                .clipShape(Circle())
                         } else {
-                            Image(.profileMock)
-                                .resizable()
+                            ProfileAvatarView(urlString: viewModel.avatarUrl, size: 72)
                         }
                     }
-                    .frame(width: 72, height: 72)
-                    .clipShape(Circle())
 
                     Button { showAvatarSheet = true } label: {
                         Image(.edit)

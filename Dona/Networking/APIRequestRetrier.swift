@@ -12,8 +12,6 @@ final class APIRequestRetrier: RequestInterceptor {
 
     private let maxRetryCount: Int
     private let retryDelay: TimeInterval
-    private var retryCount: [String: Int] = [:]
-    private let lock = NSLock()
 
     init(maxRetryCount: Int = 3, retryDelay: TimeInterval = 1.0) {
         self.maxRetryCount = maxRetryCount
@@ -41,20 +39,12 @@ final class APIRequestRetrier: RequestInterceptor {
         dueTo error: Error,
         completion: @escaping (RetryResult) -> Void
     ) {
-        lock.lock()
-        defer { lock.unlock() }
-
-        let requestID = request.id.uuidString
-        let currentRetryCount = retryCount[requestID] ?? 0
-
-        guard shouldRetry(error: error), currentRetryCount < maxRetryCount else {
-            retryCount[requestID] = nil
+        guard shouldRetry(error: error), request.retryCount < maxRetryCount else {
             completion(.doNotRetry)
             return
         }
 
-        retryCount[requestID] = currentRetryCount + 1
-        let delay = retryDelay * pow(2.0, Double(currentRetryCount))
+        let delay = retryDelay * pow(2.0, Double(request.retryCount))
         completion(.retryWithDelay(delay))
     }
 

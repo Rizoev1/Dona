@@ -50,7 +50,11 @@ struct HomeScreen: View {
                         makeCommunityFund()
                     }
 
-                    makeQuickPay()
+                    if viewModel.isLoadingQuickPayments && viewModel.quickPayments.isEmpty {
+                        quickPaySkeleton()
+                    } else {
+                        makeQuickPay()
+                    }
 
                     Group {
                         if viewModel.isLoadingActivity && viewModel.recentActivity.isEmpty {
@@ -73,11 +77,7 @@ struct HomeScreen: View {
                     navigator.push(.profile)
                 } label: {
                     HStack(spacing: 10) {
-                        Image(.profileMock)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 36, height: 36)
-                            .clipShape(Circle())
+                        ProfileAvatarView(urlString: viewModel.profile?.avatarUrl, size: 36)
                         Text(viewModel.displayName)
                             .font(AppFont.xLargeSemibold)
                             .foregroundStyle(theme.text.onSurface)
@@ -248,7 +248,7 @@ struct HomeScreen: View {
                     .foregroundStyle(theme.text.onSurface)
                 Spacer()
                 Button {
-                    tabRouter.selectedTab = 2
+                    navigator.push(.allQuickPayments)
                 } label: {
                     HStack(spacing: 5) {
                         Text("View All".localized)
@@ -267,13 +267,43 @@ struct HomeScreen: View {
             }
             .padding(.horizontal, 12)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    ForEach(0 ..< 5, id: \.self) { _ in
-                        QuickPayCard()
-                    }
-                }
+            if viewModel.quickPayments.isEmpty {
+                EmptyStateView(
+                    icon: Image(systemName: "bolt.fill"),
+                    title: "No quick payments yet".localized,
+                    subtitle: "Pay a service to save it here".localized
+                )
                 .padding(.horizontal, 12)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 6) {
+                        ForEach(viewModel.quickPayments) { quickPayment in
+                            Button {
+                                let localAccount = quickPayment.account.hasPrefix("992")
+                                    ? String(quickPayment.account.dropFirst(3))
+                                    : quickPayment.account
+                                navigator.push(.payment(.services(
+                                    serviceId: quickPayment.serviceId,
+                                    subServiceId: quickPayment.subServiceId,
+                                    title: quickPayment.label,
+                                    prefillAccount: localAccount,
+                                    prefillAmount: quickPayment.amount > 0 ? quickPayment.amount : nil
+                                )))
+                            } label: {
+                                QuickPayCard(quickPayment: quickPayment)
+                            }
+                            .buttonStyle(.plain)
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    viewModel.deleteQuickPayment(quickPayment)
+                                } label: {
+                                    Label("Delete".localized, systemImage: "trash")
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                }
             }
         }
     }
@@ -313,14 +343,12 @@ struct HomeScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(Array(viewModel.topRecentActivity.enumerated()), id: \.element.id) { index, activity in
                         HStack(spacing: 12) {
-                            Image(.amazonMock)
-                                .resizable()
-                                .frame(width: 36, height: 36)
+                            TransactionIconView(urlString: activity.iconUrl)
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Community name".localized)
+                                Text(activity.typeLabel)
                                     .font(AppFont.mediumMedium)
                                     .foregroundStyle(theme.text.onSurface)
-                                Text(activity.typeLabel)
+                                Text(activity.description)
                                     .font(AppFont.mediumRegular)
                                     .foregroundStyle(theme.text.onTertiary)
                             }
@@ -401,6 +429,32 @@ struct HomeScreen: View {
                         }
                         .padding()
                         .frame(width: 165, height: 165, alignment: .leading)
+                        .background(theme.background.background)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                }
+                .padding(.horizontal, 12)
+            }
+        }
+    }
+
+    @ViewBuilder func quickPaySkeleton() -> some View {
+        VStack(spacing: 12) {
+            HStack {
+                ShimmerBox(width: 130, height: 20)
+                Spacer()
+                ShimmerBox(width: 60, height: 20, cornerRadius: 12)
+            }
+            .padding(.horizontal, 12)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    ForEach(0..<5, id: \.self) { _ in
+                        VStack(alignment: .leading, spacing: 16) {
+                            ShimmerBox(width: 36, height: 36, cornerRadius: 18)
+                            ShimmerBox(width: 60, height: 14)
+                        }
+                        .padding()
+                        .frame(width: 120, height: 100, alignment: .leading)
                         .background(theme.background.background)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                     }

@@ -40,6 +40,9 @@ enum API {
     case rejectWithdrawal(fundId: Int, requestId: Int)
     case listNotifications
     case markNotificationRead(id: Int)
+    case listQuickPayments
+    case createQuickPayment(subServiceId: Int, account: String, label: String?, amount: Int?)
+    case deleteQuickPayment(id: Int)
     case ping
     case setPin(sessionToken: String, pin: String)
     case verifyPin(sessionToken: String, pin: String)
@@ -48,7 +51,7 @@ enum API {
 }
 
 extension API: TargetType {
-    var baseURL: URL { URL(string: "https://api.dona.finance/api")! }
+    var baseURL: URL { APIHost.base.appendingPathComponent("api") }
 
     var path: String {
         switch self {
@@ -102,6 +105,10 @@ extension API: TargetType {
             return "/notifications"
         case .markNotificationRead(let id):
             return "/notifications/\(id)/read"
+        case .listQuickPayments, .createQuickPayment:
+            return "/quick-payments"
+        case .deleteQuickPayment(let id):
+            return "/quick-payments/\(id)"
         case .ping:
             return "/ping"
         case .setPin:
@@ -120,12 +127,13 @@ extension API: TargetType {
         case .getProfile, .getWallet, .getWalletActivity, .listPaymentMethods,
              .listFunds, .getFund, .listFundMembers, .getFundActivity,
              .getFundReport, .listWithdrawals, .listNotifications, .listServices,
-             .listSubServices, .ping:
+             .listSubServices, .listQuickPayments, .ping:
             return .get
 
         case .sendOtp, .verifyOtp, .topUpWallet, .sendWallet, .addPaymentMethod,
              .createFund, .inviteFundMember, .topUpFund, .createWithdrawal, .setPin,
-             .verifyPin, .refreshTokens, .logout, .uploadAvatar, .payService:
+             .verifyPin, .refreshTokens, .logout, .uploadAvatar, .payService,
+             .createQuickPayment:
             return .post
 
         case .updateProfile, .approveWithdrawal, .rejectWithdrawal:
@@ -134,7 +142,7 @@ extension API: TargetType {
         case .markNotificationRead:
             return .put
 
-        case .deletePaymentMethod:
+        case .deletePaymentMethod, .deleteQuickPayment:
             return .delete
         }
     }
@@ -148,7 +156,8 @@ extension API: TargetType {
              .listFunds, .getFund, .listFundMembers, .getFundActivity,
              .getFundReport, .listWithdrawals, .listNotifications, .listServices,
              .listSubServices, .deletePaymentMethod, .approveWithdrawal,
-             .rejectWithdrawal, .markNotificationRead, .ping:
+             .rejectWithdrawal, .markNotificationRead, .listQuickPayments,
+             .deleteQuickPayment, .ping:
             return .requestPlain
 
         case let .sendOtp(phone):
@@ -245,6 +254,12 @@ extension API: TargetType {
                 parameters: ["session_token": sessionToken],
                 encoding: jsonEncoding
             )
+
+        case let .createQuickPayment(subServiceId, account, label, amount):
+            var params: [String: Any] = ["sub_service_id": subServiceId, "account": account]
+            if let label { params["label"] = label }
+            if let amount { params["amount"] = amount }
+            return .requestParameters(parameters: params, encoding: jsonEncoding)
         }
     }
 

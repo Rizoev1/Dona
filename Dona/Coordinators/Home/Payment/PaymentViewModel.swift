@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import Moya
 
 @MainActor
 final class PaymentViewModel: ObservableObject {
@@ -57,11 +58,11 @@ final class PaymentViewModel: ObservableObject {
 
     func topUp(amount: String) {
         guard let selectedPaymentMethod else {
-            errorMessage = "Выберите карту для пополнения"
+            errorMessage = "Select a card to top up".localized
             return
         }
         guard let amountInt = parseAmount(amount) else {
-            errorMessage = "Введите корректную сумму"
+            errorMessage = "Enter a valid amount".localized
             return
         }
 
@@ -71,7 +72,7 @@ final class PaymentViewModel: ObservableObject {
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     HapticManager.notification(.error)
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 HapticManager.notification(.success)
@@ -81,13 +82,13 @@ final class PaymentViewModel: ObservableObject {
     }
 
     func payService(account: String, amount: String) {
-        guard case .services(let serviceId, let subServiceId, _) = type else { return }
+        guard case .services(let serviceId, let subServiceId, _, _, _) = type else { return }
         guard !account.isEmpty else {
-            errorMessage = "Введите номер телефона"
+            errorMessage = "Enter a phone number".localized
             return
         }
         guard let amountInt = parseAmount(amount) else {
-            errorMessage = "Введите корректную сумму"
+            errorMessage = "Enter a valid amount".localized
             return
         }
 
@@ -98,22 +99,43 @@ final class PaymentViewModel: ObservableObject {
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     HapticManager.notification(.error)
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 HapticManager.notification(.success)
-                self?.isSuccess = true
+                self?.saveQuickPaymentThenFinish(subServiceId: subServiceId, account: fullAccount)
             }
+            .store(in: &cancellables)
+    }
+
+    // Remembers a paid provider/account as a Quick Pay shortcut (skipping duplicates),
+    // then signals success. isSuccess dismisses the screen and cancels in-flight requests,
+    // so it must not be set before the save completes.
+    private func saveQuickPaymentThenFinish(subServiceId: Int, account: String) {
+        APIManager.shared.listQuickPayments()
+            .flatMap { response -> AnyPublisher<Void, MoyaError> in
+                let alreadySaved = response.payload.contains { $0.subServiceId == subServiceId && $0.account == account }
+                if alreadySaved {
+                    return Just(()).setFailureType(to: MoyaError.self).eraseToAnyPublisher()
+                }
+                return APIManager.shared.createQuickPayment(subServiceId: subServiceId, account: account)
+                    .map { _ in () }
+                    .eraseToAnyPublisher()
+            }
+            .sink { [weak self] _ in
+                // The payment itself succeeded — a failed shortcut save must not block success
+                self?.isSuccess = true
+            } receiveValue: { _ in }
             .store(in: &cancellables)
     }
     
     func sendToFund(amount: String) {
         guard let selectedFund else {
-            errorMessage = "Выберите фонд"
+            errorMessage = "Select a fund".localized
             return
         }
         guard let amountInt = parseAmount(amount) else {
-            errorMessage = "Введите корректную сумму"
+            errorMessage = "Enter a valid amount".localized
             return
         }
 
@@ -123,7 +145,7 @@ final class PaymentViewModel: ObservableObject {
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     HapticManager.notification(.error)
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 HapticManager.notification(.success)
@@ -134,11 +156,11 @@ final class PaymentViewModel: ObservableObject {
 
     func requestWithdrawal(amount: String) {
         guard let selectedFund else {
-            errorMessage = "Выберите фонд"
+            errorMessage = "Select a fund".localized
             return
         }
         guard let amountInt = parseAmount(amount) else {
-            errorMessage = "Введите корректную сумму"
+            errorMessage = "Enter a valid amount".localized
             return
         }
 
@@ -148,7 +170,7 @@ final class PaymentViewModel: ObservableObject {
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     HapticManager.notification(.error)
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 HapticManager.notification(.success)
@@ -170,7 +192,7 @@ final class PaymentViewModel: ObservableObject {
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
                     HapticManager.notification(.error)
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.paymentMethods = response.payload

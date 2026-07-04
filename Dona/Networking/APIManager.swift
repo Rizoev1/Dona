@@ -97,6 +97,21 @@ final class APIManager {
 
 }
 
+// MARK: - User-facing errors
+
+extension MoyaError {
+    /// Human-readable error: the server's `message` field when present,
+    /// otherwise the system description
+    var userMessage: String {
+        if let data = response?.data,
+           let decoded = try? JSONDecoder().decode(MessageResponse.self, from: data),
+           !decoded.message.isEmpty {
+            return decoded.message
+        }
+        return localizedDescription
+    }
+}
+
 // MARK: - Auth
 
 extension APIManager {
@@ -293,6 +308,30 @@ extension APIManager {
             .payService(serviceId: serviceId, subServiceId: subServiceId, account: account, amount: amount),
             type: TransactionResponse.self
         )
+    }
+}
+
+// MARK: - Quick Pay
+
+extension APIManager {
+    func listQuickPayments() -> AnyPublisher<QuickPaymentListResponse, MoyaError> {
+        requestObject(.listQuickPayments, type: QuickPaymentListResponse.self)
+    }
+
+    func createQuickPayment(
+        subServiceId: Int,
+        account: String,
+        label: String? = nil,
+        amount: Int? = nil
+    ) -> AnyPublisher<QuickPaymentResponse, MoyaError> {
+        requestObject(
+            .createQuickPayment(subServiceId: subServiceId, account: account, label: label, amount: amount),
+            type: QuickPaymentResponse.self
+        )
+    }
+
+    func deleteQuickPayment(id: Int) -> AnyPublisher<MessageResponse, MoyaError> {
+        requestObject(.deleteQuickPayment(id: id), type: MessageResponse.self)
     }
 }
 

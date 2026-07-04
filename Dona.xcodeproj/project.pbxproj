@@ -79,6 +79,8 @@
 		EC12D075C0D947E98A68741F /* ru.strings in Resources */ = {isa = PBXBuildFile; fileRef = B15FE5455C9C4B968BF227A3 /* ru.strings */; };
 		373B58127BA245DAA47DAC98 /* tg.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED050E2664B145EBB4E5B86B /* tg.strings */; };
 		84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0432F9A000000B44EA9 /* Shimmer.swift */; };
+		D0A1B2C42FF0000200D7D942 /* RemoteImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1B2C32FF0000100D7D942 /* RemoteImages.swift */; };
+		D0A1B2C62FF0000400D7D942 /* AllQuickPaymentsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1B2C52FF0000300D7D942 /* AllQuickPaymentsScreen.swift */; };
 		AA02BB012FA1000100000001 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02BB002FA1000100000000 /* ImagePickerView.swift */; };
 		84DBE0402F8E629B00B44EA9 /* CommunityFundCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */; };
 		84DBE0422F8E62AC00B44EA9 /* QuickPayCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */; };
@@ -184,6 +186,8 @@
 		B15FE5455C9C4B968BF227A3 /* ru.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru.strings; path = ru.strings; sourceTree = "<group>"; };
 		ED050E2664B145EBB4E5B86B /* tg.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tg.strings; path = tg.strings; sourceTree = "<group>"; };
 		84DBE0432F9A000000B44EA9 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		D0A1B2C32FF0000100D7D942 /* RemoteImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImages.swift; sourceTree = "<group>"; };
+		D0A1B2C52FF0000300D7D942 /* AllQuickPaymentsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuickPaymentsScreen.swift; sourceTree = "<group>"; };
 		AA02BB002FA1000100000000 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		84DBE03F2F8E629B00B44EA9 /* CommunityFundCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFundCard.swift; sourceTree = "<group>"; };
 		84DBE0412F8E62AC00B44EA9 /* QuickPayCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPayCard.swift; sourceTree = "<group>"; };
@@ -296,8 +300,17 @@
 				84C00EB22F92574D00E6771B /* FundSelection */,
 				84B57E9D2F97675900988346 /* Services */,
 				84C838B22F9B6A2F00D7D942 /* Profile */,
+				D0A1B2C72FF0000500D7D942 /* QuickPayments */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		D0A1B2C72FF0000500D7D942 /* QuickPayments */ = {
+			isa = PBXGroup;
+			children = (
+				D0A1B2C52FF0000300D7D942 /* AllQuickPaymentsScreen.swift */,
+			);
+			path = QuickPayments;
 			sourceTree = "<group>";
 		};
 		4B3F73E32F8A91E700406292 /* Splash */ = {
@@ -432,6 +445,7 @@
 				6EC94E8EA9774570AE263171 /* HapticManager.swift */,
 				AA02BB002FA1000100000000 /* ImagePickerView.swift */,
 				09A2040A789A4090AA6A20FE /* String+Localized.swift */,
+				D0A1B2C32FF0000100D7D942 /* RemoteImages.swift */,
 				84CE15482F891277000E9552 /* CustomSheet.swift */,
 				84CE15452F89118C000E9552 /* AppBackgroundModifier.swift */,
 			);
@@ -846,6 +860,8 @@
 				7E638AF715A947F4A57BE5C0 /* HapticManager.swift in Sources */,
 				F1ACDD0CC77840AA899407CB /* String+Localized.swift in Sources */,
 				84DBE0442F9A000000B44EA9 /* Shimmer.swift in Sources */,
+				D0A1B2C42FF0000200D7D942 /* RemoteImages.swift in Sources */,
+				D0A1B2C62FF0000400D7D942 /* AllQuickPaymentsScreen.swift in Sources */,
 				AA02BB012FA1000100000001 /* ImagePickerView.swift in Sources */,
 				84CE15542F8914A6000E9552 /* VerificationScreen.swift in Sources */,
 				4B3F743C2FAF778A00406292 /* HomeViewModel.swift in Sources */,

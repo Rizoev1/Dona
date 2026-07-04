@@ -52,7 +52,7 @@ final class PinViewModel: ObservableObject {
 
     private func refreshAfterBiometrics(onSuccess: @escaping () -> Void) {
         guard let refreshToken = KeychainService.shared.refreshToken else {
-            errorMessage = "Session expired. Please enter your PIN."
+            errorMessage = "Session expired. Please enter your PIN.".localized
             return
         }
         isLoading = true
@@ -60,7 +60,7 @@ final class PinViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure = completion {
-                    self?.errorMessage = "Biometric login failed. Please enter your PIN."
+                    self?.errorMessage = "Biometric login failed. Please enter your PIN.".localized
                 }
             } receiveValue: { [weak self] response in
                 self?.isLoading = false
@@ -79,7 +79,7 @@ final class PinViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = Self.extractMessage(from: error)
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.isLoading = false
@@ -93,17 +93,9 @@ final class PinViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private static func extractMessage(from error: MoyaError) -> String {
-        if case .statusCode(let response) = error,
-           let decoded = try? JSONDecoder().decode(MessageResponse.self, from: response.data) {
-            return decoded.message
-        }
-        return error.localizedDescription
-    }
-
     func verify(pin: String, onSuccess: @escaping () -> Void) {
         guard let sessionToken = KeychainService.shared.sessionToken else {
-            errorMessage = "Session expired. Please log in again."
+            errorMessage = "Session expired. Please log in again.".localized
             return
         }
         isLoading = true
@@ -111,7 +103,7 @@ final class PinViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = Self.extractMessage(from: error)
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.isLoading = false

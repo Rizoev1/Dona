@@ -18,6 +18,7 @@ enum HomeRouter: Hashable {
     case notifications
     case activity
     case subServices(serviceId: Int, title: String)
+    case allQuickPayments
     case payment(PaymentScreenType)
     case fundSelection(FundSelectionType)
     case profile
@@ -50,7 +51,20 @@ struct HomeCoordinator: View {
                         ActivityScreen()
                     case .subServices(let serviceId, let title):
                         SubServicesScreen(serviceId: serviceId, title: title) { subService in
-                            routes.push(.payment(.services(serviceId: subService.serviceId, subServiceId: subService.id, title: title)))
+                            routes.push(.payment(.services(serviceId: subService.serviceId, subServiceId: subService.id, title: title, prefillAccount: nil, prefillAmount: nil)))
+                        }
+                    case .allQuickPayments:
+                        AllQuickPaymentsScreen { quickPayment in
+                            let localAccount = quickPayment.account.hasPrefix("992")
+                                ? String(quickPayment.account.dropFirst(3))
+                                : quickPayment.account
+                            routes.push(.payment(.services(
+                                serviceId: quickPayment.serviceId,
+                                subServiceId: quickPayment.subServiceId,
+                                title: quickPayment.label,
+                                prefillAccount: localAccount,
+                                prefillAmount: quickPayment.amount > 0 ? quickPayment.amount : nil
+                            )))
                         }
                     case .payment(let type):
                         PaymentScreen(type: type)

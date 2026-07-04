@@ -39,7 +39,7 @@ final class ActivityViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.transactions = response.payload

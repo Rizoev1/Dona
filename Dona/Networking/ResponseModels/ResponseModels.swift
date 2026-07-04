@@ -242,7 +242,7 @@ extension Fund: Identifiable {
     }
 
     var apyFormatted: String {
-        String(format: "Earns %.1f%% APY", apy)
+        String(format: "Earns %.1f%% APY".localized, apy)
     }
 }
 
@@ -254,12 +254,14 @@ struct FundMemberListResponse: Decodable {
         let userId: Int
         let fullName: String
         let phone: String
+        let avatarUrl: String
         let role: Fund.FundRole
 
         enum CodingKeys: String, CodingKey {
             case userId   = "user_id"
             case fullName = "full_name"
             case phone
+            case avatarUrl = "avatar_url"
             case role
         }
     }
@@ -386,6 +388,43 @@ struct AppNotification: Decodable, Identifiable {
 }
 
 // ─────────────────────────────────────────────
+// MARK: - Quick Pay
+// ─────────────────────────────────────────────
+
+struct QuickPayment: Decodable, Identifiable, Hashable {
+    let id: Int
+    let serviceId: Int
+    let subServiceId: Int
+    let account: String
+    let label: String
+    /// Сумма по умолчанию в дирамах (0 — спрашивать при оплате)
+    let amount: Int
+    let iconUrl: String
+    let createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case serviceId    = "service_id"
+        case subServiceId = "sub_service_id"
+        case account
+        case label
+        case amount
+        case iconUrl      = "icon_url"
+        case createdAt    = "created_at"
+    }
+}
+
+struct QuickPaymentResponse: Decodable {
+    let message: String
+    let payload: QuickPayment
+}
+
+struct QuickPaymentListResponse: Decodable {
+    let message: String
+    let payload: [QuickPayment]
+}
+
+// ─────────────────────────────────────────────
 // MARK: - Profile Avatar
 // ─────────────────────────────────────────────
 
@@ -412,6 +451,7 @@ struct Service: Decodable, Identifiable, Hashable {
     let clientAccess: Bool
     let hasPreCheck: Bool
     let imageName: String
+    let hasOrzu: Bool
     let category: String
 
     enum CodingKeys: String, CodingKey {
@@ -420,6 +460,7 @@ struct Service: Decodable, Identifiable, Hashable {
         case clientAccess = "client_access"
         case hasPreCheck  = "has_pre_check"
         case imageName    = "image_name"
+        case hasOrzu      = "has_orzu"
         case category
     }
 }
@@ -437,6 +478,7 @@ struct SubService: Decodable, Identifiable, Hashable {
     let prefix: String
     let minAmount: Int
     let maxAmount: Int
+    let createdAt: String
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -446,6 +488,7 @@ struct SubService: Decodable, Identifiable, Hashable {
         case prefix
         case minAmount  = "min_amount"
         case maxAmount  = "max_amount"
+        case createdAt  = "created_at"
     }
 }
 

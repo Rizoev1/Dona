@@ -51,7 +51,7 @@ final class VerificationViewModel: ObservableObject {
            let decoded = try? JSONDecoder().decode(MessageResponse.self, from: response.data) {
             return decoded.message
         }
-        return error.localizedDescription
+        return error.userMessage
     }
 
     func resendOtp(onSuccess: (() -> Void)? = nil) {

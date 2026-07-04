@@ -27,7 +27,10 @@ extension NetworkingType {
 
     static var plugins: [PluginType] {
         var plugins: [PluginType] = []
+        // Verbose logging prints request bodies (PINs, tokens) — debug builds only
+        #if DEBUG
         plugins.append(NetworkLoggerPlugin.verbose)
+        #endif
         return plugins
     }
 

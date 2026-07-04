@@ -67,7 +67,7 @@ final class ProfileViewModel: ObservableObject {
         .sink { [weak self] completion in
             self?.isSaving = false
             if case .failure(let error) = completion {
-                self?.errorMessage = error.localizedDescription
+                self?.errorMessage = error.userMessage
             }
         } receiveValue: { [weak self] _ in
             self?.saveSuccess = true
@@ -80,7 +80,7 @@ final class ProfileViewModel: ObservableObject {
         APIManager.shared.updateProfile(language: language)
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 self?.loadProfile()
@@ -94,7 +94,7 @@ final class ProfileViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.profile = response.payload
@@ -106,7 +106,7 @@ final class ProfileViewModel: ObservableObject {
         APIManager.shared.listPaymentMethods()
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.paymentMethods = response.payload

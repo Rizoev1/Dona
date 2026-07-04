@@ -37,9 +37,7 @@ struct ActivityScreen: View {
                             VStack(alignment: .leading, spacing: 12) {
                                 ForEach(Array(group.transactions.enumerated()), id: \.element.id) { index, tx in
                                     HStack(spacing: 12) {
-                                        Image(.amazonMock)
-                                            .resizable()
-                                            .frame(width: 36, height: 36)
+                                        TransactionIconView(urlString: tx.iconUrl)
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(tx.typeLabel)
                                                 .font(AppFont.mediumMedium)

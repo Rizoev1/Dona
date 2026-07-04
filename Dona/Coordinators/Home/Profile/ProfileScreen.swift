@@ -18,10 +18,7 @@ struct ProfileScreen: View {
         VStack(spacing: 10) {
             Spacer().frame(height: 10)
             VStack(spacing: 12) {
-                Image(.profileMock)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
+                ProfileAvatarView(urlString: viewModel.profile?.avatarUrl, size: 80)
                 VStack(spacing: 4) {
                     Text(viewModel.displayName)
                         .font(AppFont.xLargeSemibold)
@@ -106,7 +103,7 @@ struct ProfileScreen: View {
                         .padding(8)
                         .background(theme.background.inversePrimary)
                         .clipShape(Circle())
-                    Text("\("Payment method".localized) (\(viewModel.paymentMethods.count))")
+                    Text("Payment methods".localized)
                         .font(AppFont.largeMedium)
                         .foregroundStyle(theme.text.onSurface)
                     Spacer()
@@ -117,7 +114,9 @@ struct ProfileScreen: View {
                 }
             }
             Divider().padding(.leading, 48)
-            Button {} label: {
+            Button {
+                navigator.push(.notifications)
+            } label: {
                 HStack(spacing: 12) {
                     Image(.notificationFilled)
                         .resizable()

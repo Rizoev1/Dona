@@ -44,6 +44,8 @@
 "Join or create a fund to see it here" = "Ба фонд дохил шавед ё созед";
 "No transactions yet" = "Амалиёт нест";
 "Your recent activity will appear here" = "Амалиётҳои охирини шумо дар ин ҷо намоиш дода мешаванд";
+"No quick payments yet" = "Пардохти зуд нест";
+"Pay a service to save it here" = "Барои сабт кардан дар ин ҷо хидматрасониеро пардохт кунед";
 "This Month" = "Дар ин моҳ";
 "Today" = "Имрӯз";
 "Activity" = "Амалиётҳо";
@@ -146,12 +148,16 @@
 "Language" = "Забон";
 "Theme" = "Ороиш";
 "Payment method" = "Тариқи пардохт";
+"Payment methods" = "Тариқҳои пардохт";
 "Add card" = "Илова кардани корт";
+"No cards yet" = "Корт нест";
+"Add a card to see it here" = "Барои дидан дар ин ҷо корт илова кунед";
 "Card name" = "Номи корт";
 "Card number" = "Рақами корт";
 "Expiry date" = "Мӯҳлати амал";
 "Rename card" = "Тағйири номи корт";
 "Delete card" = "Нест кардани корт";
+"Delete" = "Нест кардан";
 "Payment history" = "Таърихи пардохтҳо";
 "Are you sure you want to delete card?" = "Шумо мутмаинед, ки мехоҳед картро нест кунед?";
 "Notification" = "Огоҳӣ";
@@ -211,3 +217,20 @@
 "You don't belong to any savings community yet" = "Шумо ҳанӯз ба ҳеҷ ҷамоате шомил нашудаед";
 "Your wallet activity will appear here" = "Фаъолияти ҳамёни шумо дар ин ҷо намоиш дода мешавад";
 "Your wallet will be credited once the transfer is confirmed. This usually takes a few minutes" = "Ҳамёни шумо пас аз тасдиқи интиқол пур мешавад. Ин одатан чанд дақиқа тӯл мекашад.";
+
+/* Audit fixes */
+"Error" = "Хатогӣ";
+"Select a card to top up" = "Барои пур кардан кортро интихоб кунед";
+"Enter a valid amount" = "Маблағи дурустро ворид кунед";
+"Enter a phone number" = "Рақами телефонро ворид кунед";
+"Select a fund" = "Фондро интихоб кунед";
+"Enter a valid 9-digit phone number" = "Рақами телефони 9-рақамаро ворид кунед";
+"Session expired. Please enter your PIN." = "Сессия ба охир расид. PIN-кодро ворид кунед.";
+"Biometric login failed. Please enter your PIN." = "Вуруди биометрӣ муваффақ нашуд. PIN-кодро ворид кунед.";
+"Session expired. Please log in again." = "Сессия ба охир расид. Аз нав ворид шавед.";
+"Sent" = "Фиристода шуд";
+"Service Payment" = "Пардохти хидматрасонӣ";
+"Earns %.1f%% APY" = "Даромади %.1f%% дар сол";
+"Korti milli" = "Корти миллӣ";
+"Initial balance (optional)" = "Бақияи аввалия (ихтиёрӣ)";
+"No rules yet" = "Қоидаҳо ҳоло нест";

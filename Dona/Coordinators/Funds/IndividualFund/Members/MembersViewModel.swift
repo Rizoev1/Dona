@@ -25,7 +25,7 @@ final class MembersViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.members = response.payload
@@ -36,7 +36,7 @@ final class MembersViewModel: ObservableObject {
     func inviteMember() {
         let digits = invitePhone.filter { $0.isNumber }
         guard digits.count == 9 else {
-            errorMessage = "Enter a valid 9-digit phone number"
+            errorMessage = "Enter a valid 9-digit phone number".localized
             return
         }
         isInviting = true
@@ -45,7 +45,7 @@ final class MembersViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isInviting = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] _ in
                 self?.inviteSuccess = true

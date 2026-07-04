@@ -12,6 +12,7 @@ struct IndividualFundScreen: View {
     @Environment(\.theme) var theme
     @StateObject private var viewModel = IndividualFundViewModel()
     @AppStorage("appLanguage") private var _language: String = "en"
+    @State private var showGuidelines = false
 
     let fund: Fund
     var onTopUp: () -> Void = {}
@@ -80,16 +81,35 @@ struct IndividualFundScreen: View {
         .navigationTitle(fund.name)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.onAppear(fundId: fund.id) }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button { } label: {
-                    Image(.search)
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundStyle(theme.text.onSurface)
-                }
+        .sheet(isPresented: $showGuidelines) {
+            guidelinesSheet()
+        }
+    }
+
+    @ViewBuilder func guidelinesSheet() -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Capsule()
+                .fill(theme.stroke.scrim.opacity(0.3))
+                .frame(width: 36, height: 4)
+                .frame(maxWidth: .infinity)
+                .padding(.top, 8)
+
+            Text("Community Guidelines".localized)
+                .font(AppFont.xLargeSemibold)
+                .foregroundStyle(theme.text.onSurface)
+
+            ScrollView(showsIndicators: false) {
+                let rules = fund.generalRules ?? ""
+                Text(rules.isEmpty ? "No rules yet".localized : rules)
+                    .font(AppFont.mediumRegular)
+                    .foregroundStyle(rules.isEmpty ? theme.text.onTertiary : theme.text.onSurface)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
+        .background(theme.background.surface)
+        .adaptivePresentationDetents(height: 400)
     }
 
     @ViewBuilder func makeTopView() -> some View {
@@ -147,9 +167,7 @@ struct IndividualFundScreen: View {
                 .padding(.vertical, 16).padding(.horizontal, 18)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                Image(.amazonMock)
-                    .resizable()
-                    .frame(width: 144, height: 144)
+                FundLogoView(urlString: fund.logoUrl, size: 144)
                     .offset(x: 15, y: 28)
             }
             .background(theme.background.background)
@@ -301,7 +319,7 @@ struct IndividualFundScreen: View {
                 }
             }
             Divider().padding(.leading, 48)
-            Button {} label: {
+            Button { showGuidelines = true } label: {
                 HStack(spacing: 12) {
                     Image(.document)
                         .resizable()
@@ -368,9 +386,7 @@ struct IndividualFundScreen: View {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(Array(viewModel.activity.enumerated()), id: \.element.id) { index, tx in
                         HStack(spacing: 12) {
-                            Image(.amazonMock)
-                                .resizable()
-                                .frame(width: 36, height: 36)
+                            TransactionIconView(urlString: tx.iconUrl)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(tx.typeLabel)
                                     .font(AppFont.mediumMedium)

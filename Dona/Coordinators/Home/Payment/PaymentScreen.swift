@@ -12,14 +12,14 @@ enum PaymentScreenType: Hashable {
     case topUp
     case request(fund: Fund)
     case send(fund: Fund)
-    case services(serviceId: Int, subServiceId: Int, title: String)
+    case services(serviceId: Int, subServiceId: Int, title: String, prefillAccount: String?, prefillAmount: Int?)
 
     var navigationTitle: String {
         switch self {
         case .topUp: return "Top Up"
         case .request(_): return "Request"
         case .send(_): return "Send"
-        case .services(_, _, let title): return title
+        case .services(_, _, let title, _, _): return title
         }
     }
 
@@ -53,6 +53,12 @@ struct PaymentScreen: View {
     init(type: PaymentScreenType) {
         self.type = type
         _viewModel = StateObject(wrappedValue: PaymentViewModel(type: type))
+        if case .services(_, _, _, let prefillAccount, let prefillAmount) = type {
+            _phoneNumber = State(initialValue: prefillAccount ?? "")
+            if let prefillAmount, prefillAmount > 0 {
+                _amount = State(initialValue: String(format: "%.2f", Double(prefillAmount) / 100.0))
+            }
+        }
     }
 
     enum PaymentField {
@@ -107,7 +113,10 @@ struct PaymentScreen: View {
         .onChange(of: viewModel.isSuccess) { success in
             if success { dismiss() }
         }
-        .alert("Ошибка", isPresented: .constant(viewModel.errorMessage != nil)) {
+        .alert("Error".localized, isPresented: Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { if !$0 { viewModel.errorMessage = nil } }
+        )) {
             Button("OK") { viewModel.errorMessage = nil }
         } message: {
             Text(viewModel.errorMessage ?? "")

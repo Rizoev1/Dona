@@ -62,7 +62,7 @@ struct SubServicesScreen: View {
                                 onSubServiceTap(sub)
                             } label: {
                                 HStack(spacing: 12) {
-                                    AsyncImage(url: URL(string: sub.imageName)) { phase in
+                                    AsyncImage(url: sub.imageName.apiImageURL) { phase in
                                         switch phase {
                                         case .success(let image):
                                             image

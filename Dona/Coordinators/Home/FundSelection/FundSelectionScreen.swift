@@ -83,9 +83,7 @@ struct FundSelectionScreen: View {
     @ViewBuilder func makeFundCard(_ fund: Fund) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 16) {
-                Image(.amazonMock)
-                    .resizable()
-                    .frame(width: 45, height: 45)
+                FundLogoView(urlString: fund.logoUrl, size: 45)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(fund.name)
                         .font(AppFont.xLargeBold)

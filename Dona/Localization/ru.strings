@@ -44,6 +44,8 @@
 "Join or create a fund to see it here" = "Вступите или создайте фонд";
 "No transactions yet" = "Нет транзакций";
 "Your recent activity will appear here" = "Здесь появятся ваши операции";
+"No quick payments yet" = "Нет быстрых платежей";
+"Pay a service to save it here" = "Оплатите услугу, чтобы сохранить её здесь";
 "This Month" = "В этом месяце";
 "Today" = "Сегодня";
 "Activity" = "Операции";
@@ -146,12 +148,16 @@
 "Language" = "Язык";
 "Theme" = "Фон";
 "Payment method" = "Способ оплаты";
+"Payment methods" = "Способы оплаты";
 "Add card" = "Добавить карту";
+"No cards yet" = "Нет карт";
+"Add a card to see it here" = "Добавьте карту, чтобы увидеть её здесь";
 "Card name" = "Название карты";
 "Card number" = "Номер карты";
 "Expiry date" = "Срок действия";
 "Rename card" = "Переименовать карту";
 "Delete card" = "Удалить карту";
+"Delete" = "Удалить";
 "Payment history" = "История платежей";
 "Are you sure you want to delete card?" = "Вы уверены, что хотите удалить карту?";
 "Notification" = "Уведомление";
@@ -211,3 +217,20 @@
 "You don't belong to any savings community yet" = "Вы ещё не состоите ни в одном фонде";
 "Your wallet activity will appear here" = "Активность кошелька появится здесь";
 "Your wallet will be credited once the transfer is confirmed. This usually takes a few minutes" = "Кошелёк будет пополнен после подтверждения перевода. Обычно это занимает несколько минут.";
+
+/* Audit fixes */
+"Error" = "Ошибка";
+"Select a card to top up" = "Выберите карту для пополнения";
+"Enter a valid amount" = "Введите корректную сумму";
+"Enter a phone number" = "Введите номер телефона";
+"Select a fund" = "Выберите фонд";
+"Enter a valid 9-digit phone number" = "Введите корректный 9-значный номер телефона";
+"Session expired. Please enter your PIN." = "Сессия истекла. Введите PIN-код.";
+"Biometric login failed. Please enter your PIN." = "Биометрический вход не удался. Введите PIN-код.";
+"Session expired. Please log in again." = "Сессия истекла. Войдите заново.";
+"Sent" = "Отправлено";
+"Service Payment" = "Оплата услуги";
+"Earns %.1f%% APY" = "Доходность %.1f%% годовых";
+"Korti milli" = "Корти милли";
+"Initial balance (optional)" = "Начальный баланс (необязательно)";
+"No rules yet" = "Правила пока не заданы";

@@ -44,6 +44,8 @@
 "Join or create a fund to see it here" = "Join or create a fund to see it here";
 "No transactions yet" = "No transactions yet";
 "Your recent activity will appear here" = "Your recent activity will appear here";
+"No quick payments yet" = "No quick payments yet";
+"Pay a service to save it here" = "Pay a service to save it here";
 "This Month" = "This Month";
 "Today" = "Today";
 "Activity" = "Activity";
@@ -146,12 +148,16 @@
 "Language" = "Language";
 "Theme" = "Theme";
 "Payment method" = "Payment method";
+"Payment methods" = "Payment methods";
 "Add card" = "Add card";
+"No cards yet" = "No cards yet";
+"Add a card to see it here" = "Add a card to see it here";
 "Card name" = "Card name";
 "Card number" = "Card number";
 "Expiry date" = "Expiry date";
 "Rename card" = "Rename card";
 "Delete card" = "Delete card";
+"Delete" = "Delete";
 "Payment history" = "Payment history";
 "Are you sure you want to delete card?" = "Are you sure you want to delete card?";
 "Notification" = "Notification";
@@ -211,3 +217,20 @@
 "You don't belong to any savings community yet" = "You don't belong to any savings community yet";
 "Your wallet activity will appear here" = "Your wallet activity will appear here";
 "Your wallet will be credited once the transfer is confirmed. This usually takes a few minutes" = "Your wallet will be credited once the transfer is confirmed. This usually takes a few minutes";
+
+/* Audit fixes */
+"Error" = "Error";
+"Select a card to top up" = "Select a card to top up";
+"Enter a valid amount" = "Enter a valid amount";
+"Enter a phone number" = "Enter a phone number";
+"Select a fund" = "Select a fund";
+"Enter a valid 9-digit phone number" = "Enter a valid 9-digit phone number";
+"Session expired. Please enter your PIN." = "Session expired. Please enter your PIN.";
+"Biometric login failed. Please enter your PIN." = "Biometric login failed. Please enter your PIN.";
+"Session expired. Please log in again." = "Session expired. Please log in again.";
+"Sent" = "Sent";
+"Service Payment" = "Service Payment";
+"Earns %.1f%% APY" = "Earns %.1f%% APY";
+"Korti milli" = "Korti milli";
+"Initial balance (optional)" = "Initial balance (optional)";
+"No rules yet" = "No rules yet";

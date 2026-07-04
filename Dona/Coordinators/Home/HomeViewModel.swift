@@ -16,10 +16,12 @@ final class HomeViewModel: ObservableObject {
     @Published var wallet: WalletResponse.Wallet?
     @Published var funds: [Fund] = []
     @Published var recentActivity: [Transaction] = []
+    @Published var quickPayments: [QuickPayment] = []
 
     @Published var isLoadingWallet = false
     @Published var isLoadingFunds = false
     @Published var isLoadingActivity = false
+    @Published var isLoadingQuickPayments = false
 
     @Published var errorMessage: String?
     
@@ -60,13 +62,14 @@ final class HomeViewModel: ObservableObject {
         loadWallet()
         loadFunds()
         loadActivity()
+        loadQuickPayments()
     }
 
     private func loadProfile() {
         APIManager.shared.getProfile()
             .sink { [weak self] completion in
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.profile = response.payload
@@ -80,7 +83,7 @@ final class HomeViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoadingWallet = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.wallet = response.payload
@@ -94,7 +97,7 @@ final class HomeViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoadingFunds = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.funds = response.payload
@@ -108,10 +111,36 @@ final class HomeViewModel: ObservableObject {
             .sink { [weak self] completion in
                 self?.isLoadingActivity = false
                 if case .failure(let error) = completion {
-                    self?.errorMessage = error.localizedDescription
+                    self?.errorMessage = error.userMessage
                 }
             } receiveValue: { [weak self] response in
                 self?.recentActivity = response.payload
+            }
+            .store(in: &cancellables)
+    }
+
+    private func loadQuickPayments() {
+        isLoadingQuickPayments = true
+        APIManager.shared.listQuickPayments()
+            .sink { [weak self] completion in
+                self?.isLoadingQuickPayments = false
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.userMessage
+                }
+            } receiveValue: { [weak self] response in
+                self?.quickPayments = response.payload
+            }
+            .store(in: &cancellables)
+    }
+
+    func deleteQuickPayment(_ item: QuickPayment) {
+        APIManager.shared.deleteQuickPayment(id: item.id)
+            .sink { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.errorMessage = error.userMessage
+                }
+            } receiveValue: { [weak self] _ in
+                self?.quickPayments.removeAll { $0.id == item.id }
             }
             .store(in: &cancellables)
     }
@@ -131,11 +160,11 @@ extension Transaction: Identifiable {
 
     var typeLabel: String {
         switch type {
-        case .topup:          return "Top up"
-        case .send:           return "Sent"
-        case .contribution:   return "Monthly Contribution"
-        case .disbursement:   return "Received"
-        case .servicePayment: return "Service Payment"
+        case .topup:          return "Top up".localized
+        case .send:           return "Sent".localized
+        case .contribution:   return "Monthly Contribution".localized
+        case .disbursement:   return "Received".localized
+        case .servicePayment: return "Service Payment".localized
         }
     }
 

@@ -52,7 +52,7 @@ struct PaymentsScreen: View {
                                 navigator.push(.subServices(serviceId: service.id, title: service.serviceName))
                             } label: {
                                 HStack(spacing: 12) {
-                                    AsyncImage(url: URL(string: service.imageName)) { phase in
+                                    AsyncImage(url: service.imageName.apiImageURL) { phase in
                                         switch phase {
                                         case .success(let image):
                                             image

@@ -23,7 +23,7 @@ struct PaymentsCoordinator: View {
                     switch screen {
                     case .subServices(let serviceId, let title):
                         SubServicesScreen(serviceId: serviceId, title: title) { subService in
-                            routes.push(.payment(.services(serviceId: subService.serviceId, subServiceId: subService.id, title: title)))
+                            routes.push(.payment(.services(serviceId: subService.serviceId, subServiceId: subService.id, title: title, prefillAccount: nil, prefillAmount: nil)))
                         }
                     case .payment(let type):
                         PaymentScreen(type: type)
